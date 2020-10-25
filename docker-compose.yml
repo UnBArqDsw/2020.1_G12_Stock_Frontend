@@ -1,10 +1,12 @@
 version: "3"
-
 services:
-    web:
-        stdin_open: true
-        build:
-            context: .
-            dockerfile: Dockerfile
-        ports:
-                - 5000:5000
+  web:
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - "/app/node_modules"
+      - "./:/app"
