@@ -1,3 +1,40 @@
-h1 {
-  color: var(--primary-dark)
+
+.login-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.login-form form{
+  min-width: 250px;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+}
+.login-form h3{
+  margin-bottom: 32px;
+}
+.login-form input{
+  margin-bottom: 16px;
+}
+
+.login-form .login-submit {
+  margin-top: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.login-header img {
+  width: 40%;
+  max-width: 150px;
+}
+.login-header  {
+  margin-bottom: 36px;
 }

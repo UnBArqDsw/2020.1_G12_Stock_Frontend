@@ -24,6 +24,7 @@ export default function AuthContextProvider({ children }) {
     if (!response.error) {
       setStorageToken(response.headers['x-auth-token']);
       setStorageUser(response.data);
+      setUser(response.data);
       history.push('/');
     }
   };
