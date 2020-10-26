@@ -1,8 +1,8 @@
 import React from 'react';
-import LoginPage from './pages/AuthPages/Login';
+import Routes from './Routes';
 
 function App() {
-  return <LoginPage />;
+  return <Routes />;
 }
 
 export default App;

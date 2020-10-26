@@ -24,7 +24,10 @@
   "rules": {
     "prettier/prettier": "error",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/state-in-constructor": "off"
+    "react/state-in-constructor": "off",
+    "react/prop-types": 0,
+    "class-methods-use-this": 0
+
   },
   "parser": "babel-eslint"
 }
