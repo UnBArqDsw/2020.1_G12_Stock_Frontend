@@ -7,6 +7,14 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
+    command: yarn start
     volumes:
       - "/app/node_modules"
       - "./:/app"
+
+networks:
+  default:
+    external:
+      name: 20201g12stockbackend_default
+
+    
