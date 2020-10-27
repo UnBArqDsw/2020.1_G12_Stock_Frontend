@@ -1,0 +1,59 @@
+button {
+  border-style: none;
+  background-color: var(--primary);
+  color: #fff; 
+  padding: 0.5rem 2rem;
+  border-radius: 0.5rem !important;
+  transition:  0.5s;
+}
+
+
+button:hover {
+  background-color: var(--primary-dark);
+  
+}
+button:focus {
+  outline: none !important;
+}
+
+input {
+  background-color: #EEE;
+  border-style: none;
+  padding: 8px;
+  border-radius: 5px;
+  transition: .08s;
+} 
+input:focus {
+  border-style: solid; 
+  border-color: rgba(77, 188, 196, 0.6);
+  box-shadow: 0px 0px 2px 2px rgba(77, 188, 196, 0.6);
+} 
+
+:root {
+  --primary: #AB2918 !important; 
+  --primary-light: #E62C38; 
+  --primary-dark: #781D11; 
+  --primary-smooth: #C21123; 
+  --primary-strong: #D92109; 
+
+  --secondary: #0FA0AB !important; 
+  --secondary-light: #ACF3F9; 
+  --secondary-dark: #0B7178 !important; 
+  --secondary-smooth: #4DBCC4;
+  --secondary-strong: #60edf7;
+
+  --green: #2AAB20 !important; 
+  --green-light: #88C959; 
+  --green-dark: #1D7817; 
+  --green-smooth: #58C791; 
+  --green-strong: #5CD177;
+
+  --yellow: #AB9A29 !important; 
+  --yellow-light: #F7DE3B; 
+  --yellow-dark: #B88623; 
+  --yellow-smooth: #B8A52C; 
+  --yellow-strong: #E0CA36; 
+  
+  --dark: #313C4E !important;
+
+}

@@ -1,12 +1,11 @@
 FROM node:alpine
 
-WORKDIR /usr/app
+WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
+COPY package.json /app
 
-COPY . .
+RUN yarn install
 
-EXPOSE 5000
+COPY . /app
 
-CMD ["npm", "start"]
+CMD ["yarn", "install"]

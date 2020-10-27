@@ -1,10 +1,20 @@
 version: "3"
-
 services:
-    web:
-        stdin_open: true
-        build:
-            context: .
-            dockerfile: Dockerfile
-        ports:
-                - 5000:5000
+  web:
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    command: yarn start
+    volumes:
+      - "/app/node_modules"
+      - "./:/app"
+
+networks:
+  default:
+    external:
+      name: 20201g12stockbackend_default
+
+    
