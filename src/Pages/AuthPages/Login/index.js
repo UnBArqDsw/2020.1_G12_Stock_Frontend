@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../../../Contexts/AuthContext';
 import logo from '../../../assets/images/logo-horizontal.png';
@@ -23,9 +24,8 @@ export default function LoginPage() {
         <form onSubmit={onSubmit}>
           <label htmlFor="document">CPF:</label>
           <input onChange={(e) => setDocument(e.target.value)} id="document" />
-          <label htmlFor="password">SENHA:</label>
-          <input onChange={(e) => setPassword(e.target.value)} id="password" />
-
+          <label htmlFor="password">Senha:</label>
+          <input onChange={(e) => setPassword(e.target.value)} id="password" type="password" />
           <p>Não é cadastrado ainda? Clique aqui</p>
           <div className="login-submit">
             <span>esqueci minha senha</span>
