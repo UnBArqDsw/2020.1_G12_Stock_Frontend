@@ -5,19 +5,21 @@
   box-sizing: border-box;
 }
 
-.container { 
+.container {
   margin: 16px;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
 }
 
-body { 
-  font: 14px 'Montserrat', sans-serif; 
+body {
+  font: 14px 'Montserrat', sans-serif !important;
   background: #ecf1f8;
-  color: #333; 
-  -webkit-font-smoothing: antialiased !important; 
+  color: #333;
+  -webkit-font-smoothing: antialiased !important;
 }
 
 ul {
