@@ -27,31 +27,31 @@ export default function SideBar() {
       <img src={logo} alt="logo" />
       <Link to="/">
         <div className={getTabClass('/')}>
-          <GoGraph size={30} />
+          <GoGraph />
           <span>Painel de controle</span>
         </div>
       </Link>
       <Link to="/stock">
         <div className={getTabClass('/stock')}>
-          <FiBox size={30} />
+          <FiBox />
           <span>Estoque</span>
         </div>
       </Link>
       <Link to="/collaborators">
         <div className={getTabClass('/collaborators')}>
-          <HiUserGroup size={30} />
+          <HiUserGroup />
           <span>Colaboradores</span>
         </div>
       </Link>
       <Link to="/history">
         <div className={getTabClass('/history')}>
-          <BiHistory size={30} />
+          <BiHistory />
           <span>Histórico</span>
         </div>
       </Link>
       <Link to="/feedback">
         <div className={getTabClass('/feedback')}>
-          <MdModeComment size={30} />
+          <MdModeComment />
           <span>Feedback</span>
         </div>
       </Link>
