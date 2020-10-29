@@ -40,9 +40,20 @@ export default function RegisterCompanyPage() {
         <h1>Comece agora mesmo</h1>
         <p>Preencha os dados abaixo para realizar o cadastro da sua empresa.</p>
         <form onSubmit={onSubmit} >
-          <FormBlock label1="Nome da Empresa" label2="CNPJ/CPF" typeInput1="text" typeInput2="text"/>
-          <FormBlock label1="Email corporativo" label2="Telefone" typeInput1="text" typeInput2="text"/>
-          <FormBlock label1="Ramo da Empresa" label2="Quantidade de Funcionários" typeInput1="text" typeInput2="text"/>
+          <FormBlock label1="Nome da Empresa" label2="Email corporativo" typeInput1="text" typeInput2="text"/>
+          <FormBlock label1="Telefone" label2="Quantidade de Funcionários" typeInput1="text" typeInput2="text"/>
+          <div className="info-block">
+            <div className="input-area">
+                <label htmlFor="document">CNPJ/CPF:</label>
+                <br />
+                <input type="text" />
+            </div>
+            <div className="branch">
+                <label htmlFor="document">Ramo da Empresa:</label>
+                <br />
+                <input type="text" />
+            </div>
+        </div>
           <div className="register-company-submit">
             <span>Ao enviar o formulário, você concorda com nossos termos e condições, assim como nossas políticas de privacidade</span>
             <button type="submit">Cadastrar Empresa</button>

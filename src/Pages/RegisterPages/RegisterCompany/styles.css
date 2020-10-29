@@ -32,3 +32,16 @@
   padding-bottom: 32px;
   font-weight: bold;
 }
+
+.info-block {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 3%;
+  flex-wrap: wrap;
+}
+
+.input-area {
+  display: inline-block;
+  padding: 0% 3% 
+}
