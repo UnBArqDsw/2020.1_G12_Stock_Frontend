@@ -10,7 +10,37 @@
   justify-content: center;
   align-items: center;
 }
-.email-company-name-container{
-  position: relative;
+.register-company-form form {
+  min-width: 250px;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-block {
+  display: flex;
+  flex-direction: row;
   justify-content: center;
+  padding-top: 3%;
+}
+
+.input-area {
+  display: inline-block;
+  padding: 0% 3% 
+}
+
+.register-company-submit {
+  margin-top: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.register-company-submit span {
+  display:flex;
+  width: 80%;
+  padding-bottom: 32px;
+  font-weight: bold;
 }
