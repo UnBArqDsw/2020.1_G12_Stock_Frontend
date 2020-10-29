@@ -1,23 +1,23 @@
-.register-company-header {
+.register-owner-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.register-company-form {
+.register-owner-form {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.register-company-form form {
+.register-owner-form form {
   min-width: 250px;
   width: 70%;
   display: flex;
   flex-direction: column;
 }
 
-.register-company-submit {
+.register-owner-submit {
   margin-top: 64px;
   display: flex;
   justify-content: center;
@@ -26,8 +26,8 @@
   text-align: center;
 }
 
-.register-company-submit span {
-  display:flex;
+.register-owner-submit span {
+  display: flex;
   width: 80%;
   padding-bottom: 32px;
   font-weight: bold;
