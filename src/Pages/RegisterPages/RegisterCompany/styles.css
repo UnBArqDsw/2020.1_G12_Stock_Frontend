@@ -1,0 +1,16 @@
+.register-company-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.register-company-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.email-company-name-container{
+  position: relative;
+  justify-content: center;
+}
