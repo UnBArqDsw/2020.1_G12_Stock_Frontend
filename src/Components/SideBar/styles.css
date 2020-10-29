@@ -1,14 +1,27 @@
 .sidebar {
   background-color: #fff;
-  width: 70%;
-  max-width: 15rem;
+  width: 15rem;
   height: 100%;
-  box-shadow: 0px 0px 5px 0px;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
   position: fixed;
   display: flex;
   align-items: center;
   flex-direction: column;
+  z-index: 200;
 }
+
+.sidebar.mobile {
+  transform: translate(-100%);
+  transition: 0.2s;
+  box-shadow: none;
+}
+
+.sidebar.mobile.open {
+  transform: translate(0);
+  transition: 0.5s;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
 .sidebar img {
   width: 60%;
   cursor: pointer;
@@ -50,4 +63,18 @@
 }
 .sidebar .sidebar-option svg {
   font-size: 30px;
+}
+
+.sidebar-blur-on-open {
+  position: absolute;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.side-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
 }

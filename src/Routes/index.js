@@ -28,6 +28,7 @@ export default function RoutesContainer() {
 const Routes = () => {
   const { isUserSigned } = useContext(AuthContext);
   const { isDesktop } = useContext(DeviceContext);
+  console.log(isDesktop);
   return (
     <div style={{ marginLeft: isUserSigned && isDesktop ? '15rem' : 0 }}>
       <PrivateRoute path="/" exact component={Dashboard} />
