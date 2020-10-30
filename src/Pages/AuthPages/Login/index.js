@@ -20,7 +20,6 @@ export default function LoginPage() {
     <div className="container">
       <div className="login-header">
         <img src={logo} alt="logo" />
-        <p>Cadastrar Estoque</p>
       </div>
       <div className="login-form">
         <h3>Portal do gestor</h3>
@@ -47,7 +46,7 @@ export default function LoginPage() {
               type={passwordVisible ? 'text' : 'password'}
             />
           </div>
-          <p>Não é cadastrado ainda? Clique aqui</p>
+          <p>Não é cadastrado ainda? <a className="link" href="register/company">Clique aqui</a></p>
           <div className="login-submit">
             <span>esqueci minha senha</span>
             <button type="submit">Entrar</button>

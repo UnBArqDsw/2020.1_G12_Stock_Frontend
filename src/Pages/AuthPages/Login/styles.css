@@ -49,3 +49,8 @@
   right: 10px;
   top: 6px;
 }
+
+.link {
+  color: black;
+  text-decoration: underline;
+}

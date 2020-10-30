@@ -43,5 +43,10 @@
 
 .input-area {
   display: inline-block;
-  padding: 0% 3% 
+  padding: 0% 3%;
+}
+
+.link {
+  color: black;
+  text-decoration: underline;
 }

@@ -11,9 +11,8 @@ class RegisterService {
         email: email,
         maxQtdCollaborator: collaborator_quantity
       });
-      console.log(response);
+      return response;
     } catch (error) {
-      console.log(error);
       return { error: true, errorData: error };
     }
   }
