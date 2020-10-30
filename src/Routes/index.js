@@ -11,12 +11,14 @@ import PrivateRoute from './privateRoute';
 import SideBar from '../Components/SideBar';
 import { AuthContext } from '../Contexts/AuthContext';
 import { DeviceContext } from '../Contexts/DeviceContext';
+import NavBar from '../Components/Navbar';
 
 export default function RoutesContainer() {
   return (
     <BrowserRouter>
       <Switch>
         <ContextProvider>
+          <NavBar />
           <SideBar />
           <Routes />
         </ContextProvider>
@@ -28,9 +30,9 @@ export default function RoutesContainer() {
 const Routes = () => {
   const { isUserSigned } = useContext(AuthContext);
   const { isDesktop } = useContext(DeviceContext);
-  console.log(isDesktop);
+
   return (
-    <div style={{ marginLeft: isUserSigned && isDesktop ? '15rem' : 0 }}>
+    <div style={{ paddingLeft: isUserSigned && isDesktop ? '15rem' : 0, paddingTop: '3.5rem' }}>
       <PrivateRoute path="/" exact component={Dashboard} />
       <PrivateRoute path="/collaborators" exact component={Collaborators} />
       <PrivateRoute path="/feedback" exact component={Feedback} />

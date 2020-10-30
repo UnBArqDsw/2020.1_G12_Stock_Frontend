@@ -1,5 +1,9 @@
 import React from 'react';
 
 export default function History() {
-  return <h1>History</h1>;
+  return (
+    <div className="container">
+      <h1>History</h1>
+    </div>
+  );
 }

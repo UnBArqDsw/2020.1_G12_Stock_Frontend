@@ -1,0 +1,10 @@
+.nav-container {
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100vw;
+  height: 3.5rem;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
+}

@@ -1,9 +1,10 @@
 .sidebar {
   background-color: #fff;
   width: 15rem;
-  height: 100%;
   box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
   position: fixed;
+  top: 0;
+  bottom: 0;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -18,7 +19,7 @@
 
 .sidebar.mobile.open {
   transform: translate(0);
-  transition: 0.5s;
+  transition: 0.3s;
   box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
 }
 
@@ -66,15 +67,16 @@
 }
 
 .sidebar-blur-on-open {
-  position: absolute;
+  position: fixed;
+  top: 0;
+  bottom: 0;
   z-index: 100;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
 .side-button {
-  position: absolute;
+  position: fixed;
   top: 10px;
   left: 10px;
 }
