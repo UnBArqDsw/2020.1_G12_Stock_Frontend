@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, Fragment } from 'react';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import Dashboard from '../Pages/Dashboard';
 import Collaborators from '../Pages/Collaborators';
@@ -18,8 +18,6 @@ export default function RoutesContainer() {
     <BrowserRouter>
       <Switch>
         <ContextProvider>
-          <NavBar />
-          <SideBar />
           <Routes />
         </ContextProvider>
       </Switch>
@@ -39,14 +37,28 @@ const Routes = () => {
     }
   };
 
+  const renderTopAndSideBar = () => {
+    if (isUserSigned) {
+      return (
+        <Fragment>
+          <NavBar />
+          <SideBar />
+        </Fragment>
+      );
+    }
+  };
+
   return (
-    <div className={getRoutesClass()}>
-      <PrivateRoute path="/" exact component={Dashboard} />
-      <PrivateRoute path="/collaborators" exact component={Collaborators} />
-      <PrivateRoute path="/feedback" exact component={Feedback} />
-      <PrivateRoute path="/history" exact component={History} />
-      <PrivateRoute path="/stock" exact component={Stock} />
-      <Route path="/login" component={Login} />
-    </div>
+    <Fragment>
+      {renderTopAndSideBar()}
+      <div className={getRoutesClass()}>
+        <PrivateRoute path="/" exact component={Dashboard} />
+        <PrivateRoute path="/collaborators" exact component={Collaborators} />
+        <PrivateRoute path="/feedback" exact component={Feedback} />
+        <PrivateRoute path="/history" exact component={History} />
+        <PrivateRoute path="/stock" exact component={Stock} />
+        <Route path="/login" component={Login} />
+      </div>
+    </Fragment>
   );
 };

@@ -7,11 +7,7 @@ import { AuthContext } from '../../Contexts/AuthContext';
 export default function NavBar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggleDropDown = () => setDropdownOpen((prevState) => !prevState);
-  const { signOut, isUserSigned } = useContext(AuthContext);
-
-  if (!isUserSigned) {
-    return <div />;
-  }
+  const { signOut } = useContext(AuthContext);
 
   return (
     <nav className="nav-container">

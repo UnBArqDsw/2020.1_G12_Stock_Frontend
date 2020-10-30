@@ -11,11 +11,10 @@ export default function SideBar() {
   const location = useLocation();
   const history = useHistory();
 
-  const { isUserSigned } = useContext(AuthContext);
   const { isMobile } = useContext(DeviceContext);
-  const [sideOpen, setSideOpen] = useState(false);
+  const [sideBarOpen, setSideBarOpen] = useState(false);
 
-  const toggleSidebar = () => setSideOpen(!sideOpen);
+  const toggleSidebar = () => setSideBarOpen(!sideBarOpen);
 
   const getNavClassOnSelect = (tabName) => {
     if (location.pathname == tabName) {
@@ -25,12 +24,8 @@ export default function SideBar() {
     }
   };
 
-  if (!isUserSigned) {
-    return <div />;
-  }
-
-  const getNavContainerFromDevice = () => {
-    if (isMobile && sideOpen) {
+  const getNavContainerByDevice = () => {
+    if (isMobile && sideBarOpen) {
       return 'sidebar mobile open';
     } else if (isMobile) {
       return 'sidebar mobile';
@@ -39,7 +34,7 @@ export default function SideBar() {
     }
   };
 
-  const renderSidebarMobileButton = () => {
+  const renderSandwichButton = () => {
     if (isMobile) {
       return (
         <div className="side-button">
@@ -49,17 +44,17 @@ export default function SideBar() {
     }
   };
 
-  const renderSidebarBackgroundOnMobile = () => {
-    if (isMobile && sideOpen) {
+  const renderSidebarOpenBackgroundOnMobile = () => {
+    if (isMobile && sideBarOpen) {
       return <div className="sidebar-blur-on-open" onClick={toggleSidebar} />;
     }
   };
 
   return (
     <>
-      {renderSidebarMobileButton()}
-      {renderSidebarBackgroundOnMobile()}
-      <div className={getNavContainerFromDevice()}>
+      {renderSandwichButton()}
+      {renderSidebarOpenBackgroundOnMobile()}
+      <div className={getNavContainerByDevice()}>
         <img src={logo} alt="logo" />
 
         <div

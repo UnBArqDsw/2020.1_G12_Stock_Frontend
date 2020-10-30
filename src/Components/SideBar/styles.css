@@ -42,9 +42,7 @@
   transition: opacity 0.4s;
   transition: 0.2s;
 }
-.sidebar-option:hover {
-  opacity: 0.5;
-}
+
 .sidebar-option-selected {
   display: flex;
   flex-direction: column;
