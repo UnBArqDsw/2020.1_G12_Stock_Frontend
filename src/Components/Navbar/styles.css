@@ -4,7 +4,23 @@
   top: 0;
   right: 0;
   left: 0;
-  width: 100vw;
   height: 3.5rem;
   box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.nav-item div button {
+  box-shadow: none !important;
+}
+.nav-item div button:hover {
+  background-color: transparent;
+}
+
+.nav-item {
+  cursor: pointer;
+  margin-right: 12px;
+}
+.nav-item svg:hover {
+  opacity: 0.5;
 }

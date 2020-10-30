@@ -31,8 +31,16 @@ const Routes = () => {
   const { isUserSigned } = useContext(AuthContext);
   const { isDesktop } = useContext(DeviceContext);
 
+  const getRoutesClass = () => {
+    if (isUserSigned && isDesktop) {
+      return 'routes-logged-desktop';
+    } else if (isUserSigned) {
+      return 'routes-logged-mobile';
+    }
+  };
+
   return (
-    <div style={{ paddingLeft: isUserSigned && isDesktop ? '15rem' : 0, paddingTop: '3.5rem' }}>
+    <div className={getRoutesClass()}>
       <PrivateRoute path="/" exact component={Dashboard} />
       <PrivateRoute path="/collaborators" exact component={Collaborators} />
       <PrivateRoute path="/feedback" exact component={Feedback} />
