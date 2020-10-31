@@ -18,10 +18,6 @@ export default function LoginPage() {
   };
   return (
     <div className="container">
-      <div className="login-header">
-        <img src={logo} alt="logo" />
-        <p>Cadastrar Estoque</p>
-      </div>
       <div className="login-form">
         <h3>Portal do gestor</h3>
         <form onSubmit={onSubmit}>
