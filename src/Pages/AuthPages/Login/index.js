@@ -2,7 +2,6 @@
 import React, { useState, useContext } from 'react';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/all';
 import { AuthContext } from '../../../Contexts/AuthContext';
-import logo from '../../../assets/images/logo-horizontal.png';
 import './styles.css';
 import InputMask from 'react-input-mask';
 

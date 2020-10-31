@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import './globalStyles.css';
 import App from './App';
-import AuthContextProvider from './Contexts/AuthContext';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
