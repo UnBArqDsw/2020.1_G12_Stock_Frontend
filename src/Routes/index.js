@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import Home from '../Pages/Home';
 import Login from '../Pages/AuthPages/Login';
-import RegisterOwner from '../Pages/RegisterPages/RegisterOwner'
+import RegisterOwner from '../Pages/RegisterPages/RegisterOwner';
 import RegisterCompany from '../Pages/RegisterPages/RegisterCompany';
 import ContextProvider from '../Contexts/Providers';
 import PrivateRoute from './privateRoute';
@@ -16,7 +16,6 @@ export default function Routes() {
           <Route path="/login" component={Login} />
           <Route path="/register/company" component={RegisterCompany} />
           <Route path="/register/owner" component={RegisterOwner} />
-          <Route />
         </ContextProvider>
       </Switch>
     </BrowserRouter>

@@ -10,6 +10,10 @@
   justify-content: center;
   align-items: center;
 }
+.register-company-form h2,
+p {
+  text-align: center;
+}
 .register-company-form form {
   min-width: 250px;
   width: 70%;
@@ -27,7 +31,7 @@
 }
 
 .register-company-submit span {
-  display:flex;
+  display: flex;
   width: 80%;
   padding-bottom: 32px;
   font-weight: bold;
@@ -49,4 +53,9 @@
 .link {
   color: black;
   text-decoration: underline;
+}
+
+.error {
+  border-style: solid;
+  border-color: red;
 }

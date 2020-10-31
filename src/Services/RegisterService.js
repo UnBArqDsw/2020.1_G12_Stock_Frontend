@@ -1,15 +1,15 @@
 import api from './Api';
 
 class RegisterService {
-  async registerCompany(email, document, branch, company_name, telephone, collaborator_quantity) {
+  async registerCompany(email, document, branch, companyName, telephone, collaboratorQuantity) {
     try {
       const response = await api.post('/company', {
         document: document.replace(/\D/g, ''),
         idBranch: branch,
-        name: company_name,
-        telephone: telephone,
-        email: email,
-        maxQtdCollaborator: collaborator_quantity
+        name: companyName,
+        telephone,
+        email,
+        maxQtdCollaborator: collaboratorQuantity,
       });
       return response;
     } catch (error) {
@@ -19,15 +19,23 @@ class RegisterService {
 
   async registerOwner(name, cpf, email, cpfCnpj, password) {
     try {
-      console.log(name, cpf, email, cpfCnpj, password);
       const response = await api.post('/collaborator', {
-        name: name,
-        document: cpf,
-        email: email,
-        companyDocument: cpfCnpj,
-        password: password
+        name,
+        document: cpf.replace(/\D/g, ''),
+        email,
+        companyDocument: cpfCnpj.replace(/\D/g, ''),
+        password,
       });
       return response;
+    } catch (error) {
+      return { error: true, errorData: error };
+    }
+  }
+
+  async getCompanyBranches() {
+    try {
+      const response = await api.get('/branch/');
+      return response.data;
     } catch (error) {
       return { error: true, errorData: error };
     }
