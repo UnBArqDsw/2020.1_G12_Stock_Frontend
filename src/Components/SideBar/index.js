@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
-import logo from '../../assets/images/logo-vertical.png';
+import React, { useState, useContext } from 'react';
 import { GoGraph, FiBox, HiUserGroup, BiHistory, MdModeComment, GrMenu } from 'react-icons/all';
-import { Link } from 'react-router-dom';
 import { useLocation, useHistory } from 'react-router-dom';
+
+import logo from '../../assets/images/logo-vertical.png';
 import './styles.css';
-import { AuthContext } from '../../Contexts/AuthContext';
 import { DeviceContext } from '../../Contexts/DeviceContext';
 
 export default function SideBar() {
@@ -17,21 +16,20 @@ export default function SideBar() {
   const toggleSidebar = () => setSideBarOpen(!sideBarOpen);
 
   const getNavClassOnSelect = (tabName) => {
-    if (location.pathname == tabName) {
+    if (location.pathname === tabName) {
       return 'sidebar-option-selected';
-    } else {
-      return 'sidebar-option';
     }
+    return 'sidebar-option';
   };
 
   const getNavContainerByDevice = () => {
     if (isMobile && sideBarOpen) {
       return 'sidebar mobile open';
-    } else if (isMobile) {
-      return 'sidebar mobile';
-    } else {
-      return 'sidebar';
     }
+    if (isMobile) {
+      return 'sidebar mobile';
+    }
+    return 'sidebar';
   };
 
   const renderSandwichButton = () => {

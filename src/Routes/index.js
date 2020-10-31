@@ -32,7 +32,8 @@ const Routes = () => {
   const getRoutesClass = () => {
     if (isUserSigned && isDesktop) {
       return 'routes-logged-desktop';
-    } else if (isUserSigned) {
+    }
+    if (isUserSigned) {
       return 'routes-logged-mobile';
     }
   };
@@ -40,16 +41,16 @@ const Routes = () => {
   const renderTopAndSideBar = () => {
     if (isUserSigned) {
       return (
-        <Fragment>
+        <>
           <NavBar />
           <SideBar />
-        </Fragment>
+        </>
       );
     }
   };
 
   return (
-    <Fragment>
+    <>
       {renderTopAndSideBar()}
       <div className={getRoutesClass()}>
         <PrivateRoute path="/" exact component={Dashboard} />
@@ -59,6 +60,6 @@ const Routes = () => {
         <PrivateRoute path="/stock" exact component={Stock} />
         <Route path="/login" component={Login} />
       </div>
-    </Fragment>
+    </>
   );
 };
