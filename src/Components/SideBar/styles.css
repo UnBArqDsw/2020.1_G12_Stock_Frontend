@@ -1,0 +1,80 @@
+.sidebar {
+  background-color: #fff;
+  width: 15rem;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  z-index: 200;
+}
+
+.sidebar.mobile {
+  transform: translate(-100%);
+  transition: 0.2s;
+  box-shadow: none;
+}
+
+.sidebar.mobile.open {
+  transform: translate(0);
+  transition: 0.3s;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+.sidebar img {
+  width: 60%;
+  cursor: pointer;
+}
+.sidebar a {
+  width: 100%;
+}
+.sidebar-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #8a8a8a;
+  font-size: 1.1rem;
+  padding: 20px 0px;
+  width: 100%;
+  cursor: pointer;
+  transition: opacity 0.4s;
+  transition: 0.2s;
+}
+
+.sidebar-option-selected {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  font-size: 1.3rem;
+  padding: 20px;
+  background-color: var(--secondary-smooth);
+  width: 100%;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.sidebar .sidebar-option-selected svg {
+  font-size: 35px;
+  transition: font-size 0.2s;
+}
+.sidebar .sidebar-option svg {
+  font-size: 30px;
+}
+
+.sidebar-blur-on-open {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.side-button {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+}

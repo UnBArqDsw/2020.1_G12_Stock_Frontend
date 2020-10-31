@@ -9,8 +9,8 @@ export default function AuthContextProvider({ children }) {
   const history = useHistory();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [, setStorageToken] = useLocalStorage('@auth:token');
-  const [storageUser, setStorageUser] = useLocalStorage('@auth:user');
+  const [, setStorageToken, removeToken] = useLocalStorage('@auth:token');
+  const [storageUser, setStorageUser, removeUser] = useLocalStorage('@auth:user');
 
   useEffect(() => {
     if (storageUser) {
@@ -28,9 +28,15 @@ export default function AuthContextProvider({ children }) {
       history.push('/');
     }
   };
+  const signOut = () => {
+    removeToken();
+    removeUser();
+    setUser(null);
+    history.push('/login');
+  };
 
   return (
-    <AuthContext.Provider value={{ user, loading, signIn, isUserSigned: !!user }}>
+    <AuthContext.Provider value={{ user, loading, signIn, signOut, isUserSigned: !!user }}>
       {children}
     </AuthContext.Provider>
   );

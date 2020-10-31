@@ -6,7 +6,7 @@
 }
 
 .container {
-  margin: 16px;
+  padding: 16px;
 }
 
 html,
@@ -17,7 +17,7 @@ body,
 
 body {
   font: 14px 'Montserrat', sans-serif !important;
-  background: #ecf1f8;
+  background: #e5e5e5 !important;
   color: #333;
   -webkit-font-smoothing: antialiased !important;
 }
