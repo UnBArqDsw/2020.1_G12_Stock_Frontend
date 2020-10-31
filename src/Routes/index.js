@@ -55,10 +55,6 @@ const Routes = () => {
         <Route path="/home" exact component={HomePage} />
         <Route path="/login" component={Login} />
         <PrivateRoute path="/" exact component={Home} />
-        {/* <PrivateRoute path="/collaborators" exact component={Collaborators} />
-        <PrivateRoute path="/feedback" exact component={Feedback} />
-        <PrivateRoute path="/history" exact component={History} />
-        <PrivateRoute path="/stock" exact component={Stock} /> */}
       </div>
     </Fragment>
   );

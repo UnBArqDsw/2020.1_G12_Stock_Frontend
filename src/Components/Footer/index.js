@@ -3,7 +3,7 @@ import React from 'react';
 import logo from '../../assets/images/logo-horizontal.png';
 import './styles.css';
 
-export default function AuthNavBar() {
+export default function Footer() {
 
   return (
       <div className="container">
