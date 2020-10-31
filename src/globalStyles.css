@@ -53,7 +53,11 @@ input:focus {
   --yellow-dark: #B88623; 
   --yellow-smooth: #B8A52C; 
   --yellow-strong: #E0CA36; 
+
+  --gray: #F5F5F5 !important;
+  --gray-secondary: #E0E0E0;
   
   --dark: #313C4E !important;
+  --font-dark: #1C1C1C;
 
 }
