@@ -18,7 +18,7 @@ export default function RegisterCompanyPage() {
     try {
       const {status} = await RegisterService.registerCompany(email, document, branch, company_name, telephone, collaborator_quantity);
       console.log(status);
-      if (status == 200) {
+      if (status === 200) {
         alert("Empresa cadastrada com sucesso!");
         history.push('/register/owner');
       }
