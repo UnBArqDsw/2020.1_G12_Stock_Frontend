@@ -4,6 +4,8 @@ import './styles.css';
 import Step1 from '../../assets/icons/step1.svg';
 import Step2 from '../../assets/icons/step2.svg';
 import Step3 from '../../assets/icons/step3.svg';
+import Bag from '../../assets/images/bag.png';
+import Box from '../../assets/images/box.png';
 import Footer from '../../Components/Footer';
 
 export default function HomePage() {
@@ -13,6 +15,8 @@ export default function HomePage() {
       <div className="cover">
         <h1 className="cover-title">O controle em sua mão</h1>
         <span className="cover-text">Com o Stock, você acompanha seu fluxo de estoque em tempo real.</span>
+        <img className="bag" src={Bag} alt="Bag" />
+        <img className="box" src={Box} alt="Box" />
       </div>
 
       <div className="steps">
