@@ -52,12 +52,18 @@ export default function AuthNavBar() {
         
               
          <div className={getNavContainerByDevice()}>
+          <div class="row">
+            {/* <div class="col"> */}
             <p class="signUp">Cadastrar Estoque</p>
+            {/* </div> */}
+            {/* <div class="col"> */}
             <div className="signIn-page">
               <a href="/login">
               <button class="signIn-button" type="button">Portal do Gestor</button>
               </a>
             </div>
+            {/* </div> */}
+          </div>
           </div>
 
         </div>
