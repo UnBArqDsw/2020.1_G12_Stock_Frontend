@@ -25,7 +25,7 @@ body {
 
 .steps, .requirements {
     background-color: #fff;
-    height: 500px;
+    height: auto;
 }
 
 .steps img {
@@ -70,6 +70,7 @@ body {
     border: solid 0.5px var(--gray-secondary);
     border-radius: 2px !important;
     padding: 15px 25px 15px 25px;
+    margin-bottom: 20px;
 }
 
 .signUp-button:hover {
@@ -81,11 +82,15 @@ body {
     padding: 15px 25px 15px 25px;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 767px) {
     .cover-title {
         font-size: 40px !important;
     }
     .cover-text {
         font-size: 18px !important;
+    }
+    .requirements .signUp {
+    margin-top: 0px !important;
+    margin-bottom: 16px;
     }
 }

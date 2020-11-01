@@ -14,6 +14,7 @@ export default function HomePage() {
         <h1 className="cover-title">O controle em sua mão</h1>
         <span className="cover-text">Com o Stock, você acompanha seu fluxo de estoque em tempo real.</span>
       </div>
+
       <div className="steps">
         <h1 className="steps-title">Comece já com apenas 3 passos</h1>
         <div class="container">
@@ -39,6 +40,7 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+
       <div className="requirements">
         <h1 className="requirements-title">Saiba como funciona</h1>
         <div class="container">
@@ -57,13 +59,16 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+
         <div className="signUp">
           <a href="/">
             <button class="signUp-button" type="button">Cadastre-se agora</button>
           </a>
         </div>
+
       </div>
     </body>
+    
     <footer>
           <Footer />
     </footer>

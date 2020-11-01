@@ -29,3 +29,13 @@
   font-weight: 600;
 }
 
+.sidebar.mobile {
+  background-color: var(--gray);
+  left: 0 !important;
+}
+
+.sidebar {
+  
+}
+
+
