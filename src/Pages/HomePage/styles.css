@@ -1,7 +1,3 @@
-body {
-    background-color: var(--gray) !important;
-}
-
 .cover {
     height: 550px;
 }
@@ -113,8 +109,7 @@ body {
     }
     
     .requirements .signUp {
-        margin-top: 0px !important;
-        margin-bottom: 16px;
+        margin: 0px !important;
     }
 
     .signUp-button {
