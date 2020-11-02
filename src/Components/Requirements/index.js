@@ -38,7 +38,7 @@ export default function Requirements() {
                         <div
                             className="item-requirements"
                             key={index}
-                            style={isSelected ? { "fontWeight": "bold", "color":"#AC1C1C", "text-decoration": "underline" } : {}}
+                            style={isSelected ? { "fontWeight": "bold", "color": "#AC1C1C", "text-decoration": "underline" } : {}}
                             onClick={handleOnClick}
                         >
                             {option.name}
@@ -54,17 +54,17 @@ export default function Requirements() {
             <div
                 className="content-requirements"
                 style={{ flexDirection: "row" }}
-            >   
+            >
                 <div class="info-requirements">
-                <div className="title-requirements"> {selectedItem.title} </div>
-                <div className="text-requirements"> {selectedItem.text} </div>
+                    <div className="title-requirements"> {selectedItem.title} </div>
+                    <div className="text-requirements"> {selectedItem.text} </div>
                 </div>
                 <div className="header-requirements">
-                        <img
-                            alt={selectedItem.name}
-                            className="img-requirements"
-                            src={selectedItem.image}
-                        />
+                    <img
+                        alt={selectedItem.name}
+                        className="img-requirements"
+                        src={selectedItem.image}
+                    />
                 </div>
             </div>
         );

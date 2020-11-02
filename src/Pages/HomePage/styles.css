@@ -107,12 +107,19 @@ body {
     .cover-title {
         font-size: 40px !important;
     }
+
     .cover-text {
         font-size: 18px !important;
     }
+    
     .requirements .signUp {
         margin-top: 0px !important;
         margin-bottom: 16px;
+    }
+
+    .signUp-button {
+        font-size: 15px;
+        margin-top: 10%;
     }
 }
 

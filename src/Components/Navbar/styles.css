@@ -10,9 +10,11 @@
   justify-content: flex-end;
   align-items: center;
 }
+
 .nav-item div button {
   box-shadow: none !important;
 }
+
 .nav-item div button:hover {
   background-color: transparent;
 }
@@ -21,6 +23,7 @@
   cursor: pointer;
   margin-right: 12px;
 }
+
 .nav-item svg:hover {
   opacity: 0.5;
 }
