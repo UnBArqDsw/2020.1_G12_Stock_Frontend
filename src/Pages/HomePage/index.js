@@ -7,6 +7,7 @@ import Step3 from '../../assets/icons/step3.svg';
 import Bag from '../../assets/images/bag.png';
 import Box from '../../assets/images/box.png';
 import Footer from '../../Components/Footer';
+import Requirements from '../../Components/Requirements';
 
 export default function HomePage() {
   return (
@@ -47,22 +48,7 @@ export default function HomePage() {
 
       <div className="requirements">
         <h1 className="requirements-title">Saiba como funciona</h1>
-        <div class="container">
-          <div class="row">
-            <div class="col-sm">
-              <h2 className="requirements-subtitle">Controle de Acesso</h2>
-            </div>
-            <div class="col-sm">
-              <h2 className="requirements-subtitle">Controle de Vendas</h2>
-            </div>
-            <div class="col-sm">
-              <h2 className="requirements-subtitle">Análises</h2>
-            </div>
-            <div class="col-sm">
-              <h2 className="requirements-subtitle">Níveis de Acesso</h2>
-            </div>
-          </div>
-        </div>
+        <Requirements />
 
         <div className="signUp">
           <a href="/">
