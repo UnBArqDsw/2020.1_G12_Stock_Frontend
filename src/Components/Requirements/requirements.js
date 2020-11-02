@@ -1,11 +1,16 @@
+import stock from '../../assets/images/stock.png';
+import sale from '../../assets/images/sale.jpg';
+import analysis from '../../assets/images/analysis.jpg';
+import accesslevel from '../../assets/images/accesslevel.jpg';
+
 const LOCALES = {
   id: "occupation",
   options: [
     {
       id: "Stock",
-    //   image: ,
+      image: stock,
       name: "Controle de Estoque",
-      title: "Controle de Estoque",
+      title: "Facilidade de Controle",
       text:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut dignissim purus risus, non consequat purus dictum vitae. Curabitur fermentum vulputate dapibus. Maecenas sollicitudin neque a lectus viverra, maximus sagittis orci sagittis. Morbi enim mi, interdum et sapien sed, sodales sollicitudin turpis. Donec mauris massa, pharetra sed sapien sed, congue imperdiet ante.",
       description:
@@ -13,7 +18,7 @@ const LOCALES = {
     },
     {
       id: "Sales",
-    //   image:,
+      image: sale,
       name: "Controle de Vendas",
       title: "Controle de Vendas",
       text:
@@ -23,7 +28,7 @@ const LOCALES = {
   },
     {
       id: "Analysis",
-    //   image: ,
+      image: analysis,
       name: "Análises",
       title: "Análises",
       text:
@@ -33,7 +38,7 @@ const LOCALES = {
     },
     {
       id: "AccessLevel",
-    //   image: ,
+      image: accesslevel,
       name: "Nível de Acesso",
       title: "Nível de Acesso",
       text:

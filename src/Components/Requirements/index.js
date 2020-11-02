@@ -38,7 +38,7 @@ export default function Requirements() {
                         <div
                             className="item-requirements"
                             key={index}
-                            style={isSelected ? { fontWeight: "bold" } : {}}
+                            style={isSelected ? { "fontWeight": "bold", "color":"#AC1C1C", "text-decoration": "underline" } : {}}
                             onClick={handleOnClick}
                         >
                             {option.name}
@@ -54,17 +54,17 @@ export default function Requirements() {
             <div
                 className="content-requirements"
                 style={{ flexDirection: "row" }}
-            >
+            >   
+                <div class="info-requirements">
                 <div className="title-requirements"> {selectedItem.title} </div>
                 <div className="text-requirements"> {selectedItem.text} </div>
+                </div>
                 <div className="header-requirements">
-                    <div className="imgLoading-requirements">
                         <img
                             alt={selectedItem.name}
                             className="img-requirements"
                             src={selectedItem.image}
                         />
-                    </div>
                 </div>
             </div>
         );
@@ -72,7 +72,7 @@ export default function Requirements() {
 
     return (
         <div ref={ref} className="requirements" id={LOCALES.id}>
-            <div className="title-requirements"> {LOCALES.name} </div>
+            <div className="name-requirements"> {LOCALES.name} </div>
             <div className="tabs-requirements">
                 {renderMenu()}
                 {showContent && renderContent()}

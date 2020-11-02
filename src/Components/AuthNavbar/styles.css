@@ -16,7 +16,6 @@
   background-color: #F0F0F0;
   color: var(--primary);
   font-weight: 600;
-  margin-top: -20px !important;
   border: solid 0.5px var(--gray-secondary);
   border-radius: 2px !important;
   padding: 15px 25px 15px 25px;

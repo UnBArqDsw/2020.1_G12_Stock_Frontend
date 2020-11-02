@@ -6,14 +6,6 @@
   padding-right: 50px;
 }
 
-.title-requirements {
-color: red;
-font-size: 20px;
-height: 250px;
-line-height: 250px;
-text-align: center;
-}
-
 .tabs-requirements {
     min-height: 660px;
     height: fit-content;
@@ -30,11 +22,10 @@ align-items: center;
 justify-content: center;
 width: 12.5%;
 height: 60px;
-font-family: "Reem Kufi";
-font-size: 14px;
+font-size: 20px;
+font-weight: 500;
 position: relative;
-padding-left: 10px;
-padding-right: 10px;
+padding-top: 50px;
 text-align: center;
 cursor: pointer;
 }
@@ -58,51 +49,43 @@ animation: fadein 1s linear forwards;
 }
 
 .header-requirements {
-display: flex;
-justify-content: center;
-position: relative;
-width: 50%;
-}
-
-.imgLoading-requirements {
-    background: rgba(0, 0, 0, 0.05);
-    width: 60%;
-    height: 90%;
-    overflow-y: hidden;
-    position: relative;
+  justify-content: center;
+  position: relative;
+  width: 50%;
 }
 
     .img-requirements {
-    width: 100%;
-    height: 150%;
-    object-fit: cover;
-    top: -25%;
-    position: absolute;
-    animation: move 1s linear fowards;
+    width: 700px;
+    max-width: 100%;
+    height: auto;
+    margin-top: 7%;
+    margin-left: 10%;
+    border-radius: 10px;
     }
 
 
     .title-requirements {
-    background-color: white;
-    font-size: 20px;
-    line-height: 20px;
-    color: blue;
-    height: fit-content;
-    padding: 10px;
+    font-size: 30px;
+    color: var(--font-dark);
+    text-align: center;
     position: absolute;
-    width: min-content;
-    -webkit-animation: move 1s linear forwards;
-    animation: move 1s linear forwards;
-}
+    margin-top: 5%;
+    }
 
 
-.text-requirements {
-display: flex;
-align-items: center;
-font-size: 14px;
-width: 50%;
-white-space: pre-line;
-}
+  .text-requirements {
+    color: var(--font-dark);
+    text-align: justify;
+    font-size: 18px;
+    margin: 25% 10% 10% 10%;
+  }
+
+  .info-requirements {
+    display: flex;
+    justify-content: center;
+    width: 45%;
+    margin-left: 5%;
+  }
     
   
 
