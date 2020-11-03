@@ -1,0 +1,54 @@
+.login-header a.img {
+    width: 40%;
+    max-width: 150px;
+}
+
+.signIn-button {
+  background-color: white;
+  color: var(--primary);
+  font-weight: 600;
+  border: solid 0.5px var(--gray-secondary);
+  border-radius: 2px !important;
+  padding: 15px 25px 15px 25px;
+}
+
+.signIn-button:hover {
+  background-color: #F0F0F0;
+  color: var(--primary);
+  font-weight: 600;
+  border: solid 0.5px var(--gray-secondary);
+  border-radius: 2px !important;
+  padding: 15px 25px 15px 25px;
+}
+
+.signUp {
+  margin-top: 15px;
+  margin-left: -40%;
+  margin-right: 20%;
+  font-weight: 600;
+  text-align: center;
+}
+
+.sidebar.mobile {
+  background-color: var(--gray);
+  left: 0 !important;
+}
+
+@media screen and (max-width: 768px) {
+  .signIn-page{
+    padding-left: 15% !important;
+    margin-top: 10% !important;
+  }
+
+  .signUp {
+    margin-left: 20% !important;
+    margin-top: 10% !important;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .login-header img {
+    margin-left: 20px !important;
+  }
+}
+

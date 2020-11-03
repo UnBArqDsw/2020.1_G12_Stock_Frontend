@@ -55,17 +55,22 @@ input:focus {
   --secondary-smooth: #4dbcc4;
   --secondary-strong: #60edf7;
 
-  --green: #2aab20 !important;
-  --green-light: #88c959;
-  --green-dark: #1d7817;
-  --green-smooth: #58c791;
-  --green-strong: #5cd177;
+  --green: #2AAB20 !important; 
+  --green-light: #88C959; 
+  --green-dark: #1D7817; 
+  --green-smooth: #58C791; 
+  --green-strong: #5CD177;
 
-  --yellow: #ab9a29 !important;
-  --yellow-light: #f7de3b;
-  --yellow-dark: #b88623;
-  --yellow-smooth: #b8a52c;
-  --yellow-strong: #e0ca36;
+  --yellow: #AB9A29 !important; 
+  --yellow-light: #F7DE3B; 
+  --yellow-dark: #B88623; 
+  --yellow-smooth: #B8A52C; 
+  --yellow-strong: #E0CA36; 
 
-  --dark: #313c4e !important;
+  --gray: #F5F5F5 !important;
+  --gray-secondary: #E0E0E0;
+  
+  --dark: #313C4E !important;
+  --font-dark: #1C1C1C;
+
 }

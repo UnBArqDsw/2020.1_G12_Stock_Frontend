@@ -2,7 +2,6 @@
 import React, { useState, useContext } from 'react';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/all';
 import { AuthContext } from '../../../Contexts/AuthContext';
-import logo from '../../../assets/images/logo-horizontal.png';
 import './styles.css';
 import InputMask from 'react-input-mask';
 
@@ -18,9 +17,6 @@ export default function LoginPage() {
   };
   return (
     <div className="container">
-      <div className="login-header">
-        <img src={logo} alt="logo" />
-      </div>
       <div className="login-form">
         <h3>Portal do gestor</h3>
         <form onSubmit={onSubmit}>

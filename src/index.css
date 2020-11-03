@@ -17,7 +17,7 @@ body,
 
 body {
   font: 14px 'Montserrat', sans-serif !important;
-  background: #e5e5e5 !important;
+  background: var(--gray) !important;
   color: #333;
   -webkit-font-smoothing: antialiased !important;
 }
