@@ -11,11 +11,17 @@ export default function Requirements() {
   const [showContent, setShowContent] = useState(true);
   const ref = useRef();
 
+  const selectItem = (option) => {
+    const isSelected = option.id === selectedItem.id;
+
+    return isSelected;
+  }
+
   const renderMenu = () => {
     return (
       <div className="menu-requirements">
         {options.map((option, index) => {
-          const isSelected = option.id === selectedItem.id;
+          const isSelected = selectItem(option);
           const handleOnClick = () => {
             if (option.id !== selectedItem.id) {
               setSelectedItem(option);
