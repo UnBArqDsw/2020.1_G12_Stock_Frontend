@@ -52,7 +52,8 @@
   top: 6px;
 }
 
-.link {
-  color: black;
+.register-click {
+  color: var(--font-dark);
   text-decoration: underline;
+  margin: 0 !important;
 }

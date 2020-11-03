@@ -22,10 +22,7 @@ export default function RoutesContainer() {
     <BrowserRouter>
       <Switch>
         <ContextProvider>
-          <PrivateRoute path="/" exact component={HomePage} />
-          <Route path="/login" component={Login} />
-          <Route path="/register/company" component={RegisterCompany} />
-          <Route path="/register/owner" component={RegisterOwner} />
+          <Routes />
         </ContextProvider>
       </Switch>
     </BrowserRouter>
@@ -72,6 +69,8 @@ const Routes = () => {
         <PrivateRoute path="/history" exact component={History} />
         <PrivateRoute path="/stock" exact component={Stock} />
         <Route path="/login" component={Login} />
+        <Route path="/register/company" component={RegisterCompany} />
+        <Route path="/register/owner" component={RegisterOwner} />
         <Route path="/home" exact component={HomePage} />
       </div>
     </>

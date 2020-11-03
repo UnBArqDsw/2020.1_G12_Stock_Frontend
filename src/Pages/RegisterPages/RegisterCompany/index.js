@@ -65,14 +65,6 @@ export default function RegisterCompanyPage() {
 
   return (
     <div className="container">
-      <div className="register-company-header">
-        <img src={logo} alt="logo" />
-        <div>
-          <a className="link" href="/login">
-            Portal do Gestor
-          </a>
-        </div>
-      </div>
       <div className="register-company-form">
         <h2>Comece agora mesmo</h2>
         <p>Preencha os dados abaixo para realizar o cadastro da sua empresa.</p>

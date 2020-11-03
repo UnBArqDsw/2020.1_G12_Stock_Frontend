@@ -60,10 +60,6 @@ export default function RegisterOwnerPage() {
 
   return (
     <div className="container">
-      <div className="register-owner-header">
-        <img src={logo} alt="logo" />
-        <div>Portal do Gestor</div>
-      </div>
       <div className="register-owner-form">
         <h1>Faça seu cadastro de Gestor</h1>
         <p>Preencha os dados abaixo para realizar seu cadastro.</p>

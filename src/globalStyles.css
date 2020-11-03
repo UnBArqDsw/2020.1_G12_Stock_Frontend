@@ -14,7 +14,13 @@ button:focus {
   outline: none !important;
 }
 
-input,
+input {
+  background-color: #eee;
+  border-style: none;
+  padding: 8px;
+  border-radius: 5px;
+}
+
 select {
   background-color: #eee;
   border-style: none;

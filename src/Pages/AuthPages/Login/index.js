@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/all';
 import { AuthContext } from '../../../Contexts/AuthContext';
 import './styles.css';
@@ -42,7 +43,7 @@ export default function LoginPage() {
               type={passwordVisible ? 'text' : 'password'}
             />
           </div>
-          <p>Não é cadastrado ainda? <a className="link" href="register/company">Clique aqui</a></p>
+          <p>Não é cadastrado ainda? <Link to="register/company" className="register-click">Clique aqui</Link></p>
           <div className="login-submit">
             <span>esqueci minha senha</span>
             <button type="submit">Entrar</button>
