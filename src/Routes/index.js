@@ -1,15 +1,17 @@
 import React, { useContext, Fragment } from 'react';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import { AuthContext } from '../Contexts/AuthContext';
+import Login from '../Pages/AuthPages/Login';
+import ContextProvider from '../Contexts/Providers';
+import PrivateRoute from './privateRoute';
+import HomePage from '../Pages/HomePage';
+import AuthNavBar from '../Components/AuthNavbar';
 import Dashboard from '../Pages/Dashboard';
 import Collaborators from '../Pages/Collaborators';
 import Feedback from '../Pages/Feedback';
 import History from '../Pages/History';
 import Stock from '../Pages/Stock';
-import Login from '../Pages/AuthPages/Login';
-import ContextProvider from '../Contexts/Providers';
-import PrivateRoute from './privateRoute';
 import SideBar from '../Components/SideBar';
-import { AuthContext } from '../Contexts/AuthContext';
 import { DeviceContext } from '../Contexts/DeviceContext';
 import NavBar from '../Components/Navbar';
 
@@ -47,6 +49,12 @@ const Routes = () => {
         </>
       );
     }
+
+    return (
+      <>
+        <AuthNavBar />
+      </>
+    );
   };
 
   return (
@@ -59,6 +67,7 @@ const Routes = () => {
         <PrivateRoute path="/history" exact component={History} />
         <PrivateRoute path="/stock" exact component={Stock} />
         <Route path="/login" component={Login} />
+        <Route path="/home" exact component={HomePage} />
       </div>
     </>
   );

@@ -32,7 +32,7 @@ export default function AuthContextProvider({ children }) {
     removeToken();
     removeUser();
     setUser(null);
-    history.push('/login');
+    history.push('/home');
   };
 
   return (
