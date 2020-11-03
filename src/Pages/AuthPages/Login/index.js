@@ -16,41 +16,39 @@ export default function LoginPage() {
     signIn(document, password);
   };
   return (
-    <body>
-      <div className="container">
-        <div className="login-form">
-          <h3>Portal do gestor</h3>
-          <form onSubmit={onSubmit}>
-            <label htmlFor="document">CPF:</label>
-            <InputMask
-              onChange={(e) => setDocument(e.target.value)}
-              id="document"
-              mask="999.999.999-99"
-              maskChar=""
+    <div className="container">
+      <div className="login-form">
+        <h3>Portal do gestor</h3>
+        <form onSubmit={onSubmit}>
+          <label htmlFor="document">CPF:</label>
+          <InputMask
+            onChange={(e) => setDocument(e.target.value)}
+            id="document"
+            mask="999.999.999-99"
+            maskChar=""
+          />
+          <label htmlFor="password">Senha:</label>
+          <div className="password-input-container">
+            <div className="password-icon-container">
+              {passwordVisible ? (
+                <AiFillEyeInvisible size={20} onClick={() => setPasswordVisible(false)} />
+              ) : (
+                <AiFillEye size={20} onClick={() => setPasswordVisible(true)} />
+              )}
+            </div>
+            <input
+              onChange={(e) => setPassword(e.target.value)}
+              id="password"
+              type={passwordVisible ? 'text' : 'password'}
             />
-            <label htmlFor="password">Senha:</label>
-            <div className="password-input-container">
-              <div className="password-icon-container">
-                {passwordVisible ? (
-                  <AiFillEyeInvisible size={20} onClick={() => setPasswordVisible(false)} />
-                ) : (
-                    <AiFillEye size={20} onClick={() => setPasswordVisible(true)} />
-                  )}
-              </div>
-              <input
-                onChange={(e) => setPassword(e.target.value)}
-                id="password"
-                type={passwordVisible ? 'text' : 'password'}
-              />
-            </div>
-            <p>Não é cadastrado ainda? Clique aqui</p>
-            <div className="login-submit">
-              <span>esqueci minha senha</span>
-              <button type="submit">Entrar</button>
-            </div>
-          </form>
-        </div>
+          </div>
+          <p>Não é cadastrado ainda? Clique aqui</p>
+          <div className="login-submit">
+            <span>esqueci minha senha</span>
+            <button type="submit">Entrar</button>
+          </div>
+        </form>
       </div>
-    </body>
+    </div>
   );
 }

@@ -11,32 +11,33 @@ import Requirements from '../../Components/Requirements';
 
 export default function HomePage() {
   return (
-    <html>
-    <body>
+    <>
       <div className="cover">
         <h1 className="cover-title">O controle em sua mão</h1>
-        <span className="cover-text">Com o Stock, você acompanha seu fluxo de estoque em tempo real.</span>
+        <span className="cover-text">
+          Com o Stock, você acompanha seu fluxo de estoque em tempo real.
+        </span>
         <img className="bag" src={Bag} alt="Bag" />
         <img className="box" src={Box} alt="Box" />
       </div>
 
       <div className="steps">
         <h1 className="steps-title">Comece já com apenas 3 passos</h1>
-        <div class="container">
-          <div class="row">
-            <div class="col-sm">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm">
               <img src={Step1} alt="Step1" />
               <div>
                 <span>1. Cadastre sua empresa</span>
               </div>
             </div>
-            <div class="col-sm">
+            <div className="col-sm">
               <img src={Step2} alt="Step2" />
               <div>
                 <span>2. Acesse sua conta e adicione estoque e colaboradores</span>
               </div>
             </div>
-            <div class="col-sm">
+            <div className="col-sm">
               <img src={Step3} alt="Step3" />
               <div>
                 <span>3. Agora só fazer seu gerenciamento</span>
@@ -52,16 +53,13 @@ export default function HomePage() {
 
         <div className="signUp">
           <a href="/">
-            <button class="signUp-button" type="button">Cadastre-se agora</button>
+            <button className="signUp-button" type="button">
+              Cadastre-se agora
+            </button>
           </a>
         </div>
-
       </div>
-    </body>
-    
-    <footer>
-          <Footer />
-    </footer>
-    </html>
+      <Footer />
+    </>
   );
 }

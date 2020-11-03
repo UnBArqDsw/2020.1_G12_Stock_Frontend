@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { GrMenu } from 'react-icons/all';
 import logo from '../../assets/images/logo-horizontal.png';
 import './styles.css';
 import { DeviceContext } from '../../Contexts/DeviceContext';
 
 export default function AuthNavBar() {
-
   const { isMobile } = useContext(DeviceContext);
   const [authNavBarOpen, setauthNavBarOpen] = useState(false);
 
@@ -37,35 +37,28 @@ export default function AuthNavBar() {
     }
   };
 
-
-
   return (
     <>
       {renderSandwichButton()}
       {renderSidebarOpenBackgroundOnMobile()}
       <div className="container">
-
         <div className="login-header">
-            <a href="/home">
-              <img src={logo} alt="logo" />
-            </a>
-        
-              
-         <div className={getNavContainerByDevice()}>
-          <div class="row">
-            {/* <div class="col"> */}
-            <p class="signUp">Cadastrar Estoque</p>
-            {/* </div> */}
-            {/* <div class="col"> */}
-            <div className="signIn-page">
-              <a href="/login">
-              <button class="signIn-button" type="button">Portal do Gestor</button>
-              </a>
-            </div>
-            {/* </div> */}
-          </div>
-          </div>
+          <Link to="/home">
+            <img src={logo} alt="logo" />
+          </Link>
 
+          <div className={getNavContainerByDevice()}>
+            <div className="row">
+              <p className="signUp">Cadastrar Estoque</p>
+              <div className="signIn-page">
+                <Link to="/login">
+                  <button className="signIn-button" type="button">
+                    Portal do Gestor
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>

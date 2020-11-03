@@ -4,7 +4,7 @@ import { AuthContext } from '../Contexts/AuthContext';
 import Login from '../Pages/AuthPages/Login';
 import ContextProvider from '../Contexts/Providers';
 import PrivateRoute from './privateRoute';
-import HomePage from '../Pages/HomePage'
+import HomePage from '../Pages/HomePage';
 import AuthNavBar from '../Components/AuthNavbar';
 import Dashboard from '../Pages/Dashboard';
 import Collaborators from '../Pages/Collaborators';
@@ -43,19 +43,18 @@ const Routes = () => {
   const renderTopAndSideBar = () => {
     if (isUserSigned) {
       return (
-        <Fragment>
+        <>
           <NavBar />
           <SideBar />
-        </Fragment>
+        </>
       );
     }
-    else {
-      return (
-        <Fragment>
-          <AuthNavBar />
-        </Fragment>
-      );
-    }
+
+    return (
+      <>
+        <AuthNavBar />
+      </>
+    );
   };
 
   return (
