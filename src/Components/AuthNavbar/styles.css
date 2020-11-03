@@ -1,6 +1,6 @@
 .login-header a.img {
-    width: 40%;
-    max-width: 150px;
+  width: 40%;
+  max-width: 150px;
 }
 
 .signIn-button {
@@ -13,7 +13,7 @@
 }
 
 .signIn-button:hover {
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
   color: var(--primary);
   font-weight: 600;
   border: solid 0.5px var(--gray-secondary);
@@ -35,9 +35,13 @@
 }
 
 @media screen and (max-width: 768px) {
-  .signIn-page{
+  .signIn-page {
     padding-left: 15% !important;
     margin-top: 10% !important;
+  }
+  .login-header {
+    display: flex;
+    justify-content: center;
   }
 
   .signUp {
@@ -45,10 +49,3 @@
     margin-top: 10% !important;
   }
 }
-
-@media screen and (max-width: 575px) {
-  .login-header img {
-    margin-left: 20px !important;
-  }
-}
-
