@@ -18,6 +18,18 @@ button:focus {
   outline: none !important;
 }
 
+button.secondary{
+  border-style: none;
+  background-color: var(--dark);
+  color: #fff; 
+  padding: 0.5rem 2rem;
+  border-radius: 5px !important;
+  transition: 0.5s;
+}
+button.secondary:hover{
+  background-color: var(--font-dark);
+}
+
 input {
   background-color: #fff;
   border-style: none;
@@ -65,6 +77,7 @@ input:focus {
 
   --gray: #F5F5F5 !important;
   --gray-secondary: #E0E0E0;
+  --gray-dark: #757575 !important;
   
   --dark: #313C4E !important;
   --font-dark: #1C1C1C;

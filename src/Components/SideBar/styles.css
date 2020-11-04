@@ -9,6 +9,7 @@
   align-items: center;
   flex-direction: column;
   z-index: 200;
+  overflow-x: scroll;
 }
 
 .sidebar.mobile {
@@ -25,7 +26,7 @@
 }
 
 .sidebar img {
-  width: 60%;
+  width: 70%;
   cursor: pointer;
 }
 .sidebar a {
