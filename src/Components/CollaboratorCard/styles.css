@@ -1,0 +1,21 @@
+.container {
+}
+.card-header {
+  background-color: #fff !important;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.collaborator {
+  display: flex;
+  flex-direction: column;
+  margin-left: -30%;
+}
+.name{
+    font-size: 14px;
+}
+.access-level {
+    margin-top: -10%;
+    font-size: 10px;
+}

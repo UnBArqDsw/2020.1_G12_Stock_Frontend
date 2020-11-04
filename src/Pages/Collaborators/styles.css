@@ -1,0 +1,41 @@
+.collaborator-content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.toolbar {
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.search-filter {
+  height: inherit;
+  display: flex;
+  align-items: center;
+}
+.search-filter input {
+  height: inherit;
+}
+.search-filter svg {
+  background: var(--gray-secondary);
+  color: var(--gray-dark);
+  height: inherit;
+  width: 30px;
+  padding: 5px;
+  margin-left: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.search-filter svg:hover {
+  opacity: 0.5;
+}
+.create-collaborator button {
+  margin-left: 5px;
+}

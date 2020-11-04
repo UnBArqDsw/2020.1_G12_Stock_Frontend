@@ -18,6 +18,18 @@ button:focus {
   outline: none !important;
 }
 
+button.secondary{
+  border-style: none;
+  background-color: var(--dark);
+  color: #fff; 
+  padding: 0.5rem 2rem;
+  border-radius: 5px !important;
+  transition: 0.5s;
+}
+button.secondary:hover{
+  background-color: var(--font-dark);
+}
+
 input {
   background-color: #fff;
   border-style: none;
