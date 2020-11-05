@@ -49,7 +49,7 @@ export default function AuthNavBar() {
 
           <div className={getNavContainerByDevice()}>
             <div className="row">
-              <p className="signUp">Cadastrar Estoque</p>
+            <Link to="/register/company" className="signUp">Cadastrar Estoque</Link>
               <div className="signIn-page">
                 <Link to="/login">
                   <button className="signIn-button" type="button">

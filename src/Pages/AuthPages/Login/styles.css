@@ -51,3 +51,9 @@
   right: 10px;
   top: 6px;
 }
+
+.register-click {
+  color: var(--font-dark);
+  text-decoration: underline;
+  margin: 0 !important;
+}

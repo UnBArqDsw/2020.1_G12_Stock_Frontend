@@ -7,10 +7,6 @@ button {
   transition: 0.5s;
 }
 
-a {
-  text-decoration: none !important;
-}
-
 button:hover {
   background-color: var(--primary-dark);
 }
@@ -19,11 +15,25 @@ button:focus {
 }
 
 input {
-  background-color: #fff;
+  background-color: #eee;
   border-style: none;
   padding: 8px;
   border-radius: 5px;
 }
+
+select {
+  background-color: #eee;
+  border-style: none;
+  padding: 8px;
+  border-radius: 5px;
+  width: 220px;
+}
+
+option {
+  background-color: #fff;
+}
+
+select:focus,
 input:focus {
   border-style: solid;
   border-color: rgba(77, 188, 196, 0.6);

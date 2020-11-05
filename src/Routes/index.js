@@ -11,6 +11,8 @@ import Collaborators from '../Pages/Collaborators';
 import Feedback from '../Pages/Feedback';
 import History from '../Pages/History';
 import Stock from '../Pages/Stock';
+import RegisterOwner from '../Pages/RegisterPages/RegisterOwner';
+import RegisterCompany from '../Pages/RegisterPages/RegisterCompany';
 import SideBar from '../Components/SideBar';
 import { DeviceContext } from '../Contexts/DeviceContext';
 import NavBar from '../Components/Navbar';
@@ -67,6 +69,8 @@ const Routes = () => {
         <PrivateRoute path="/history" exact component={History} />
         <PrivateRoute path="/stock" exact component={Stock} />
         <Route path="/login" component={Login} />
+        <Route path="/register/company" component={RegisterCompany} />
+        <Route path="/register/owner" component={RegisterOwner} />
         <Route path="/home" exact component={HomePage} />
       </div>
     </>
