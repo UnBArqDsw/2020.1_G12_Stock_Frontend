@@ -1,7 +1,8 @@
 import React from 'react';
 import './styles.css';
-import {FaFilter, FaSortAmountUp} from 'react-icons/all';
-import {Table} from 'reactstrap'; 
+import { FaFilter, FaSortAmountUp } from 'react-icons/all';
+import { Table } from 'reactstrap';
+import ProductCard from '../../Components/ProductCard';
 
 export default function Stock() {
   return (
@@ -10,18 +11,22 @@ export default function Stock() {
         <h1>Estoque</h1>
         <div className="toolbar">
           <div className="search-filter">
-            <input type="text" placeholder="Procurar produtos"/>
-              <FaFilter />
-              <FaSortAmountUp />
+            <input type="text" placeholder="Procurar produtos" />
+            <FaFilter />
+            <FaSortAmountUp />
           </div>
           <div className="create-import">
-            <button className="secondary">Importar</button>
-            <button className="secondary">Novo Produto</button>
+            <button type="button" className="secondary">
+              Importar
+            </button>
+            <button type="button" className="secondary">
+              Novo Produto
+            </button>
           </div>
         </div>
       </div>
-
-      <Table hover style={{backgroundColor: "#fff", marginTop: 20}}>
+      <ProductCard />
+      {/* <Table hover style={{backgroundColor: "#fff", marginTop: 20}}>
       <thead>
         <tr>
           <th>Nome e descrição</th>
@@ -53,8 +58,7 @@ export default function Stock() {
           <td>@twitter</td>
         </tr>
       </tbody>
-    </Table>
-
+    </Table> */}
     </div>
   );
 }
