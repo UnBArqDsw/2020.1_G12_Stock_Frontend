@@ -20,9 +20,11 @@
   display: flex;
   align-items: center;
 }
+
 .search-filter input {
   height: inherit;
 }
+
 .search-filter svg {
   background: var(--gray-secondary);
   color: var(--gray-dark);
@@ -33,9 +35,11 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
 .search-filter svg:hover {
   opacity: 0.5;
 }
+
 .create-collaborator button {
   margin-left: 5px;
 }

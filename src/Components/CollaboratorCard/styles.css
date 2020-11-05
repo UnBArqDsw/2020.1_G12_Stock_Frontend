@@ -1,5 +1,3 @@
-.container {
-}
 .card-header {
   background-color: #fff !important;
   display: flex;
@@ -12,10 +10,19 @@
   flex-direction: column;
   margin-left: -30%;
 }
-.name{
+
+.name {
     font-size: 14px;
 }
+
 .access-level {
     margin-top: -10%;
     font-size: 10px;
+}
+
+.collaborator-actions {
+  background-color: #fff !important;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
