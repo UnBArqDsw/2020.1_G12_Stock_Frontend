@@ -29,6 +29,15 @@
   text-align: center;
 }
 
+a.signUp, a.signUp:hover {
+  color: var(--font-dark);
+  text-decoration: none;
+}
+
+p.signUp:hover {
+  text-decoration: none !important;
+}
+
 .sidebar.mobile {
   background-color: var(--gray);
   left: 0 !important;
