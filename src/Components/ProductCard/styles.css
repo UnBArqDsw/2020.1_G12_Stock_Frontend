@@ -1,0 +1,34 @@
+.list-container {
+  margin-top: 26px;
+}
+.list-container .card {
+  margin-bottom: 16px;
+}
+.product-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px !important;
+}
+.product-header div {
+  padding: 10px;
+  display: flex;
+  width: 25%;
+  height: 100%;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+.product-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.product-card div {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  width: 25%;
+  flex-direction: column;
+  text-align: center;
+}

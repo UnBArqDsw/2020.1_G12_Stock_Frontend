@@ -1,11 +1,11 @@
-.stock-content{
-  width: 100%; 
-  display: flex; 
-  align-items:  center;
+.stock-content {
+  width: 100%;
+  display: flex;
+  align-items: center;
   flex-direction: column;
 }
 
-.toolbar{
+.toolbar {
   width: 100%;
   height: 2rem;
   display: flex;
@@ -15,15 +15,15 @@
   flex-wrap: wrap;
 }
 
-.search-filter{
+.search-filter {
   height: inherit;
-  display: flex; 
+  display: flex;
   align-items: center;
-} 
-.search-filter input{
+}
+.search-filter input {
   height: inherit;
-} 
-.search-filter svg{
+}
+.search-filter svg {
   background: var(--gray-secondary);
   color: var(--gray-dark);
   height: inherit;
@@ -33,9 +33,33 @@
   border-radius: 5px;
   cursor: pointer;
 }
-.search-filter svg:hover{
+.search-filter svg:hover {
   opacity: 0.5;
 }
-.create-import button{
+.create-import button {
   margin-left: 5px;
+}
+
+.add-product-modal-footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.new-product-input-container {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 16px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.new-product-input-container div {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.new-product-input-container.textarea div {
+  width: 100%;
 }

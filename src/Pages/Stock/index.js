@@ -1,10 +1,110 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './styles.css';
 import { FaFilter, FaSortAmountUp } from 'react-icons/all';
-import { Table } from 'reactstrap';
+import { Modal, ModalHeader, ModalFooter, ModalBody } from 'reactstrap';
 import ProductCard from '../../Components/ProductCard';
 
 export default function Stock() {
+  const [newProductModalOpen, setNewProductModalOpen] = useState(false);
+  const toggleNewProductModal = () => setNewProductModalOpen(!newProductModalOpen);
+
+  const [newLotModalOpen, setNewLotModalOpen] = useState(false);
+  const toggleNewLotModal = () => setNewLotModalOpen(!newLotModalOpen);
+
+  const renderNewProductModal = () => (
+    <Modal toggle={toggleNewProductModal} isOpen={newProductModalOpen}>
+      <ModalHeader toggle={toggleNewProductModal}>Cadastrar novo produto</ModalHeader>
+      <ModalBody>
+        <form>
+          <div className="new-product-input-container">
+            <div>
+              <span>Nome</span>
+              <input type="text" />
+            </div>
+            <div>
+              <span>Preço</span>
+              <input type="text" />
+            </div>
+          </div>
+
+          <div className="new-product-input-container">
+            <div>
+              <span>Categorias</span>
+              <select>
+                <option>teste</option>
+                <option>teste</option>
+                <option>teste</option>
+                <option>teste</option>
+                <option>teste</option>
+              </select>
+            </div>
+            <div>
+              <span>Unidade de medida</span>
+              <select>
+                <option>teste</option>
+                <option>teste</option>
+                <option>teste</option>
+                <option>teste</option>
+                <option>teste</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </ModalBody>
+      <ModalFooter>
+        <div className="add-product-modal-footer">
+          <button type="button" className="secondary" onClick={toggleNewProductModal}>
+            Adicionar
+          </button>
+        </div>
+      </ModalFooter>
+    </Modal>
+  );
+
+  const renderNewLotModal = () => (
+    <Modal toggle={toggleNewLotModal} isOpen={newLotModalOpen}>
+      <ModalHeader toggle={toggleNewLotModal}>Cadastro de Lote</ModalHeader>
+      <ModalBody>
+        <form>
+          <div className="new-product-input-container">
+            <div>
+              <span>Data de entrada</span>
+              <input type="text" />
+            </div>
+            <div>
+              <span>Data de Vencimento</span>
+              <input type="text" />
+            </div>
+          </div>
+
+          <div className="new-product-input-container">
+            <div>
+              <span>Preço da compra</span>
+              <input type="text" />
+            </div>
+            <div>
+              <span>Quantidade</span>
+              <input type="text" />
+            </div>
+          </div>
+
+          <div className="new-product-input-container textarea">
+            <div>
+              <span>Descrição</span>
+              <textarea />
+            </div>
+          </div>
+        </form>
+      </ModalBody>
+      <ModalFooter>
+        <div className="add-product-modal-footer">
+          <button type="button" className="secondary" onClick={toggleNewProductModal}>
+            Cadastrar Lote
+          </button>
+        </div>
+      </ModalFooter>
+    </Modal>
+  );
   return (
     <div className="container">
       <div className="stock-content">
@@ -16,49 +116,18 @@ export default function Stock() {
             <FaSortAmountUp />
           </div>
           <div className="create-import">
-            <button type="button" className="secondary">
+            <button type="button" className="secondary" onClick={toggleNewLotModal}>
               Importar
             </button>
-            <button type="button" className="secondary">
+            <button type="button" className="secondary" onClick={toggleNewProductModal}>
               Novo Produto
             </button>
           </div>
         </div>
       </div>
       <ProductCard />
-      {/* <Table hover style={{backgroundColor: "#fff", marginTop: 20}}>
-      <thead>
-        <tr>
-          <th>Nome e descrição</th>
-          <th>Quantidade</th>
-          <th>Unidade</th>
-          <th>Lotes</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th>
-           <p>Chá Camomila</p> 
-           <p>Chá de Camomila LEÃO 10g com 10 Saquinhos</p>
-            </th>
-          <td>10</td>
-          <td>100g</td>
-          <td>4</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-      </tbody>
-    </Table> */}
+      {renderNewProductModal()}
+      {renderNewLotModal()}
     </div>
   );
 }
