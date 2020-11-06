@@ -10,16 +10,15 @@ export default function Collaborators() {
   const [collaborators, setCollaborators] = useState([]);
 
   useEffect(() => {
-    if(user) loadCollaborators();
+    if (user) loadCollaborators();
   }, []);
 
   const loadCollaborators = async () => {
     try {
       const response = await CollaboratorService.loadCollaborator(user.idCompany);
-      console.log(response);
       setCollaborators(response);
 
-    } catch(error) {
+    } catch (error) {
       console.log(error);
     }
   }
@@ -56,9 +55,17 @@ export default function Collaborators() {
           </div>
         </div>
       </div>
-      <div class="row">
-      {collaborators.length ? collaborators.map(user => <CollaboratorCard name={user.name} accessLevel={nameAccessLevel(user)} photo="#" />)
-             : ( <p>Você ainda não possui colaboradores cadastrados</p>) }    
+      <div className="row">
+        {collaborators.length ? collaborators.map(user =>
+          <CollaboratorCard
+            name={user.name}
+            accessLevel={nameAccessLevel(user)}
+            photo="#"
+            activate={user.activate}
+            idCollaborator={user.idCollaborator}
+          />
+        )
+          : (<p>Você ainda não possui colaboradores cadastrados</p>)}
       </div>
     </div>
   );
