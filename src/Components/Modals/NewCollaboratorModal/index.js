@@ -3,12 +3,14 @@ import './styles.css';
 import { Modal, ModalHeader, ModalFooter, ModalBody } from 'reactstrap';
 import { AuthContext } from '../../../Contexts/AuthContext';
 import CollaboratorService from '../../../Services/CollaboratorService';
+import ResultModal from '../ResultModal';
 
 
 export default function NewCollaboratorModal(props) {
   const { user } = useContext(AuthContext);
   const { modalVisible, setModalVisible } = props;
 
+  const [resultModal, setResultModal] = useState(false)
   const [name, setName] = useState('');
   const [cpf, setCpf] = useState('');
   const [email, setEmail] = useState('');
@@ -16,6 +18,7 @@ export default function NewCollaboratorModal(props) {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [checkPasswordsText, setCheckPasswordsText] = useState('');
+  const [response, setResponse] = useState({});
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -26,6 +29,7 @@ export default function NewCollaboratorModal(props) {
     if (password && passwordConfirm && password === passwordConfirm) {
       try {
         const response = await CollaboratorService.createCollaborator(user.idCompany, name, cpf, email, idAccessLevel, password);
+        setResponse(response)
         return response;
 
       } catch (error) {
@@ -55,6 +59,9 @@ export default function NewCollaboratorModal(props) {
       <ModalHeader isOpen={modalVisible} toggle={() => {
         setModalVisible(false)
       }}>Cadastrar novo(a) Colaborador(a)</ModalHeader>
+      <ResultModal title={response ? ("Colaborador(a) adicionado com sucesso!") : ("Falha ao adicionar colaborador(a).")}
+        modalVisible={resultModal}
+        setModalVisible={setResultModal} />
       <form onSubmit={onSubmit}>
         <ModalBody>
 
@@ -102,7 +109,7 @@ export default function NewCollaboratorModal(props) {
         </ModalBody>
         <ModalFooter>
           <div className="add-product-modal-footer">
-            <button type="submit" className="secondary">
+            <button type="submit" className="secondary" onClick={() => setResultModal(true)}>
               Adicionar
           </button>
           </div>
