@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import CollaboratorService from '../../Services/CollaboratorService';
 import { FaEdit } from 'react-icons/all';
-import ConfirmationModal from '../ConfirmationModal';
-import ResultModal from '../ResultModal';
+import ConfirmationModal from '../Modals/ConfirmationModal';
+import ResultModal from '../Modals/ResultModal';
 import './styles.css';
 
 export default function CollaboratorCard(props) {

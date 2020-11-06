@@ -30,12 +30,24 @@ button.secondary:hover{
   background-color: var(--font-dark);
 }
 
-input {
+input,
+textarea {
   background-color: #fff;
   border-style: none;
+  box-shadow: 0px 0px 1.5px 0.1px;
   padding: 8px;
   border-radius: 5px;
 }
+
+select {
+  background-color: #fff;
+  border-style: none;
+  box-shadow: 0px 0px 1.5px 0.1px;
+  padding: 8px;
+  border-radius: 5px;
+  width: 220px;
+}
+
 input:focus {
   border-style: solid;
   border-color: rgba(77, 188, 196, 0.6);

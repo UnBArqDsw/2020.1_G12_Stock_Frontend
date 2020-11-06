@@ -2,12 +2,14 @@ import React, { useContext, useState, useEffect } from 'react';
 import { FaFilter, FaSortAmountUp } from 'react-icons/all';
 import CollaboratorCard from '../../Components/CollaboratorCard';
 import { AuthContext } from '../../Contexts/AuthContext';
+import NewCollaboratorModal from '../../Components/Modals/NewCollaboratorModal';
 import CollaboratorService from '../../Services/CollaboratorService';
 import './styles.css';
 
 export default function Collaborators() {
   const { user } = useContext(AuthContext);
   const [collaborators, setCollaborators] = useState([]);
+  const [newCollaboratorModal, setNewCollaboratorModal] = useState(false);
 
   useEffect(() => {
     if (user) loadCollaborators();
@@ -42,6 +44,7 @@ export default function Collaborators() {
 
   return (
     <div className="container">
+      <NewCollaboratorModal setModalVisible={setNewCollaboratorModal} modalVisible={newCollaboratorModal} />
       <div className="collaborator-content">
         <h1>Colaboradores</h1>
         <div className="toolbar">
@@ -51,7 +54,7 @@ export default function Collaborators() {
             <FaSortAmountUp />
           </div>
           <div className="create-collaborator">
-            <button className="secondary">Novo Colaborador</button>
+            <button className="secondary" onClick={() => { setNewCollaboratorModal(true) }}>Novo Colaborador</button>
           </div>
         </div>
       </div>
