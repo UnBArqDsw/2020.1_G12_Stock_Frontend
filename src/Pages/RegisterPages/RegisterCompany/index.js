@@ -13,14 +13,13 @@ export default function RegisterCompanyPage() {
   const [document, setDocument] = useState('');
   const [email, setEmail] = useState('');
   const [branch, setBranch] = useState('');
-  const [conpanyName, setCompanyName] = useState('');
+  const [companyName, setCompanyName] = useState('');
   const [telephone, setTelephone] = useState('');
   const [collaboratorQuantity, setCollaboratorQuantity] = useState('');
   const [branches, setBranches] = useState([]);
   const history = useHistory();
   const [cpfCnpjMask, setCpfCnpjMask] = useState(MASK_CPF);
 
-  console.log(branches);
 
   useEffect(() => {
     if (document.length > CPF_CHAR_LENGTH) {
@@ -36,7 +35,7 @@ export default function RegisterCompanyPage() {
         email,
         document,
         branch,
-        conpanyName,
+        companyName,
         telephone,
         collaboratorQuantity
       );

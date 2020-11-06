@@ -14,6 +14,7 @@ export default function LoginPage() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    console.log(document, password);
     signIn(document, password);
   };
   return (

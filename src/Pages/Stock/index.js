@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles.css';
 import { FaFilter, FaSortAmountUp } from 'react-icons/all';
 import { Modal, ModalHeader, ModalFooter, ModalBody } from 'reactstrap';
 import ProductCard from '../../Components/ProductCard';
+import GetService from '../../Services/GetService';
 
 export default function Stock() {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    getProducts();
+  }, []);
+  const getProducts = async () => {
+    const response = await GetService.getProducts();
+    setProducts(response);
+    console.log(response);
+  }
   const [newProductModalOpen, setNewProductModalOpen] = useState(false);
   const toggleNewProductModal = () => setNewProductModalOpen(!newProductModalOpen);
 
@@ -26,7 +36,6 @@ export default function Stock() {
               <input type="text" />
             </div>
           </div>
-
           <div className="new-product-input-container">
             <div>
               <span>Categorias</span>
@@ -125,7 +134,7 @@ export default function Stock() {
           </div>
         </div>
       </div>
-      <ProductCard />
+      <ProductCard products={products}/>
       {renderNewProductModal()}
       {renderNewLotModal()}
     </div>

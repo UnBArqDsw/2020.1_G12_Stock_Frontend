@@ -1,43 +1,52 @@
-import React from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { Card, CardBody } from 'reactstrap';
 import './styles.css';
+import GetService from '../../Services/GetService';
 
-export default function ProductCard() {
-  return (
-    <div className="list-container">
-      <Card>
-        <CardBody className="product-header">
-          <div>
-            <span>Nome e Descrição</span>
-          </div>
-          <div>
-            <span>Quantidade</span>
-          </div>
-          <div>
-            <span>Unidade</span>
-          </div>
-          <div>
-            <span>Lotes</span>
-          </div>
-        </CardBody>
-      </Card>
-      <Card>
-        <CardBody className="product-card">
-          <div>
-            <p>Chá de camomila</p>
-            <p>aazzzzzzzzzzzzzzzzzzzzzssssssssssssssssssssssssssssssssssssssssszzzzzz</p>
-          </div>
-          <div>
-            <p>10</p>
-          </div>
-          <div>
-            <p>100g</p>
-          </div>
-          <div>
-            <p>4</p>
-          </div>
-        </CardBody>
-      </Card>
-    </div>
-  );
+class ProductCard extends Component {
+  render() {
+    return (
+      <div className="list-container">
+        <Card>
+          <CardBody className="product-header">
+            <div>
+              <span>Nome e Descrição</span>
+            </div>
+            <div>
+              <span>Quantidade</span>
+            </div>
+            <div>
+              <span>Unidade</span>
+            </div>
+            <div>
+              <span>Lotes</span>
+            </div>
+          </CardBody>
+        </Card>
+        <div className="cards">
+          {this.props.products.map((product) => {
+            return (<Card>
+              <CardBody className="product-card">
+                <div>
+                  <p>{product.name}</p>
+                </div>
+                <div>
+                  <p>{product.quantity}</p>
+                </div>
+                <div>
+                  <p>{product.uniQtd} {product.unitMeasure}(s)</p>
+                </div>
+                <div>
+                  {console.log(product, product.lots)}
+                <p>{product.lots}</p>
+                </div>
+              </CardBody>
+            </Card>);
+          })}
+
+        </div>
+      </div>
+    );
+  }
 }
+export default ProductCard;
