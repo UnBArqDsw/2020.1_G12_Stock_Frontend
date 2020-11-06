@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CollaboratorService from '../../Services/CollaboratorService';
 import { FaEdit } from 'react-icons/all';
+import ConfirmationModal from '../ConfirmationModal';
 import './styles.css';
 
 export default function CollaboratorCard(props) {
 
-  const { activate, idCollaborator, photo, name, accessLevel } = props
-
+  const { activate, idCollaborator, photo, name, accessLevel } = props;
+  const [confirmationModal, setConfirmationModal] = useState(false);
 
   const changeStatusCollaborator = async () => {
     try {
-      console.log(idCollaborator)
-      console.log(!activate)
       const response = await CollaboratorService.changeStatusCollaborator(idCollaborator, !activate);
-      return response
+      setConfirmationModal(false);
+      return response;
     } catch (error) {
       console.log(error);
     }
@@ -21,6 +21,26 @@ export default function CollaboratorCard(props) {
 
   return (
     <div className="col-md-6">
+      <ConfirmationModal modalVisible={confirmationModal}
+        setModalVisible={setConfirmationModal}
+        confirm={activate ? (
+          "Desativar"
+        ) : (
+            "Ativar"
+          )}
+        cancel="Cancelar"
+        title={activate ? (
+          `Tem certeza que deseja desativar colaborator(a) ${name}?`
+        ) : (
+            `Tem certeza que deseja ativar colaborator(a) ${name}?`
+          )}
+        message={activate ? (
+          "Ao desativar, você não perderá os dados do(a) usuário(a), porém ele(a) não terá mais acesso à plataforma."
+        ) : (
+            "Ao ativar, o(a) colaborador(a) voltará a ter acesso à plataforma."
+          )} 
+          response={changeStatusCollaborator}/>
+        
       <div className="container">
         <div className="card-header">
           <img src={photo} />
@@ -31,7 +51,7 @@ export default function CollaboratorCard(props) {
           <FaEdit size={25} />
         </div>
         <div className="collaborator-actions">
-          <button onClick={changeStatusCollaborator} className="deactivate">
+          <button onClick={() => setConfirmationModal(true)} className="deactivate">
             {activate ? (
               "Desativar Usuário"
             ) : (

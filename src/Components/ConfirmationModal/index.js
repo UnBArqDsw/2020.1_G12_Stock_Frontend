@@ -2,13 +2,16 @@
 
 import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { GiCancel } from 'react-icons/all';
+
 export default function ConfirmationModal(props) {
   const {
     confirm,
     cancel,
     message,
-    title
+    title,
+    modalVisible,
+    setModalVisible,
+    response
   } = props;
 
   const [modal, setModal] = useState(false);
@@ -17,15 +20,17 @@ export default function ConfirmationModal(props) {
 
   return (
     <div>
-      <Button color="danger" onClick={toggle}><GiCancel size={20} /></Button>
-      <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>{title}</ModalHeader>
+      <Modal isOpen={modalVisible} toggle={() => {
+            setModalVisible(!modalVisible);
+        }}>
+        <ModalHeader isOpen={modalVisible} toggle={() => {
+            setModalVisible(false)}}>{title}</ModalHeader>
         <ModalBody>
           {message}
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={toggle}>{confirm}</Button>{' '}
-          <Button color="secondary" onClick={toggle}>{cancel}</Button>
+          <Button color="primary" onClick={response}>{confirm}</Button>
+          <Button color="secondary" onClick={() => setModalVisible(false)}>{cancel}</Button>
         </ModalFooter>
       </Modal>
     </div>
