@@ -19,6 +19,7 @@
   height: inherit;
   display: flex;
   align-items: center;
+  margin-left: 15px;
 }
 
 .search-filter input {
@@ -40,6 +41,10 @@
   opacity: 0.5;
 }
 
+.deactivate {
+  cursor: pointer;
+}
+
 .create-collaborator button {
-  margin-left: 5px;
+  margin-right: 15px;
 }

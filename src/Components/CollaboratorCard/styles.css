@@ -1,8 +1,13 @@
+.container {
+border-radius: 5px;
+}
+
 .card-header {
   background-color: #fff !important;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  border: none !important;
 }
 
 .collaborator {
@@ -25,4 +30,5 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: 0px 50px 0px 50px;
 }

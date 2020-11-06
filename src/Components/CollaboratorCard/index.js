@@ -51,13 +51,13 @@ export default function CollaboratorCard(props) {
           <FaEdit size={25} />
         </div>
         <div className="collaborator-actions">
-          <button onClick={() => setConfirmationModal(true)} className="deactivate">
+          <a onClick={() => setConfirmationModal(true)} className="deactivate">
             {activate ? (
-              "Desativar Usuário"
+              "Desativar Colaborador"
             ) : (
-                "Ativar Usuário"
+                "Ativar Colaborador"
               )}
-          </button>
+          </a>
           <p className="show-sells">Visualizar Vendas</p>
         </div>
       </div>
