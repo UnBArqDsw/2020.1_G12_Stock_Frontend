@@ -41,15 +41,18 @@ a.deactivate {
 }
 
 .name {
-    font-size: 20px;
-    margin-top: 20%;
-    font-weight: 500;
+  font-size: 20px;
+  font-weight: 500;
+  position: absolute;
+  margin-left: -10%;
+  margin-top: 2%;
 }
 
-
 .access-level {
-    margin-top: -10%;
-    font-size: 14px;
+  font-size: 14px;
+  position: absolute;
+  margin-left: -10%;
+  margin-top: 7%;
 }
 
 .collaborator-info {
@@ -62,6 +65,7 @@ a.deactivate {
 
 .user-photo {
   width: 90px;
+  height: 90%;
   max-width: 100%;
   border-radius: 100%;
 }
@@ -85,9 +89,29 @@ a.deactivate {
   padding: 30px 35px 20px 40px;
 }
 
-@media screen and (max-width: 767px){
+@media screen and (min-width: 768px) and (max-width: 1270px) {
+  .name {
+    display: none;
+  }
+  .access-level {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
   .collaborator {
-   margin: 0px;
+    margin: 0px;
   }
 
+  .name {
+    position: relative;
+    margin: 15px 0px 0px 0px;
+    font-size: 14px;
+  }
+  
+  .access-level {
+    position: relative;
+    font-size: 11px;
+  }
 }
+
