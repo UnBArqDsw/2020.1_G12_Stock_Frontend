@@ -1,9 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import InputMask from 'react-input-mask';
 import logo from '../../../assets/images/logo-horizontal.png';
 import RegisterService from '../../../Services/RegisterService';
 import './styles.css';
-import { useHistory } from 'react-router-dom';
-import InputMask from 'react-input-mask';
+import GetService from '../../../Services/GetService';
 
 const MASK_CPF = '999.999.999-999';
 const CPF_CHAR_LENGTH = 14;
@@ -53,7 +54,7 @@ export default function RegisterCompanyPage() {
   };
 
   const getBranches = async () => {
-    const response = await RegisterService.getCompanyBranches();
+    const response = await GetService.getCompanyBranches();
     setBranches(response);
   };
 
