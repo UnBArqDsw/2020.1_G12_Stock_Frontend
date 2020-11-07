@@ -20,7 +20,6 @@ export default function RegisterCompanyPage() {
   const history = useHistory();
   const [cpfCnpjMask, setCpfCnpjMask] = useState(MASK_CPF);
 
-
   useEffect(() => {
     if (document.length > CPF_CHAR_LENGTH) {
       setCpfCnpjMask(MASK_CNPJ);
@@ -53,14 +52,14 @@ export default function RegisterCompanyPage() {
     registerCompany();
   };
 
-  useEffect(() => {
-    getBranches();
-  }, []);
-
   const getBranches = async () => {
     const response = await RegisterService.getCompanyBranches();
     setBranches(response);
   };
+
+  useEffect(() => {
+    getBranches();
+  }, []);
 
   return (
     <div className="container">
@@ -96,7 +95,7 @@ export default function RegisterCompanyPage() {
               <label htmlFor="document">Ramo do Negócio:</label>
               <br />
               <select type="select" onChange={(e) => setBranch(e.target.value)}>
-                <option value=""></option>
+                <option value="" />
                 {branches?.map((branch, i) => (
                   <option key={i} value={branch.idBranch}>
                     {branch.name}

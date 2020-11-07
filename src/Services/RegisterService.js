@@ -32,6 +32,20 @@ class RegisterService {
     }
   }
 
+  async registerProduct(name, price, unity, quantity) {
+    try {
+      const response = await api.post('/product', {
+        name,
+        unitQtd: quantity,
+        unitMeasure: unity,
+        salePrice: price,
+      });
+      return response;
+    } catch (error) {
+      return { error: true, erroData: error };
+    }
+  }
+
   async getCompanyBranches() {
     try {
       const response = await api.get('/branch/');

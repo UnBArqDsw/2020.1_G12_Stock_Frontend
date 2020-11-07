@@ -1,7 +1,6 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import { Card, CardBody } from 'reactstrap';
 import './styles.css';
-import GetService from '../../Services/GetService';
 
 class ProductCard extends Component {
   render() {
@@ -25,25 +24,27 @@ class ProductCard extends Component {
         </Card>
         <div className="cards">
           {this.props.products.map((product) => {
-            return (<Card>
-              <CardBody className="product-card">
-                <div>
-                  <p>{product.name}</p>
-                </div>
-                <div>
-                  <p>{product.quantity}</p>
-                </div>
-                <div>
-                  <p>{product.uniQtd} {product.unitMeasure}(s)</p>
-                </div>
-                <div>
-                  {console.log(product, product.lots)}
-                <p>{product.lots}</p>
-                </div>
-              </CardBody>
-            </Card>);
+            return (
+              <Card>
+                <CardBody className="product-card">
+                  <div>
+                    <p>{product.name}</p>
+                  </div>
+                  <div>
+                    <p>{product.quantity}</p>
+                  </div>
+                  <div>
+                    <p>
+                      {product.uniQtd} {product.unitMeasure}(s)
+                    </p>
+                  </div>
+                  <div>
+                    <p>{product.lots}</p>
+                  </div>
+                </CardBody>
+              </Card>
+            );
           })}
-
         </div>
       </div>
     );
