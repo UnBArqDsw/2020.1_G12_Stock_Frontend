@@ -21,3 +21,7 @@
 .new-product-input-container.textarea div {
   width: 100%;
 }
+
+button.secondary:disabled {
+  background-color: var(--gray-secondary) !important;
+}

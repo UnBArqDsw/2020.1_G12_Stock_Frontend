@@ -6,7 +6,6 @@ import CollaboratorService from '../../../Services/CollaboratorService';
 import ResultModal from '../ResultModal';
 import InputMask from 'react-input-mask';
 
-
 export default function NewCollaboratorModal(props) {
   const { user } = useContext(AuthContext);
   const { modalVisible, setModalVisible } = props;
@@ -34,37 +33,23 @@ export default function NewCollaboratorModal(props) {
   const getRoles = async () => {
     const response = await CollaboratorService.loadAccessLevel();
     setRoles(response);
-    console.log(roles)
   };
 
   const createCollaborator = async () => {
-    console.log('entrou')
     if (password && passwordConfirm && password === passwordConfirm) {
       try {
-
-        console.log('entrouIF')
         const response = await CollaboratorService.createCollaborator(user.idCompany, name, cpf, email, idAccessLevel, password);
         setResponseCreate(response)
-        console.log(response);
         return response;
-
-
       } catch (error) {
-        console.log('error')
-        console.log(error);
       }
     }
     else {
-      console.log('entrou')
       setResponseCreate({})
-      console.log(responseCreate);
     }
-
-
   }
 
   const checkPassword = (pass_confirm) => {
-    console.log('check')
     if (
       pass_confirm !== password &&
       password !== undefined &&
@@ -94,7 +79,7 @@ export default function NewCollaboratorModal(props) {
             <div className="new-product-input-container">
               <div>
                 <label htmlFor="name">Nome</label>
-                <input type="text" onChange={(e) => setName(e.target.value)} />
+                <input type="text" onChange={(e) => setName(e.target.value)} required/>
               </div>
               <div>
                 <label htmlFor="document">CPF</label>
@@ -103,13 +88,13 @@ export default function NewCollaboratorModal(props) {
                   id="document"
                   mask="999.999.999-99"
                   maskChar=""
-                />
+                  required />
               </div>
             </div>
             <div className="new-product-input-container">
               <div>
                 <label htmlFor="email">Email</label>
-                <input type="text" onChange={(e) => setEmail(e.target.value)} />
+                <input type="text" onChange={(e) => setEmail(e.target.value)} required/>
               </div>
               <div>
                 <label htmlFor="idAccessLevel">Nível de Acesso</label>
@@ -142,7 +127,7 @@ export default function NewCollaboratorModal(props) {
           </ModalBody>
           <ModalFooter>
             <div className="add-product-modal-footer">
-              <button type="submit" className="secondary" onClick={() => setResultModal(true)}>
+              <button type="submit" className="secondary" disabled={!password || !passwordConfirm || !idAccessLevel || !email || !cpf || !name} onClick={() => setResultModal(true)}>
                 Adicionar
           </button>
             </div>

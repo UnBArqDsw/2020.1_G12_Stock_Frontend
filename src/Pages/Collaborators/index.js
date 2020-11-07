@@ -25,6 +25,11 @@ export default function Collaborators() {
     }
   }
 
+  const cpfFormatted = (cpf) => {
+    cpf = cpf.replace(/[^\d]/g, '');
+    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+  }
+
   const nameAccessLevel = (user) => {
     let accessLevel;
     switch (user.idAccessLevel) {
@@ -67,7 +72,7 @@ export default function Collaborators() {
             activate={user.activate}
             idCollaborator={user.idCollaborator}
             email={user.email}
-            cpf={user.document}
+            cpf={cpfFormatted(user.document)}
           />
         )
           : (<p>Você ainda não possui colaboradores cadastrados</p>)}
