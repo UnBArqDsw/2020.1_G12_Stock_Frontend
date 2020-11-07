@@ -62,6 +62,12 @@ input:focus {
   padding-top: 3.5rem;
 }
 
+.modal-content {
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, 50%) !important;
+}
+
 :root {
   --primary: #ab2918 !important;
   --primary-light: #e62c38;

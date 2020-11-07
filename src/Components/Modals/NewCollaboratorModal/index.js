@@ -64,64 +64,66 @@ export default function NewCollaboratorModal(props) {
       <ResultModal title={response.error ? ("Falha ao adicionar colaborador(a).") : ("Colaborador(a) adicionado com sucesso!")}
         modalVisible={resultModal}
         setModalVisible={setResultModal} />
-      <form onSubmit={onSubmit}>
-        <ModalBody>
+      <div className="new-product-container">
+        <form onSubmit={onSubmit}>
+          <ModalBody>
 
-          <div className="new-product-input-container">
-            <div>
-              <label htmlFor="name">Nome</label>
-              <input type="text" onChange={(e) => setName(e.target.value)} />
+            <div className="new-product-input-container">
+              <div>
+                <label htmlFor="name">Nome</label>
+                <input type="text" onChange={(e) => setName(e.target.value)} />
+              </div>
+              <div>
+                <label htmlFor="document">CPF</label>
+                <InputMask
+                  onChange={(e) => setCpf(e.target.value)}
+                  id="document"
+                  mask="999.999.999-99"
+                  maskChar=""
+                />
+              </div>
             </div>
-            <div>
-              <label htmlFor="document">CPF</label>
-              <InputMask
-                onChange={(e) => setCpf(e.target.value)}
-                id="document"
-                mask="999.999.999-99"
-                maskChar=""
-              />
+            <div className="new-product-input-container">
+              <div>
+                <label htmlFor="email">Email</label>
+                <input type="text" onChange={(e) => setEmail(e.target.value)} />
+              </div>
+              <div>
+                <label htmlFor="idAccessLevel">Nível de Acesso</label>
+                <select type="select" onChange={(e) => setIdAccessLevel(e.target.value)}>
+                  <option value=""></option>
+                  <option value="3">Vendedor(a)</option>
+                  <option value="2">Administrador(a)</option>
+                  <option value="1">Dono(a)</option>
+                </select>
+              </div>
             </div>
-          </div>
-          <div className="new-product-input-container">
-            <div>
-              <label htmlFor="email">Email</label>
-              <input type="text" onChange={(e) => setEmail(e.target.value)} />
+            <div className="new-product-input-container">
+              <div>
+                <label htmlFor="password">Senha</label>
+                <input type="password" onChange={(e) => setPassword(e.target.value)} />
+              </div>
+              <div>
+                <label htmlFor="passwordConfirm">Confirmar Senha</label>
+                <input type="password" onChange={function (e) {
+                  setPasswordConfirm(e.target.value);
+                  checkPassword(e.target.value);
+                }}
+                  required />
+                <p className="password-text">{checkPasswordsText}</p>
+              </div>
             </div>
-            <div>
-              <label htmlFor="idAccessLevel">Nível de Acesso</label>
-              <select type="select" onChange={(e) => setIdAccessLevel(e.target.value)}>
-                <option value=""></option>
-                <option value="3">Vendedor(a)</option>
-                <option value="2">Administrador(a)</option>
-                <option value="1">Dono(a)</option>
-              </select>
-            </div>
-          </div>
-          <div className="new-product-input-container">
-            <div>
-              <label htmlFor="password">Senha</label>
-              <input type="password" onChange={(e) => setPassword(e.target.value)} />
-            </div>
-            <div>
-              <label htmlFor="passwordConfirm">Confirmar Senha</label>
-              <input type="password" onChange={function (e) {
-                setPasswordConfirm(e.target.value);
-                checkPassword(e.target.value);
-              }}
-                required />
-              <p className="password-text">{checkPasswordsText}</p>
-            </div>
-          </div>
 
-        </ModalBody>
-        <ModalFooter>
-          <div className="add-product-modal-footer">
-            <button type="submit" className="secondary" onClick={() => setResultModal(true)}>
-              Adicionar
+          </ModalBody>
+          <ModalFooter>
+            <div className="add-product-modal-footer">
+              <button type="submit" className="secondary" onClick={() => setResultModal(true)}>
+                Adicionar
           </button>
-          </div>
-        </ModalFooter>
-      </form>
+            </div>
+          </ModalFooter>
+        </form>
+      </div>
     </Modal>
   );
 }
