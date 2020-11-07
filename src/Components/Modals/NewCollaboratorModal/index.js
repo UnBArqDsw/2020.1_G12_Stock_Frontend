@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './styles.css';
 import { Modal, ModalHeader, ModalFooter, ModalBody } from 'reactstrap';
 import { AuthContext } from '../../../Contexts/AuthContext';
@@ -19,28 +19,52 @@ export default function NewCollaboratorModal(props) {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [checkPasswordsText, setCheckPasswordsText] = useState('');
-  const [response, setResponse] = useState({});
+  const [responseCreate, setResponseCreate] = useState({});
+  const [roles, setRoles] = useState([]);
+
+  useEffect(() => {
+    getRoles();
+  }, []);
 
   const onSubmit = (e) => {
     e.preventDefault();
     createCollaborator();
   };
 
+  const getRoles = async () => {
+    const response = await CollaboratorService.loadAccessLevel();
+    setRoles(response);
+    console.log(roles)
+  };
+
   const createCollaborator = async () => {
+    console.log('entrou')
     if (password && passwordConfirm && password === passwordConfirm) {
       try {
+
+        console.log('entrouIF')
         const response = await CollaboratorService.createCollaborator(user.idCompany, name, cpf, email, idAccessLevel, password);
-        setResponse(response)
+        setResponseCreate(response)
         console.log(response);
         return response;
 
+
       } catch (error) {
+        console.log('error')
         console.log(error);
       }
     }
+    else {
+      console.log('entrou')
+      setResponseCreate({})
+      console.log(responseCreate);
+    }
+
+
   }
 
   const checkPassword = (pass_confirm) => {
+    console.log('check')
     if (
       pass_confirm !== password &&
       password !== undefined &&
@@ -53,7 +77,6 @@ export default function NewCollaboratorModal(props) {
     }
   };
 
-
   return (
     <Modal isOpen={modalVisible} toggle={() => {
       setModalVisible(!modalVisible);
@@ -61,7 +84,7 @@ export default function NewCollaboratorModal(props) {
       <ModalHeader isOpen={modalVisible} toggle={() => {
         setModalVisible(false)
       }}>Cadastrar novo(a) Colaborador(a)</ModalHeader>
-      <ResultModal title={response.error ? ("Falha ao adicionar colaborador(a).") : ("Colaborador(a) adicionado com sucesso!")}
+      <ResultModal title={responseCreate.error || !responseCreate ? ("Falha ao adicionar colaborador(a).") : ("Colaborador(a) adicionado com sucesso!")}
         modalVisible={resultModal}
         setModalVisible={setResultModal} />
       <div className="new-product-container">
@@ -92,9 +115,11 @@ export default function NewCollaboratorModal(props) {
                 <label htmlFor="idAccessLevel">Nível de Acesso</label>
                 <select type="select" onChange={(e) => setIdAccessLevel(e.target.value)}>
                   <option value=""></option>
-                  <option value="3">Vendedor(a)</option>
-                  <option value="2">Administrador(a)</option>
-                  <option value="1">Dono(a)</option>
+                  {roles?.map((role, i) => (
+                    <option key={i} value={role.idAccessLevel}>
+                      {role.name}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>

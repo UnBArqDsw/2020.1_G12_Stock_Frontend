@@ -1,0 +1,58 @@
+.register-company-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-company-form h2,
+p {
+  text-align: center;
+}
+
+.register-company-form form {
+  min-width: 250px;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.register-company-submit {
+  margin-top: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.register-company-submit span {
+  display: flex;
+  width: 80%;
+  padding-bottom: 32px;
+  font-weight: bold;
+}
+
+.info-block {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 3%;
+  flex-wrap: wrap;
+}
+
+.input-area {
+  display: inline-block;
+  padding: 0% 3%;
+}
+
+.link {
+  color: black;
+  text-decoration: underline;
+}
+
+.error {
+  border-style: solid;
+  border-color: red;
+}

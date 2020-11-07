@@ -1,0 +1,34 @@
+.register-owner-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.register-owner-form form {
+  min-width: 250px;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.register-owner-submit {
+  margin-top: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.register-owner-submit span {
+  display: flex;
+  width: 80%;
+  padding-bottom: 32px;
+  font-weight: bold;
+}
+
+.password-text {
+  margin-top: 5px;
+  color: #ab2918;
+}

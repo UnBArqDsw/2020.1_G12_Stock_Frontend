@@ -29,13 +29,22 @@
   text-align: center;
 }
 
+a.signUp, a.signUp:hover {
+  color: var(--font-dark);
+  text-decoration: none;
+}
+
+p.signUp:hover {
+  text-decoration: none !important;
+}
+
 .sidebar.mobile {
   background-color: var(--gray);
   left: 0 !important;
 }
 
 @media screen and (max-width: 768px) {
-  .signIn-page{
+  .signIn-page {
     padding-left: 15% !important;
     margin-top: 10% !important;
   }

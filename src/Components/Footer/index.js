@@ -14,26 +14,20 @@ export default function Footer() {
         <span className="rights">© Copyright 2020 - Stock - Todos os direitos reservados.</span>
         <div className="links container">
           <div className="signUp-page link">
-            <Link to="/login">
-              <span className="signUp">Cadastrar</span>
+            <Link to="/login" className="signUp">Cadastrar
             </Link>
           </div>
           <div className="signIn-page link">
-            <Link to="/login">
-              <span className="signUp">Portal do Gestor</span>
+            <Link to="/login" className="signUp">Portal do Gestor
             </Link>
           </div>
         </div>
         <div className="links container">
           <div className="link">
-            <Link to href="/">
-              <span className="signUp">Termos e Condições Gerais</span>
-            </Link>
+            <Link to="/register/company" className="signUp">Termos e Condições Gerais</Link>
           </div>
           <div className="link">
-            <Link to="/">
-              <span className="signUp">Política de Privacidade</span>
-            </Link>
+            <Link to="/" className="signUp">Política de Privacidade</Link>
           </div>
         </div>
       </div>
