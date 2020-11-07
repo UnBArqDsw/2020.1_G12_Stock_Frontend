@@ -20,7 +20,7 @@ export default function ConfirmationModal(props) {
         setModalVisible(!modalVisible);
       }}>
         <ModalHeader isOpen={modalVisible} toggle={() => {
-          setModalVisible(false)
+          window.location.reload()
         }}>{title}
         </ModalHeader>
         <ModalFooter>

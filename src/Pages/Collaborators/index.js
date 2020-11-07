@@ -63,9 +63,11 @@ export default function Collaborators() {
           <CollaboratorCard
             name={user.name}
             accessLevel={nameAccessLevel(user)}
-            photo="#"
+            photo={user.photo}
             activate={user.activate}
             idCollaborator={user.idCollaborator}
+            email={user.email}
+            cpf={user.document}
           />
         )
           : (<p>Você ainda não possui colaboradores cadastrados</p>)}

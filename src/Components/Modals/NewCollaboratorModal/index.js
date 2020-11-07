@@ -4,6 +4,7 @@ import { Modal, ModalHeader, ModalFooter, ModalBody } from 'reactstrap';
 import { AuthContext } from '../../../Contexts/AuthContext';
 import CollaboratorService from '../../../Services/CollaboratorService';
 import ResultModal from '../ResultModal';
+import InputMask from 'react-input-mask';
 
 
 export default function NewCollaboratorModal(props) {
@@ -30,6 +31,7 @@ export default function NewCollaboratorModal(props) {
       try {
         const response = await CollaboratorService.createCollaborator(user.idCompany, name, cpf, email, idAccessLevel, password);
         setResponse(response)
+        console.log(response);
         return response;
 
       } catch (error) {
@@ -59,7 +61,7 @@ export default function NewCollaboratorModal(props) {
       <ModalHeader isOpen={modalVisible} toggle={() => {
         setModalVisible(false)
       }}>Cadastrar novo(a) Colaborador(a)</ModalHeader>
-      <ResultModal title={response ? ("Colaborador(a) adicionado com sucesso!") : ("Falha ao adicionar colaborador(a).")}
+      <ResultModal title={response.error ? ("Falha ao adicionar colaborador(a).") : ("Colaborador(a) adicionado com sucesso!")}
         modalVisible={resultModal}
         setModalVisible={setResultModal} />
       <form onSubmit={onSubmit}>
@@ -72,37 +74,42 @@ export default function NewCollaboratorModal(props) {
             </div>
             <div>
               <label htmlFor="document">CPF</label>
-              <input type="text" onChange={(e) => setCpf(e.target.value)} />
+              <InputMask
+                onChange={(e) => setCpf(e.target.value)}
+                id="document"
+                mask="999.999.999-99"
+                maskChar=""
+              />
             </div>
-            <div className="new-product-input-container">
-              <div>
-                <label htmlFor="email">Email</label>
-                <input type="text" onChange={(e) => setEmail(e.target.value)} />
-              </div>
-              <div>
-                <label htmlFor="idAccessLevel">Nível de Acesso</label>
-                <select type="select" onChange={(e) => setIdAccessLevel(e.target.value)}>
-                  <option value=""></option>
-                  <option value="3">Vendedor(a)</option>
-                  <option value="2">Administrador(a)</option>
-                  <option value="1">Dono(a)</option>
-                </select>
-              </div>
+          </div>
+          <div className="new-product-input-container">
+            <div>
+              <label htmlFor="email">Email</label>
+              <input type="text" onChange={(e) => setEmail(e.target.value)} />
             </div>
-            <div className="new-product-input-container">
-              <div>
-                <label htmlFor="password">Senha</label>
-                <input type="password" onChange={(e) => setPassword(e.target.value)} />
-              </div>
-              <div>
-                <label htmlFor="passwordConfirm">Confirmar Senha</label>
-                <input type="password" onChange={function (e) {
-                  setPasswordConfirm(e.target.value);
-                  checkPassword(e.target.value);
-                }}
-                  required />
-                <p className="password-text">{checkPasswordsText}</p>
-              </div>
+            <div>
+              <label htmlFor="idAccessLevel">Nível de Acesso</label>
+              <select type="select" onChange={(e) => setIdAccessLevel(e.target.value)}>
+                <option value=""></option>
+                <option value="3">Vendedor(a)</option>
+                <option value="2">Administrador(a)</option>
+                <option value="1">Dono(a)</option>
+              </select>
+            </div>
+          </div>
+          <div className="new-product-input-container">
+            <div>
+              <label htmlFor="password">Senha</label>
+              <input type="password" onChange={(e) => setPassword(e.target.value)} />
+            </div>
+            <div>
+              <label htmlFor="passwordConfirm">Confirmar Senha</label>
+              <input type="password" onChange={function (e) {
+                setPasswordConfirm(e.target.value);
+                checkPassword(e.target.value);
+              }}
+                required />
+              <p className="password-text">{checkPasswordsText}</p>
             </div>
           </div>
 

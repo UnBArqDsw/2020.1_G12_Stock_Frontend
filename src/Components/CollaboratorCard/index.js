@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import CollaboratorService from '../../Services/CollaboratorService';
-import { FaEdit } from 'react-icons/all';
+import { FiEdit } from 'react-icons/all';
 import ConfirmationModal from '../Modals/ConfirmationModal';
 import ResultModal from '../Modals/ResultModal';
+import defaultAvatar from '../../assets/images/default-user.png'
 import './styles.css';
 
 export default function CollaboratorCard(props) {
 
-  const { activate, idCollaborator, photo, name, accessLevel } = props;
+  const { activate, idCollaborator, photo, name, accessLevel, cpf, email } = props;
   const [confirmationModal, setConfirmationModal] = useState(false);
   const [resultModal, setResultModal] = useState(false);
 
@@ -44,20 +45,34 @@ export default function CollaboratorCard(props) {
           )}
         response={changeStatusCollaborator} />
       <ResultModal modalVisible={resultModal}
-      setModalVisible={setResultModal}
-      title={activate ? (
-        `Colaborador(a) ${name} desativado(a) com sucesso!`
-      ) : (
-          `Colaborador(a) ${name} ativado(a) com sucesso!`
-        )} />
+        setModalVisible={setResultModal}
+        title={activate ? (
+          `Colaborador(a) ${name} desativado(a) com sucesso!`
+        ) : (
+            `Colaborador(a) ${name} ativado(a) com sucesso!`
+          )} />
       <div className="container">
         <div className="card-header">
-          <img src={photo} />
+          {photo ? (
+            <img className="user-photo" src={photo} />
+          ) : (
+              <img className="user-photo" src={defaultAvatar} />
+            )}
           <div className="collaborator">
             <p className="name">{name}</p>
             <p className="access-level">{accessLevel}</p>
           </div>
-          <FaEdit size={25} />
+          <div className="icon">
+            <FiEdit size={25} />
+          </div>
+        </div>
+        <div className="collaborator-info">
+          <p className="info-field">Email</p>
+          <p className="info-data">{email}</p>
+        </div>
+        <div className="collaborator-info">
+          <p className="info-field">CPF</p>
+          <p className="info-data">{cpf}</p>
         </div>
         <div className="collaborator-actions">
           <a onClick={() => setConfirmationModal(true)} className="deactivate">
@@ -67,7 +82,7 @@ export default function CollaboratorCard(props) {
                 "Ativar Colaborador"
               )}
           </a>
-          <p className="show-sells">Visualizar Vendas</p>
+          <a className="show-sells">Visualizar Vendas</a>
         </div>
       </div>
     </div>

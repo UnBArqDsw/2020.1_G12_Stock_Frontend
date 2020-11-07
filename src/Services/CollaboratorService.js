@@ -26,7 +26,7 @@ class CollaboratorService {
 
   async createCollaborator(idCompany, name, document, email, idAccessLevel, password) {
     try {
-      document = JSON.parse(document)
+      document = document.replace(/\D/g, '');
       idAccessLevel = JSON.parse(idAccessLevel);
 
       const response = await api.post(`/collaborator/`, { idCompany, name, document, email, idAccessLevel, password });
