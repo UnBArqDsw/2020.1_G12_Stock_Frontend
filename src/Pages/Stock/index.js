@@ -6,10 +6,10 @@ import { useHistory } from 'react-router-dom';
 import ProductCard from '../../Components/ProductCard';
 import GetService from '../../Services/GetService';
 import RegisterService from '../../Services/RegisterService';
+import CategoryService from '../../Services/CategoryService';
 
 export default function Stock() {
   const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [productName, setProductName] = useState('');
   const [productUnitQtd, setProductUnitQtd] = useState('');
   const [productUnitMeasure, setProductUnitMeasure] = useState('');
@@ -20,38 +20,70 @@ export default function Stock() {
   const [lotProductQty, setLotProductQty] = useState('');
   const [lotDescription, setLotDescription] = useState('');
   const [lotPurchasePrice, setLotPurchasePrice] = useState('');
-  const history = useHistory();
+  const [categories, setCategories] = useState([]);
+  const [categoryName, setCategoryName] = useState('');
+  const [categoryDescription, setCategoryDescription] = useState('');
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
-  const getProducts = async () => {
-    const response = await GetService.getProducts();
-    setProducts(response);
-  };
-  const getCategories = async () => {
-    const response = await GetService.getCategories();
-    setCategories(response);
-  };
-  useEffect(() => {
-    getProducts();
-    getCategories();
-  }, []);
   const [newProductModalOpen, setNewProductModalOpen] = useState(false);
   const toggleNewProductModal = () => setNewProductModalOpen(!newProductModalOpen);
 
   const [newLotModalOpen, setNewLotModalOpen] = useState(false);
   const toggleNewLotModal = () => setNewLotModalOpen(!newLotModalOpen);
 
+  const [newCategoryModalOpen, setNewCategoryModalOpen] = useState(false);
+  const toggleNewCategoryModal = () => setNewCategoryModalOpen(!newCategoryModalOpen);
+
+  const getProducts = async () => {
+    const response = await GetService.getProducts();
+    setProducts(response);
+  };
+
+  useEffect(() => {
+    getProducts();
+    getCategories();
+  }, []);
+
+  useEffect(() => {
+    if (!newCategoryModalOpen) {
+      setProductName('');
+      setSelectedCategories([]);
+      setProductUnitMeasure('');
+      setProductUnitQtd('');
+      setProductSalePrice('');
+    }
+  }, [newProductModalOpen]);
+
+  useEffect(() => {
+    if (!newLotModalOpen) {
+      setLotProduct('');
+      setLotEntryDate('');
+      setLotDueDate('');
+      setLotProductQty('');
+      setLotDescription('');
+      setLotPurchasePrice('');
+    }
+  }, [newLotModalOpen]);
+
+  useEffect(() => {
+    if (!newCategoryModalOpen) {
+      setCategoryName('');
+      setCategoryDescription('');
+    }
+  }, [newCategoryModalOpen]);
+
   async function registerProduct() {
     try {
       const { status } = await RegisterService.registerProduct(
         productName,
-        productUnitQtd,
+        productSalePrice,
         productUnitMeasure,
-        productSalePrice
+        productUnitQtd,
+        selectedCategories
       );
       if (status === 200) {
         toggleNewProductModal();
         alert('Produto Cadastrado com sucesso!');
-        history.push('/stock');
       }
     } catch (error) {
       console.log(error.response);
@@ -72,7 +104,6 @@ export default function Stock() {
       if (status === 200) {
         toggleNewLotModal();
         alert('Lote Cadastrado com sucesso!');
-        history.push('/stock');
       }
     } catch (error) {
       console.log(error.response);
@@ -80,6 +111,35 @@ export default function Stock() {
     }
   }
 
+  const getCategories = async () => {
+    const response = await CategoryService.getCategories();
+    setCategories(response);
+  };
+
+  const createCategory = async () => {
+    const response = await CategoryService.createCategory({
+      name: categoryName,
+      description: categoryDescription,
+    });
+    if (!response.error) {
+      getCategories();
+      toggleNewCategoryModal();
+    } else {
+      alert('Erro ao salvar a categoria!');
+    }
+  };
+
+  const selectCategory = (e) => {
+    const categoryId = Number(e.target.value);
+    if (selectedCategories.includes(categoryId)) {
+      const newSelectedCategories = selectedCategories.filter(
+        (selectedCategoryId) => categoryId !== selectedCategoryId
+      );
+      setSelectedCategories(newSelectedCategories);
+    } else {
+      setSelectedCategories([...selectedCategories, categoryId]);
+    }
+  };
   const renderNewProductModal = () => (
     <Modal toggle={toggleNewProductModal} isOpen={newProductModalOpen}>
       <ModalHeader toggle={toggleNewProductModal}>Cadastrar novo produto</ModalHeader>
@@ -97,18 +157,6 @@ export default function Stock() {
           </div>
           <div className="new-product-input-container">
             <div>
-              <span>Categorias</span>
-              <select>
-                {categories.map((category, i) => {
-                  return (
-                    <option key={i} value={category.idCategory}>
-                      {category.name}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-            <div>
               <span>Unidade de medida</span>
               <input
                 type="text"
@@ -116,8 +164,8 @@ export default function Stock() {
                 placeholder="Litro, Kilograma, etc.."
               />
             </div>
-            <div className="new-product-input-container">
-              <span>Quantidade da unidade de medida</span>
+            <div>
+              <span>Quantidade</span>
               <input
                 type="number"
                 onChange={(e) => setProductUnitQtd(e.target.value)}
@@ -125,14 +173,33 @@ export default function Stock() {
               />
             </div>
           </div>
+          <div className="product-category">
+            <span>Categorias</span>
+            <div className="product-checks">
+              {categories.map((category, i) => (
+                <label for="category" key={i}>
+                  <input
+                    checked={selectedCategories.includes(category.idCategory)}
+                    type="checkbox"
+                    name="category"
+                    value={category.idCategory}
+                    onChange={selectCategory}
+                  />{' '}
+                  {category.name}
+                </label>
+              ))}
+            </div>
+          </div>
         </form>
       </ModalBody>
       <ModalFooter>
-        <div className="add-product-modal-footer">
-          <button type="button" className="secondary" onClick={registerProduct}>
-            Adicionar
-          </button>
-        </div>
+        <button type="button" onClick={toggleNewCategoryModal}>
+          Criar Categoria
+        </button>
+
+        <button className="secondary" type="button" onClick={registerProduct}>
+          Adicionar
+        </button>
       </ModalFooter>
     </Modal>
   );
@@ -195,6 +262,26 @@ export default function Stock() {
       </ModalFooter>
     </Modal>
   );
+
+  const renderNewCategoryModal = () => (
+    <Modal isOpen={newCategoryModalOpen} toggle={toggleNewCategoryModal} size="sm">
+      <ModalHeader toggle={toggleNewCategoryModal}>Criar Categoria</ModalHeader>
+      <ModalBody>
+        <div className="new-category-form">
+          <label>Nome</label>
+          <input onChange={(e) => setCategoryName(e.target.value)} value={categoryName} />
+          <label>Descrição</label>
+          <textarea
+            onChange={(e) => setCategoryDescription(e.target.value)}
+            value={categoryDescription}
+          />
+        </div>
+      </ModalBody>
+      <ModalFooter>
+        <button onClick={createCategory}>Criar</button>
+      </ModalFooter>
+    </Modal>
+  );
   return (
     <div className="container">
       <div className="stock-content">
@@ -207,7 +294,7 @@ export default function Stock() {
           </div>
           <div className="create-import">
             <button type="button" className="secondary" onClick={toggleNewLotModal}>
-              Importar
+              Novo lote de produto
             </button>
             <button type="button" className="secondary" onClick={toggleNewProductModal}>
               Novo Produto
@@ -218,6 +305,7 @@ export default function Stock() {
       <ProductCard products={products} />
       {renderNewProductModal()}
       {renderNewLotModal()}
+      {renderNewCategoryModal()}
     </div>
   );
 }

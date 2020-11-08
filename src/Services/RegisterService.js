@@ -32,13 +32,14 @@ class RegisterService {
     }
   }
 
-  async registerProduct(name, price, unity, quantity) {
+  async registerProduct(name, price, unity, quantity, categories) {
     try {
       const response = await api.post('/product', {
         name,
-        unitQtd: quantity,
+        unitQtd: Number(quantity),
         unitMeasure: unity,
-        salePrice: price,
+        salePrice: Number(price),
+        categories,
       });
       return response;
     } catch (error) {

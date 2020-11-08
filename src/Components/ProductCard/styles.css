@@ -32,3 +32,9 @@
   flex-direction: column;
   text-align: center;
 }
+
+@media only screen and (max-width: 767px) {
+  .list-container {
+    margin-top: 90px;
+  }
+}
