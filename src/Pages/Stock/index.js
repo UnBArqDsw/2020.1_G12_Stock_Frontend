@@ -229,26 +229,24 @@ export default function Stock() {
               <input type="number" onChange={(e) => setLotProductQty(e.target.value)} />
             </div>
           </div>
-          <div className="new-product-input-container">
-            <div>
-              <span>Produto</span>
-              <select type="select" onChange={(e) => setLotProduct(e.target.value)}>
+          <div>
+            <span>Produto</span>
+              <div className="new-product-input-container">
+              <select class="select-alone" type="select" onChange={(e) => setLotProduct(e.target.value)}>
                 <option value="" />
                 {products.map((product, i) => {
                   return (
                     <option key={i} value={product.idProduct}>
-                      {product.name}
+                      {product.name + " - " + product.unitQtd +" "+ product.unitMeasure+"(s)"}
                     </option>
                   );
                 })}
               </select>
             </div>
           </div>
-          <div className="new-product-input-container textarea">
-            <div>
-              <span>Descrição</span>
-              <textarea maxLength="255" onChange={(e) => setLotDescription(e.target.value)} />
-            </div>
+          <span>Descrição</span>
+          <div className="new-product-input-container">
+            <textarea class="textarea-alone" maxLength="255" onChange={(e) => setLotDescription(e.target.value)} />
           </div>
         </form>
       </ModalBody>

@@ -53,10 +53,6 @@
   flex-direction: column;
 }
 
-.new-product-input-container.textarea div {
-  width: 100%;
-}
-
 .new-product-input-container div {
   width: 100%;
 }
@@ -84,6 +80,14 @@
 
 .new-category-form label {
   margin-top: 12px;
+}
+
+.select-alone {
+  width: 100%;
+}
+
+.textarea-alone {
+  width: 100%;
 }
 
 @media only screen and (max-width: 767px) {
