@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CollaboratorService from '../../Services/CollaboratorService';
+import AccessLevelService from '../../Services/AccessLevelService';
 import { FiEdit } from 'react-icons/all';
 import ConfirmationModal from '../Modals/ConfirmationModal';
 import ResultModal from '../Modals/ResultModal';
@@ -8,9 +9,14 @@ import './styles.css';
 
 export default function CollaboratorCard(props) {
 
-  const { activate, idCollaborator, photo, name, accessLevel, cpf, email } = props;
+  const { activate, idCollaborator, photo, name, idAccessLevel, cpf, email } = props;
   const [confirmationModal, setConfirmationModal] = useState(false);
+  const [accessLevel, setAccessLevel] = useState('');
   const [resultModal, setResultModal] = useState(false);
+
+  useEffect(async () => {
+    if (idAccessLevel) nameAccessLevel();
+  }, []);
 
   const changeStatusCollaborator = async () => {
     try {
@@ -18,6 +24,16 @@ export default function CollaboratorCard(props) {
       setConfirmationModal(false);
       setResultModal(true)
       return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const nameAccessLevel = async () => {
+    try {
+      const response = await AccessLevelService.getAccessLevel(idAccessLevel);
+      setAccessLevel(response[0].name);
+
     } catch (error) {
       console.log(error);
     }

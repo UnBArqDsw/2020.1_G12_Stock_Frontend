@@ -3,6 +3,7 @@ import './styles.css';
 import { Modal, ModalHeader, ModalFooter, ModalBody } from 'reactstrap';
 import { AuthContext } from '../../../Contexts/AuthContext';
 import CollaboratorService from '../../../Services/CollaboratorService';
+import AccessLevelService from '../../../Services/AccessLevelService';
 import ResultModal from '../ResultModal';
 import InputMask from 'react-input-mask';
 
@@ -31,7 +32,7 @@ export default function NewCollaboratorModal(props) {
   };
 
   const getRoles = async () => {
-    const response = await CollaboratorService.loadAccessLevel();
+    const response = await AccessLevelService.loadAccessLevel();
     setRoles(response);
   };
 

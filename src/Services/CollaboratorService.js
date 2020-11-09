@@ -36,15 +36,5 @@ class CollaboratorService {
       return { error: true, errorData: error };
     }
   }
-
-  async loadAccessLevel() {
-    try {
-      const response = await api.get('/accessLevel/list');
-      return response.data;
-    } catch (error) {
-      console.log(error);
-      return { error: true, errorData: error };
-    }
-  }
 }
 export default new CollaboratorService();

@@ -11,7 +11,7 @@ export default function Collaborators() {
   const [collaborators, setCollaborators] = useState([]);
   const [newCollaboratorModal, setNewCollaboratorModal] = useState(false);
 
-  useEffect(() => {
+  useEffect(async () => {
     if (user) loadCollaborators();
   }, []);
 
@@ -28,23 +28,6 @@ export default function Collaborators() {
   const cpfFormatted = (cpf) => {
     cpf = cpf.replace(/[^\d]/g, '');
     return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-  }
-
-  const nameAccessLevel = (user) => {
-    let accessLevel;
-    switch (user.idAccessLevel) {
-      case 1:
-        accessLevel = "Gestor";
-        break;
-      case 2:
-        accessLevel = "Administrador";
-        break;
-      case 3:
-        accessLevel = "Vendedor";
-        break;
-      default:
-    }
-    return accessLevel;
   }
 
   return (
@@ -67,7 +50,7 @@ export default function Collaborators() {
         {collaborators.length ? collaborators.map(user =>
           <CollaboratorCard
             name={user.name}
-            accessLevel={nameAccessLevel(user)}
+            idAccessLevel={user.idAccessLevel}
             photo={user.photo}
             activate={user.activate}
             idCollaborator={user.idCollaborator}
