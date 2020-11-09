@@ -14,16 +14,23 @@ button:focus {
   outline: none !important;
 }
 
-input {
-  background-color: #eee;
+button.secondary{
   border-style: none;
-  padding: 8px;
-  border-radius: 5px;
+  background-color: var(--dark);
+  color: #fff; 
+  padding: 0.5rem 2rem;
+  border-radius: 5px !important;
+  transition: 0.5s;
+}
+button.secondary:hover{
+  background-color: var(--font-dark);
 }
 
-select {
-  background-color: #eee;
+input,
+textarea {
+  background-color: #fff;
   border-style: none;
+  box-shadow: 0px 0px 1.5px 0.1px;
   padding: 8px;
   border-radius: 5px;
   width: 220px;
@@ -33,7 +40,15 @@ option {
   background-color: #fff;
 }
 
-select:focus,
+select {
+  background-color: #fff;
+  border-style: none;
+  box-shadow: 0px 0px 1.5px 0.1px;
+  padding: 8px;
+  border-radius: 5px;
+  width: 220px;
+}
+
 input:focus {
   border-style: solid;
   border-color: rgba(77, 188, 196, 0.6);
@@ -46,6 +61,12 @@ input:focus {
 }
 .routes-logged-mobile {
   padding-top: 3.5rem;
+}
+
+.modal-content {
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, 50%) !important;
 }
 
 :root {
@@ -75,6 +96,7 @@ input:focus {
 
   --gray: #F5F5F5 !important;
   --gray-secondary: #E0E0E0;
+  --gray-third: #8A8A8A;
   
   --dark: #313C4E !important;
   --font-dark: #1C1C1C;

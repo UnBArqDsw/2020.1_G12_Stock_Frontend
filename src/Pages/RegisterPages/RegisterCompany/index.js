@@ -20,8 +20,6 @@ export default function RegisterCompanyPage() {
   const history = useHistory();
   const [cpfCnpjMask, setCpfCnpjMask] = useState(MASK_CPF);
 
-  console.log(branches);
-
   useEffect(() => {
     if (document.length > CPF_CHAR_LENGTH) {
       setCpfCnpjMask(MASK_CNPJ);
