@@ -14,7 +14,7 @@ export default function CollaboratorCard(props) {
   const [accessLevel, setAccessLevel] = useState('');
   const [resultModal, setResultModal] = useState(false);
 
-  useEffect(async () => {
+  useEffect(() => {
     if (idAccessLevel) nameAccessLevel();
   }, []);
 

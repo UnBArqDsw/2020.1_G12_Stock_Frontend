@@ -11,7 +11,7 @@ export default function Collaborators() {
   const [collaborators, setCollaborators] = useState([]);
   const [newCollaboratorModal, setNewCollaboratorModal] = useState(false);
 
-  useEffect(async () => {
+  useEffect(() => {
     if (user) loadCollaborators();
   }, []);
 
