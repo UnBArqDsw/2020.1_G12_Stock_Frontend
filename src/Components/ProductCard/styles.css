@@ -33,8 +33,13 @@
   text-align: center;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 413px) {
   .list-container {
     margin-top: 90px;
+  }
+}
+@media only screen and (min-width: 414px) and (max-width: 944px) {
+  .list-container {
+    margin-top: 50px;
   }
 }

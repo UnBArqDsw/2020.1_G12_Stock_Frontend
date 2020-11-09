@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './styles.css';
 import { FaFilter, FaSortAmountUp } from 'react-icons/all';
 import { Modal, ModalHeader, ModalFooter, ModalBody } from 'reactstrap';
-import { useHistory } from 'react-router-dom';
 import ProductCard from '../../Components/ProductCard';
-import GetService from '../../Services/GetService';
+import ProductService from '../../Services/ProductService';
 import RegisterService from '../../Services/RegisterService';
 import CategoryService from '../../Services/CategoryService';
 
@@ -35,7 +34,7 @@ export default function Stock() {
   const toggleNewCategoryModal = () => setNewCategoryModalOpen(!newCategoryModalOpen);
 
   const getProducts = async () => {
-    const response = await GetService.getProducts();
+    const response = await ProductService.getProducts();
     setProducts(response);
   };
 

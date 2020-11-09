@@ -102,3 +102,8 @@
     margin-bottom: 10px;
   }
 }
+@media only screen and (max-width: 944px) {
+  .create-import button{
+    margin-bottom: 2.5px;
+  }
+}

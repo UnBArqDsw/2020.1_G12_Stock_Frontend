@@ -4,7 +4,7 @@ import InputMask from 'react-input-mask';
 import logo from '../../../assets/images/logo-horizontal.png';
 import RegisterService from '../../../Services/RegisterService';
 import './styles.css';
-import GetService from '../../../Services/GetService';
+import CompanyService from '../../../Services/CompanyService';
 
 const MASK_CPF = '999.999.999-999';
 const CPF_CHAR_LENGTH = 14;
@@ -54,7 +54,7 @@ export default function RegisterCompanyPage() {
   };
 
   const getBranches = async () => {
-    const response = await GetService.getCompanyBranches();
+    const response = await CompanyService.getCompanyBranches();
     setBranches(response);
   };
 
