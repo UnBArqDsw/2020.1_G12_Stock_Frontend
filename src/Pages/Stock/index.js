@@ -300,6 +300,7 @@ export default function Stock() {
         </div>
       </div>
       <ProductCard products={products} />
+      
       {renderNewProductModal()}
       {renderNewLotModal()}
       {renderNewCategoryModal()}
