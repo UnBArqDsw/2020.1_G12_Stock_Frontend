@@ -4,6 +4,7 @@ import AccessLevelService from '../../Services/AccessLevelService';
 import { FiEdit } from 'react-icons/all';
 import ConfirmationModal from '../Modals/ConfirmationModal';
 import ResultModal from '../Modals/ResultModal';
+import UpdateCollaboratorModal from '../Modals/UpdateCollaboratorModal';
 import defaultAvatar from '../../assets/images/default-user.png'
 import './styles.css';
 
@@ -11,8 +12,10 @@ export default function CollaboratorCard(props) {
 
   const { activate, idCollaborator, photo, name, idAccessLevel, cpf, email } = props;
   const [confirmationModal, setConfirmationModal] = useState(false);
+  const [updateResult, setUpdateResult] = useState();
   const [accessLevel, setAccessLevel] = useState('');
   const [resultModal, setResultModal] = useState(false);
+  const [updateModal, setUpdateModal] = useState(false);
 
   useEffect(() => {
     if (idAccessLevel) nameAccessLevel();
@@ -63,10 +66,12 @@ export default function CollaboratorCard(props) {
       <ResultModal modalVisible={resultModal}
         setModalVisible={setResultModal}
         title={activate ? (
-          `Colaborador(a) ${name} desativado(a) com sucesso!`
+          `Colaborador(a) ${name} atualizado(a) com sucesso!`
         ) : (
-            `Colaborador(a) ${name} ativado(a) com sucesso!`
+            `Colaborador(a) ${name} atualizado(a) com sucesso!`
           )} />
+      <UpdateCollaboratorModal modalVisible={updateModal}
+        setModalVisible={setUpdateModal} idCollaborator={idCollaborator}/>
       <div className="container">
         <div className="card-header">
           {photo ? (
@@ -79,7 +84,7 @@ export default function CollaboratorCard(props) {
             <p className="access-level">{accessLevel}</p>
           </div>
           <div className="icon">
-            <FiEdit size={25} />
+            <FiEdit size={25} onClick={() => setUpdateModal(true)} />
           </div>
         </div>
         <div className="collaborator-info">
