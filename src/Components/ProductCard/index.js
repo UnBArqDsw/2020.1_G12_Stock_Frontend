@@ -14,6 +14,7 @@ const ProductCard = ({ products }) => {
   const [quantity, setQuantity] = useState('');
   const [product, setProduct] = useState({});
   const [lot, setLot] = useState({});
+  const [showLotInfo, setShowLotInfo] = useState(false);
   const toggleDecreaseProductModal = () => {
     setDecreaseProductModalOpen(!decreaseProductModalOpen)
   };
@@ -27,18 +28,21 @@ const ProductCard = ({ products }) => {
     setProductSelected({});
     setLot({});
     setProduct({});
-    if (cardSelected !== idCard){
+    if (cardSelected !== idCard) {
       setProductId(idCard);
       setCardSelected(idCard);
       setProductSelected(products.filter((element) => element.idProduct == idCard));
     }
     setQuantity('');
-
   }
-  const setLotSelected = (l) =>{
-    if(product){
-      console.log(product.lots.filter((lot)=>lot.idLot == l)[0]);
-      setLot(product.lots.filter((lot)=>lot.idLot == l)[0]);
+  const setLotSelected = (l) => {
+    if (product) {
+      setLot(product.lots.filter((lot) => lot.idLot == l)[0]);
+    }
+    if(l!==''){
+      setShowLotInfo(true);
+    }else{
+      setShowLotInfo(false);
     }
   }
   const decreaseProduct = async () => {
@@ -83,14 +87,22 @@ const ProductCard = ({ products }) => {
       </ModalFooter>
     </Modal>
   );
+  const lotInfo = () => (
+    <div className="lot-info">
+      <h5>Informações sobre esse lote:</h5>
+      <p>Data de adição {lot?.entryDate}</p>
+      <p>Quantidade disponível: {lot?.productQty}</p>
+      <p>Preço de compra: R${lot?.purchasePrice}</p>
+    </div>
+  );
   const renderDecreaseLotModal = () => (
     <Modal toggle={toggleDecreaseLotModal} isOpen={decreaseLotModalOpen}>
-      <ModalHeader toggle={toggleDecreaseLotModal}> Remover produto com defeito.</ModalHeader>
+      <ModalHeader toggle={toggleDecreaseLotModal}> Remover produto com defeito</ModalHeader>
       <ModalBody>
         <p>De qual lote deseja remover?</p>
-        <select type="select" onChange={(e) => setLotSelected(e.target.value)}>
+        <select className="select-alone" type="select" onChange={(e) => setLotSelected(e.target.value)}>
           <option value="" />
-          {product?.lots?.filter((lot)=>lot.productQty>0).map((lot) => {
+          {product?.lots?.filter((lot) => lot.productQty > 0).map((lot) => {
             return (
               <option key={lot.idLot} value={lot.idLot}>
                 {lot.description}
@@ -98,10 +110,7 @@ const ProductCard = ({ products }) => {
             );
           })}
         </select>
-        <h5>Informações sobre esse lote:</h5>
-        <p>Data de adição {lot?.entryDate}</p>
-        <p>Quantidade disponível: {lot?.productQty}</p>
-        <p>Preço de compra: {lot?.purchasePrice}</p>
+        {showLotInfo? lotInfo():null}
       </ModalBody>
       <ModalFooter>
         <p>
@@ -147,7 +156,7 @@ const ProductCard = ({ products }) => {
                       </p>
                     </div>
                     <div id={product.idProduct} onClick={(e) => toggle(e.target.id)}>
-                      <p id={product.idProduct} onClick={(e) => toggle(e.target.id)}>{product.lots.filter((l)=>l.productQty>0).length}</p>
+                      <p id={product.idProduct} onClick={(e) => toggle(e.target.id)}>{product.lots.filter((l) => l.productQty > 0).length}</p>
                     </div>
                   </CardBody>
                   <Collapse value={product.idProduct} isOpen={product.idProduct == cardSelected}>

@@ -54,6 +54,13 @@
   width: 60px;
 }
 
+.select-alone {
+  width: 100%;
+}
+
+.lot-info{
+}
+
 @media only screen and (max-width: 413px) {
   .list-container {
     margin-top: 90px;
