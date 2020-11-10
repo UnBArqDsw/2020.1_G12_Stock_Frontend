@@ -1,0 +1,22 @@
+.history-content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.history-input-container {
+    position: relative;
+    top: 30px;
+}
+
+.history-input-container input {
+    margin-left: 10px;
+    width: 50%;
+}
+
+.history-icon-container {
+    position: absolute;
+    top: 8px;
+    left: calc(50% + 50px);
+}
