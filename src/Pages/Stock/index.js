@@ -221,7 +221,7 @@ export default function Stock() {
 
           <div className="new-product-input-container">
             <div>
-              <span>Preço da compra</span>
+              <span>Preço de compra</span>
               <input type="number" onChange={(e) => setLotPurchasePrice(e.target.value)} />
             </div>
             <div>

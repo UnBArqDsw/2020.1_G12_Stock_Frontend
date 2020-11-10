@@ -34,6 +34,19 @@
   text-align: center;
 }
 
+.product-options {
+  padding: 5px;
+  height: 80%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: var(--gray-secondary);
+}
+
+.input-quantity{
+  width: 100px;
+}
+
 @media only screen and (max-width: 413px) {
   .list-container {
     margin-top: 90px;
