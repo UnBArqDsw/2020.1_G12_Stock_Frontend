@@ -47,6 +47,11 @@ select {
   border-radius: 5px;
   width: 220px;
 }
+
+option {
+  background-color: #fff;
+}
+
 input:focus {
   border-style: solid;
   border-color: rgba(77, 188, 196, 0.6);
@@ -64,6 +69,7 @@ input:focus {
 .close span {
   font-size: 25px;
 }
+
 :root {
   --primary: #ab2918 !important;
   --primary-light: #e62c38;
@@ -91,7 +97,10 @@ input:focus {
 
   --gray: #f5f5f5 !important;
   --gray-secondary: #e0e0e0;
-  --gray-dark: #757575 !important;
+  --gray-third: #8a8a8a;
+
+  --dark: #313c4e !important;
+  --font-dark: #1c1c1c;
 
   --dark: #313c4e !important;
   --font-dark: #1c1c1c;
