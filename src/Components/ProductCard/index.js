@@ -11,7 +11,7 @@ const ProductCard = ({ products }) => {
   const [decreaseProductModalOpen, setDecreaseProductModalOpen] = useState(false);
   const [productId, setProductId] = useState('');
   const [quantity, setQuantity] = useState('');
-  const [quantityTarget, setQuantityTarget] = useState();
+  const [productString, setProductString] = useState('');
   const toggleDecreaseProductModal = () => {
     setDecreaseProductModalOpen(!decreaseProductModalOpen)
   };
@@ -27,29 +27,36 @@ const ProductCard = ({ products }) => {
   }
 
   const decreaseProduct = async () =>{
-    console.log(quantityTarget);
     try{
       const {errorData, status} = await DecreaseService.decreaseProduct(productId, quantity);
       if(status=== 200){
         toggleDecreaseProductModal();
         alert('Baixa do produto concluída com sucesso!');
       }else{
+        toggleDecreaseProductModal();
         alert(`Falha ao dar baixa em produto: ${errorData.data.details}`);
       }
     }catch(error){
-      console.log(error.data);
       alert(`Falha ao dar baixa em produto: ${error.data}`);
     }
-    quantityTarget.defaultValue = '';
   }
-
+  const setProductSelected = (p) =>{
+    if(p){
+      if(p.length>0){
+        if(p[0].name+' '+p[0].unitQtd+' '+p[0].unitMeasure!=productString){
+          setProductString(p[0].name+' '+p[0].unitQtd+' '+p[0].unitMeasure);
+        }
+      }
+    }
+  }
+  
   const renderDecreseProductModal = () => (
     <Modal toggle={toggleDecreaseProductModal} isOpen={decreaseProductModalOpen}>
       <ModalHeader toggle={toggleDecreaseProductModal}>
         Dar baixa em produto
       </ModalHeader>
       <ModalBody>
-        Tem certeza que deseja dar baixa no produto
+        Tem certeza que deseja dar baixa de {quantity} unidade(s) do produto {setProductSelected(products.filter((element)=>element.idProduct == productId)), productString}(s)?
       </ModalBody>
       <ModalFooter>
         <button type="button" onClick={decreaseProduct}>
