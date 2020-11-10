@@ -26,6 +26,20 @@ button.secondary {
   border-radius: 5px !important;
   transition: 0.5s;
 }
+
+button.secondary-light {
+  border-style: none;
+  background-color: var(--secondary);
+  color: #fff;
+  padding: 0.5rem 2rem;
+  border-radius: 5px !important;
+  transition: 0.5s;
+}
+
+button.secondary-light:hover {
+  background-color: var(--secondary-dark);
+}
+
 button.secondary:hover {
   background-color: var(--font-dark);
 }

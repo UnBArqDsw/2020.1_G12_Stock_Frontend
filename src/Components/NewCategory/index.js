@@ -54,7 +54,7 @@ function NewCategory({ getCategories }) {
   return (
     <>
       {renderNewCategoryModal()}
-      <button type="button" onClick={toggleNewCategoryModal}>
+      <button type="button" className="secondary-light" onClick={toggleNewCategoryModal}>
         Criar Categoria
       </button>
     </>
