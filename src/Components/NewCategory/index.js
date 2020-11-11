@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import './styles.css';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import CategoryService from '../../Services/CategoryService';
+import ResultModal from '../Modals/ResultModal';
 
 function NewCategory({ getCategories }) {
   const [categoryName, setCategoryName] = useState('');
   const [categoryDescription, setCategoryDescription] = useState('');
   const [newCategoryModalOpen, setNewCategoryModalOpen] = useState(false);
   const toggleNewCategoryModal = () => setNewCategoryModalOpen(!newCategoryModalOpen);
+  const [resultModalVisible, setResultModalVisible] = useState(false);
+  const [resultModalTitle, setResultModalTitle] = useState('');
 
   useEffect(() => {
     if (!newCategoryModalOpen) {
@@ -25,7 +28,8 @@ function NewCategory({ getCategories }) {
       getCategories();
       toggleNewCategoryModal();
     } else {
-      alert('Erro ao salvar a categoria!');
+      setResultModalTitle('Erro ao salvar a categoria!');
+      setResultModalVisible(true);
     }
   };
 
@@ -54,6 +58,12 @@ function NewCategory({ getCategories }) {
   return (
     <>
       {renderNewCategoryModal()}
+      <ResultModal
+        title={resultModalTitle}
+        modalVisible={resultModalVisible}
+        setModalVisible={setResultModalVisible}
+        refresh={false}
+      />
       <button type="button" className="secondary-light" onClick={toggleNewCategoryModal}>
         Criar Categoria
       </button>

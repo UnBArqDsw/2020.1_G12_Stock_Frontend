@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import moment from 'moment';
 import RegisterService from '../../Services/RegisterService';
 import ResultModal from '../Modals/ResultModal';
 
@@ -56,7 +57,11 @@ export default function NewLot({ products }) {
           <div className="new-product-input-container">
             <div>
               <span>Data de entrada</span>
-              <input type="date" onChange={(e) => setLotEntryDate(e.target.value)} />
+              <input
+                type="date"
+                onChange={(e) => setLotEntryDate(e.target.value)}
+                defaultValue={moment().format('YYYY-MM-DD')}
+              />
             </div>
             <div>
               <span>Data de Vencimento</span>
@@ -67,7 +72,13 @@ export default function NewLot({ products }) {
           <div className="new-product-input-container">
             <div>
               <span>Preço da compra</span>
-              <input type="number" onChange={(e) => setLotPurchasePrice(e.target.value)} />
+              <input
+                value={`R$ ${lotPurchasePrice}`}
+                onChange={(e) => {
+                  const price = e.target.value.split(' ')[1];
+                  setLotPurchasePrice(price || '');
+                }}
+              />
             </div>
             <div>
               <span>Quantidade</span>
