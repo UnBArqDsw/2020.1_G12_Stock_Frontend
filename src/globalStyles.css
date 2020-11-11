@@ -7,6 +7,10 @@ button {
   transition: 0.5s;
 }
 
+a {
+  text-decoration: none !important;
+}
+
 button:hover {
   background-color: var(--primary-dark);
 }
@@ -14,15 +18,29 @@ button:focus {
   outline: none !important;
 }
 
-button.secondary{
+button.secondary {
   border-style: none;
   background-color: var(--dark);
-  color: #fff; 
+  color: #fff;
   padding: 0.5rem 2rem;
   border-radius: 5px !important;
   transition: 0.5s;
 }
-button.secondary:hover{
+
+button.secondary-light {
+  border-style: none;
+  background-color: var(--secondary);
+  color: #fff;
+  padding: 0.5rem 2rem;
+  border-radius: 5px !important;
+  transition: 0.5s;
+}
+
+button.secondary-light:hover {
+  background-color: var(--secondary-dark);
+}
+
+button.secondary:hover {
   background-color: var(--font-dark);
 }
 
@@ -33,11 +51,6 @@ textarea {
   box-shadow: 0px 0px 1.5px 0.1px;
   padding: 8px;
   border-radius: 5px;
-  width: 220px;
-}
-
-option {
-  background-color: #fff;
 }
 
 select {
@@ -47,6 +60,10 @@ select {
   padding: 8px;
   border-radius: 5px;
   width: 220px;
+}
+
+option {
+  background-color: #fff;
 }
 
 input:focus {
@@ -63,10 +80,8 @@ input:focus {
   padding-top: 3.5rem;
 }
 
-.modal-content {
-  left: 50% !important;
-  top: 50% !important;
-  transform: translate(-50%, 50%) !important;
+.close span {
+  font-size: 25px;
 }
 
 :root {
@@ -82,23 +97,25 @@ input:focus {
   --secondary-smooth: #4dbcc4;
   --secondary-strong: #60edf7;
 
-  --green: #2AAB20 !important; 
-  --green-light: #88C959; 
-  --green-dark: #1D7817; 
-  --green-smooth: #58C791; 
-  --green-strong: #5CD177;
+  --green: #2aab20 !important;
+  --green-light: #88c959;
+  --green-dark: #1d7817;
+  --green-smooth: #58c791;
+  --green-strong: #5cd177;
 
-  --yellow: #AB9A29 !important; 
-  --yellow-light: #F7DE3B; 
-  --yellow-dark: #B88623; 
-  --yellow-smooth: #B8A52C; 
-  --yellow-strong: #E0CA36; 
+  --yellow: #ab9a29 !important;
+  --yellow-light: #f7de3b;
+  --yellow-dark: #b88623;
+  --yellow-smooth: #b8a52c;
+  --yellow-strong: #e0ca36;
 
-  --gray: #F5F5F5 !important;
-  --gray-secondary: #E0E0E0;
-  --gray-third: #8A8A8A;
-  
-  --dark: #313C4E !important;
-  --font-dark: #1C1C1C;
+  --gray: #f5f5f5 !important;
+  --gray-secondary: #e0e0e0;
+  --gray-third: #8a8a8a;
 
+  --dark: #313c4e !important;
+  --font-dark: #1c1c1c;
+
+  --dark: #313c4e !important;
+  --font-dark: #1c1c1c;
 }

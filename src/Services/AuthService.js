@@ -5,7 +5,7 @@ class AuthService {
     try {
       const response = await api.post('/collaborator/auth', {
         document: document.replace(/\D/g, ''),
-        password,
+        password: password,
       });
       return response;
     } catch (error) {
