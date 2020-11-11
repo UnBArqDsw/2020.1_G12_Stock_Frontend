@@ -52,7 +52,7 @@ export default function AuthNavBar() {
             <Link to="/register/company" className="signUp">Cadastrar Estoque</Link>
               <div className="signIn-page">
                 <Link to="/login">
-                  <button className="signIn-button" type="button">
+                  <button className="signIn-button" type="button" onClick={toggleSidebar}>
                     Portal do Gestor
                   </button>
                 </Link>

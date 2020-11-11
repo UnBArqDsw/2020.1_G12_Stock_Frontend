@@ -6,12 +6,14 @@ const api = axios.create({
 
 api.interceptors.request.use(
   async (config) => {
-      const token = JSON.parse(localStorage.getItem('@auth:token'));
-      config.headers['x-auth-token'] = token;
-      return config;
+    let token = localStorage.getItem('@auth:token');
+    token = token ? JSON.parse(token) : '';
+    // eslint-disable-next-line no-param-reassign
+    config.headers['x-auth-token'] = token;
+    return config;
   },
   (error) => {
-      console.log(error);
+    console.log(error);
   }
 );
 
