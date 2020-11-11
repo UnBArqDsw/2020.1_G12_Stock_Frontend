@@ -76,31 +76,31 @@ export default function NewCollaboratorModal(props) {
         <ModalHeader isOpen={modalVisible} toggle={() => {
           setModalVisible(false)
         }}>Cadastrar novo(a) Colaborador(a)</ModalHeader>
-        <div className="new-product-container">
+        <div className="new-collaborator-container">
           <form onSubmit={onSubmit}>
             <ModalBody>
-
-              <div className="new-product-input-container">
-                <div>
+              <div className="row new-collaborator-input-container">
+                <div className="col-md-6">
                   <label htmlFor="name">Nome</label>
-                  <input type="text" onChange={(e) => setName(e.target.value)} required />
+                  <input type="text" className="new-collaborator-input" onChange={(e) => setName(e.target.value)} required />
                 </div>
-                <div>
+                <div className="col-md-6">
                   <label htmlFor="document">CPF</label>
                   <InputMask
                     onChange={(e) => setCpf(e.target.value)}
+                    className="new-collaborator-input"
                     id="document"
                     mask="999.999.999-99"
                     maskChar=""
                     required />
                 </div>
               </div>
-              <div className="new-product-input-container">
-                <div>
+              <div className="row new-collaborator-input-container">
+                <div className="col-md-6">
                   <label htmlFor="email">Email</label>
-                  <input type="text" onChange={(e) => setEmail(e.target.value)} required />
+                  <input type="text" className="new-collaborator-input" onChange={(e) => setEmail(e.target.value)} required />
                 </div>
-                <div>
+                <div className="col-md-6">
                   <label htmlFor="idAccessLevel">Nível de Acesso</label>
                   <select type="select" onChange={(e) => setIdAccessLevel(e.target.value)}>
                     <option value=""></option>
@@ -112,14 +112,14 @@ export default function NewCollaboratorModal(props) {
                   </select>
                 </div>
               </div>
-              <div className="new-product-input-container">
-                <div>
+              <div className="row new-collaborator-input-container">
+                <div className="col-md-6">
                   <label htmlFor="password">Senha</label>
-                  <input type="password" onChange={(e) => setPassword(e.target.value)} />
+                  <input type="password" className="new-collaborator-input" onChange={(e) => setPassword(e.target.value)} />
                 </div>
-                <div>
+                <div className="col-md-6">
                   <label htmlFor="passwordConfirm">Confirmar Senha</label>
-                  <input type="password" onChange={function (e) {
+                  <input type="password" className="new-collaborator-input" onChange={function (e) {
                     setPasswordConfirm(e.target.value);
                     checkPassword(e.target.value);
                   }}

@@ -79,14 +79,13 @@ export default function UpdateCollaboratorModal(props) {
         <ModalHeader isOpen={modalVisible} toggle={() => {
           setModalVisible(false)
         }}>Editar Colaborador(a)</ModalHeader>
-        <div className="new-product-container">
+        <div className="edit-collaborator-container">
           <form onSubmit={onSubmit}>
             <ModalBody>
-
-              <div className="new-product-input-container">
-                <div>
+              <div className="row edit-collaborator-input-container">
+                <div className="col-md-6">
                   <label htmlFor="name">Nome</label>
-                  <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+                  <input type="text" value={name} className="edit-collaborator-input" onChange={(e) => setName(e.target.value)} required />
                 </div>
                 <div>
                   <label htmlFor="document">CPF</label>
@@ -94,14 +93,15 @@ export default function UpdateCollaboratorModal(props) {
                     value={cpf} onChange={(e) => setCpf(e.target.value)}
                     id="document"
                     mask="999.999.999-99"
+                    className="edit-collaborator-input"
                     maskChar=""
                     required />
                 </div>
               </div>
-              <div className="new-product-input-container">
-                <div>
+              <div className="row edit-collaborator-input-container">
+                <div className="col-md-6">
                   <label htmlFor="email">Email</label>
-                  <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                  <input type="text" value={email} className="edit-collaborator-input" onChange={(e) => setEmail(e.target.value)} required />
                 </div>
                 <div>
                   <label htmlFor="idAccessLevel">Nível de Acesso</label>
@@ -118,7 +118,7 @@ export default function UpdateCollaboratorModal(props) {
             </ModalBody>
             <ModalFooter>
               <div className="add-product-modal-footer">
-                <button type="submit" className="secondary" disabled={ !idAccessLevel || !email || !cpf || !name}>
+                <button type="submit" className="secondary" disabled={!idAccessLevel || !email || !cpf || !name}>
                   Salvar
           </button>
               </div>
