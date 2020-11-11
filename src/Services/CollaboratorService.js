@@ -1,9 +1,9 @@
 import api from './Api';
 
 class CollaboratorService {
-  async loadCollaborators(idCompany) {
+  async loadCollaborators() {
     try {
-      const response = await api.get(`/collaborators/${idCompany}`);
+      const response = await api.get(`/collaborators`);
       return response.data;
     } catch (error) {
       console.log(error);

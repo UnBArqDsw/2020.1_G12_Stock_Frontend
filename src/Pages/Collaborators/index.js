@@ -24,7 +24,7 @@ export default function Collaborators() {
 
   const loadCollaborators = async () => {
     try {
-      const response = await CollaboratorService.loadCollaborators(user.idCompany);
+      const response = await CollaboratorService.loadCollaborators();
       setCollaborators(response);
 
     } catch (error) {
