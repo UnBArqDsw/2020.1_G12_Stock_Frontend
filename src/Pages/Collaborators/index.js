@@ -9,15 +9,22 @@ import './styles.css';
 export default function Collaborators() {
   const { user } = useContext(AuthContext);
   const [collaborators, setCollaborators] = useState([]);
+  const [collaboratorsFiltered, setCollaboratorsFiltered] = useState([]);
   const [newCollaboratorModal, setNewCollaboratorModal] = useState(false);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     if (user) loadCollaborators();
   }, []);
 
+  useEffect(() => {
+    const collaboratorsFilteredBySearch = collaborators.filter((product) => product.name.includes(search));
+    setCollaboratorsFiltered(collaboratorsFilteredBySearch);
+  }, [search]);
+
   const loadCollaborators = async () => {
     try {
-      const response = await CollaboratorService.loadCollaborator(user.idCompany);
+      const response = await CollaboratorService.loadCollaborators(user.idCompany);
       setCollaborators(response);
 
     } catch (error) {
@@ -37,7 +44,7 @@ export default function Collaborators() {
         <h1>Colaboradores</h1>
         <div className="toolbar">
           <div className="search-filter">
-            <input type="text" placeholder="Procurar colaborador" />
+            <input type="text" placeholder="Procurar colaborador" onChange={(e) => setSearch(e.target.value)} />
             <FaFilter />
             <FaSortAmountUp />
           </div>
@@ -47,7 +54,7 @@ export default function Collaborators() {
         </div>
       </div>
       <div className="row">
-        {collaborators.length ? collaborators.map(user =>
+        {search.length ? collaboratorsFiltered.map(user =>
           <CollaboratorCard
             name={user.name}
             idAccessLevel={user.idAccessLevel}
@@ -58,7 +65,17 @@ export default function Collaborators() {
             cpf={cpfFormatted(user.document)}
           />
         )
-          : (<p>Você ainda não possui colaboradores cadastrados</p>)}
+          : collaborators.map(user =>
+            <CollaboratorCard
+              name={user.name}
+              idAccessLevel={user.idAccessLevel}
+              photo={user.photo}
+              activate={user.activate}
+              idCollaborator={user.idCollaborator}
+              email={user.email}
+              cpf={cpfFormatted(user.document)}
+            />
+          )}
       </div>
     </div>
   );

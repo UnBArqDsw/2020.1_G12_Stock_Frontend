@@ -16,13 +16,14 @@ export default function UpdateCollaboratorModal(props) {
   const [cpf, setCpf] = useState('');
   const [email, setEmail] = useState('');
   const [idAccessLevel, setIdAccessLevel] = useState('');
+  const [accessLevel, setAccessLevel] = useState('');
   const [responseUpdate, setResponseUpdate] = useState({});
   const [roles, setRoles] = useState([]);
-  const [collaborator, setCollaborator] = useState({});
 
   useEffect(() => {
     getCollaborator();
-    getRoles()
+    getRoles();
+    if (idAccessLevel) nameAccessLevel();
   }, []);
 
   const onSubmit = (e) => {
@@ -35,16 +36,29 @@ export default function UpdateCollaboratorModal(props) {
     setRoles(response);
   };
 
+  const nameAccessLevel = async (idAccessLevel) => {
+    try {
+      const response = await AccessLevelService.getAccessLevel(idAccessLevel);
+      setAccessLevel(response[0].name);
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const getCollaborator = async () => {
     const response = await CollaboratorService.loadCollaborator(idCollaborator);
-    setCollaborator(response);
+    setName(response.name);
+    setCpf(response.document);
+    setEmail(response.email);
+    setIdAccessLevel(response.idAccessLevel);
+    nameAccessLevel(response.idAccessLevel);
   };
 
   const updateCollaborator = async () => {
-
     const params = { name: name, email: email, idAccessLevel: idAccessLevel, document: cpf };
     try {
-      const response = await CollaboratorService.updateCollaborator(user.idCompany, params);
+      const response = await CollaboratorService.editCollaborator(idCollaborator, params);
       setResponseUpdate(response);
       setResultModal(true);
       setModalVisible(false);
@@ -64,7 +78,7 @@ export default function UpdateCollaboratorModal(props) {
       }}>
         <ModalHeader isOpen={modalVisible} toggle={() => {
           setModalVisible(false)
-        }}>Atualizar Colaborador(a)</ModalHeader>
+        }}>Editar Colaborador(a)</ModalHeader>
         <div className="new-product-container">
           <form onSubmit={onSubmit}>
             <ModalBody>
@@ -72,13 +86,12 @@ export default function UpdateCollaboratorModal(props) {
               <div className="new-product-input-container">
                 <div>
                   <label htmlFor="name">Nome</label>
-                  <input type="text" value={collaborator.name} onChange={(e) => setName(e.target.value)} required />
+                  <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
                 </div>
                 <div>
                   <label htmlFor="document">CPF</label>
                   <InputMask
-                    placeholder={collaborator.document}
-                    value={collaborator.document} onChange={(e) => setCpf(e.target.value)}
+                    value={cpf} onChange={(e) => setCpf(e.target.value)}
                     id="document"
                     mask="999.999.999-99"
                     maskChar=""
@@ -88,12 +101,12 @@ export default function UpdateCollaboratorModal(props) {
               <div className="new-product-input-container">
                 <div>
                   <label htmlFor="email">Email</label>
-                  <input type="text" value={collaborator.email} onChange={(e) => setEmail(e.target.value)} required />
+                  <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} required />
                 </div>
                 <div>
                   <label htmlFor="idAccessLevel">Nível de Acesso</label>
                   <select type="select" onChange={(e) => setIdAccessLevel(e.target.value)}>
-                    <option value=""></option>
+                    <option value="">{accessLevel}</option>
                     {roles?.map((role, i) => (
                       <option key={i} value={role.idAccessLevel}>
                         {role.name}
@@ -106,7 +119,7 @@ export default function UpdateCollaboratorModal(props) {
             <ModalFooter>
               <div className="add-product-modal-footer">
                 <button type="submit" className="secondary" disabled={ !idAccessLevel || !email || !cpf || !name}>
-                  Atualizar
+                  Salvar
           </button>
               </div>
             </ModalFooter>

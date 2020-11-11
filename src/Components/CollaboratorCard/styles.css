@@ -81,6 +81,10 @@ a.deactivate {
   font-weight: 600;
 }
 
+.icon-edit {
+  cursor: pointer;
+}
+
 .collaborator-actions {
   background-color: #fff !important;
   display: flex;

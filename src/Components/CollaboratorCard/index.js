@@ -12,7 +12,6 @@ export default function CollaboratorCard(props) {
 
   const { activate, idCollaborator, photo, name, idAccessLevel, cpf, email } = props;
   const [confirmationModal, setConfirmationModal] = useState(false);
-  const [updateResult, setUpdateResult] = useState();
   const [accessLevel, setAccessLevel] = useState('');
   const [resultModal, setResultModal] = useState(false);
   const [updateModal, setUpdateModal] = useState(false);
@@ -83,7 +82,7 @@ export default function CollaboratorCard(props) {
             <p className="name">{name}</p>
             <p className="access-level">{accessLevel}</p>
           </div>
-          <div className="icon">
+          <div className="icon-edit">
             <FiEdit size={25} onClick={() => setUpdateModal(true)} />
           </div>
         </div>
