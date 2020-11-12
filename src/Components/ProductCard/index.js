@@ -11,12 +11,14 @@ const ProductCard = ({ products }) => {
   const [decreaseProductModalOpen, setDecreaseProductModalOpen] = useState(false);
   const [decreaseLotModalOpen, setDecreaseLotModalOpen] = useState(false);
   const [productId, setProductId] = useState('');
+  const [lotId, setLotId] = useState('');
   const [quantity, setQuantity] = useState('');
   const [product, setProduct] = useState({});
   const [lot, setLot] = useState({});
   const [collaborator, setCollaborator] = useState({});
   const [collaborators, setCollaborators] = useState({});
   const [showLotInfo, setShowLotInfo] = useState(false);
+  const [confirmDecreaseLotModalOpen, setConfirmDecreaseLotModalOpen] = useState(false);
   const toggleDecreaseProductModal = () => {
     setDecreaseProductModalOpen(!decreaseProductModalOpen)
   };
@@ -26,6 +28,9 @@ const ProductCard = ({ products }) => {
       setShowLotInfo(false);
     }
   };
+  const toggleConfirmDecreaseLotModal = () =>{
+    setConfirmDecreaseLotModalOpen(!confirmDecreaseLotModalOpen);
+  }
   const loadCollaborators = async () => {
     const response = await CollaboratorService.getCollaborators();
     setCollaborators(response);
@@ -50,6 +55,7 @@ const ProductCard = ({ products }) => {
     }else{
       let find_lot = product.lots.filter((lot) => lot.idLot == l.target.value)[0];
       setLot(find_lot);
+      setLotId(find_lot.idLot);
       setCollaborator(collaborators.filter((c) => c.idCollaborator == find_lot.idCollaborator)[0]);
       setShowLotInfo(true);
     }
@@ -66,6 +72,21 @@ const ProductCard = ({ products }) => {
       }
     } catch (error) {
       alert(`Falha ao dar baixa em produto: ${error.data}`);
+    }
+  }
+  const decreaseLot = async () => {
+    try {
+      const { errorData, status } = await DecreaseService.decreaseLot(lotId, quantity);
+      if (status === 200) {
+        toggleConfirmDecreaseLotModal();
+        toggleDecreaseLotModal();
+        alert('Produto removido com sucesso!');
+      } else {
+        toggleConfirmDecreaseLotModal();
+        alert(`Falha ao remover produto: ${errorData.data.details}`);
+      }
+    } catch (error) {
+      alert(`Falha ao remover produto: ${error.data}`);
     }
   }
   const setProductSelected = (p) => {
@@ -96,6 +117,26 @@ const ProductCard = ({ products }) => {
       </ModalFooter>
     </Modal>
   );
+
+  const renderConfirmDecreaseLotModal = () => (
+    <Modal toggle={toggleConfirmDecreaseLotModal} isOpen={confirmDecreaseLotModalOpen}>
+      <ModalHeader toggle={toggleConfirmDecreaseLotModal}>
+        Dar baixa em produto
+      </ModalHeader>
+      <ModalBody>
+  Tem certeza que deseja remover {quantity} unidade(s) do produto {product.name + ' ' + product.unitQtd + ' ' + product.unitMeasure}(s) do lote {lot.description} inserido pelo colaborador {collaborator.name}?
+      </ModalBody>
+      <ModalFooter>
+        <button type="button" onClick={decreaseLot}>
+          Sim
+        </button>
+        <button type="button" onClick={toggleConfirmDecreaseLotModal}>
+          Não
+        </button>
+      </ModalFooter>
+    </Modal>
+  );
+
   const lotInfo = () => (
     <div className="lot-info">
       <h5>Informações sobre esse lote:</h5>
@@ -105,6 +146,9 @@ const ProductCard = ({ products }) => {
       <div><label>Responsável:</label><span>{collaborator?.name}</span></div>
       <div class="div-input"><label>Quantidade a ser removida:</label><span><input className="input-quantity" type="number" defaultValue='' onChange={(e) => setQuantity(e.target.value)}></input></span></div>
     </div>
+  );
+  const decreaseLotButton = () => (
+    <button onClick={toggleConfirmDecreaseLotModal} type="button">Remover</button>
   );
   const renderDecreaseLotModal = () => (
     <Modal toggle={toggleDecreaseLotModal} isOpen={decreaseLotModalOpen}>
@@ -124,6 +168,7 @@ const ProductCard = ({ products }) => {
         {showLotInfo?lotInfo():null}
       </ModalBody>
       <ModalFooter>
+        {showLotInfo?decreaseLotButton():null}
         <p>
           A remoção do produto não será contabilizada como venda, apenas remoção por motivo específico de indisponibilidade do produto.
         </p>
@@ -194,6 +239,7 @@ const ProductCard = ({ products }) => {
       </div>
       {renderDecreseProductModal()}
       {renderDecreaseLotModal()}
+      {renderConfirmDecreaseLotModal()}
     </div>
   );
 };
