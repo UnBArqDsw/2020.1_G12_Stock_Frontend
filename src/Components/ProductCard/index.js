@@ -26,6 +26,7 @@ const ProductCard = ({ products }) => {
     setDecreaseLotModalOpen(!decreaseLotModalOpen)
     if(!decreaseLotModalOpen){
       setShowLotInfo(false);
+      setQuantity('');
     }
   };
   const toggleConfirmDecreaseLotModal = () =>{
@@ -50,6 +51,7 @@ const ProductCard = ({ products }) => {
     setQuantity('');
   }
   const setLotSelected = (l) => {
+    setQuantity('');
     if(!l.target.value){
       setShowLotInfo(false);
     }else{

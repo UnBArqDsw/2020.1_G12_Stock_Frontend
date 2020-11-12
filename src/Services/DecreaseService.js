@@ -9,6 +9,7 @@ class DecreaseService{
       });
       return response;
     }catch(error){
+      console.log(error.response);
       return { error: true, errorData: error.response };
     }
   }
