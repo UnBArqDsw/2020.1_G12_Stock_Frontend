@@ -1,4 +1,4 @@
- import React from 'react';
+ import React, {useState, useEffect} from 'react';
 import { FaFilter } from 'react-icons/all';
 import HistoryService from '../../Services/HistoryService'
 import './styles.css'
@@ -12,7 +12,7 @@ export default function History() {
 
   const loadHistoryData = async () => {
     try {
-      const response = await HistoryService.loadHistoryData(user.idCompany);
+      const response = await HistoryService.loadHistoryData(2);
       setHistoryData(response);
 
     } catch (error) {
