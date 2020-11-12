@@ -1,8 +1,25 @@
-import React from 'react';
+ import React from 'react';
 import { FaFilter } from 'react-icons/all';
+import HistoryService from '../../Services/HistoryService'
 import './styles.css'
 
 export default function History() {
+  const [historyData, setHistoryData] = useState([]);
+
+  useEffect(() => {
+    loadHistoryData();
+  }, []);
+
+  const loadHistoryData = async () => {
+    try {
+      const response = await HistoryService.loadHistoryData(user.idCompany);
+      setHistoryData(response);
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div className="container">
       <div className="history-content">
