@@ -9,12 +9,14 @@
   align-items: center;
   flex-direction: column;
   z-index: 200;
+  overflow-x: scroll;
 }
 
 .sidebar.mobile {
   transform: translate(-100%);
   transition: 0.2s;
   box-shadow: none;
+  overflow-x: scroll;
 }
 
 .sidebar.mobile.open {
@@ -24,7 +26,7 @@
 }
 
 .sidebar img {
-  width: 60%;
+  width: 70%;
   cursor: pointer;
 }
 .sidebar a {
@@ -54,6 +56,9 @@
   width: 100%;
   cursor: pointer;
   transition: 0.2s;
+}
+.sidebar-option-selected span {
+  color: #fff;
 }
 
 .sidebar .sidebar-option-selected svg {
