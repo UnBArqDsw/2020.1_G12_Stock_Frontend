@@ -1,8 +1,8 @@
 import api from '../Services/Api';
 class CategoryService {
-  async getCategories(idCompany) {
+  async getCategories() {
     try {
-      const response = await api.get(`/categories/${idCompany}`);
+      const response = await api.get(`/categories`);
       return response.data;
     } catch (error) {
       console.log(error);

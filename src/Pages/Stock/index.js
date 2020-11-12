@@ -1,16 +1,14 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaFilter, FaSortAmountUp } from 'react-icons/all';
 import ProductList from '../../Components/ProductList';
 import GetService from '../../Services/GetService';
-import { AuthContext } from '../../Contexts/AuthContext';
 import NewLot from '../../Components/NewLot';
 import NewProduct from '../../Components/NewProduct';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import './styles.css';
 
 export default function Stock() {
-  const { user } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
   const [productsFiltered, setProductsFiltered] = useState([]);
   const [search, setSearch] = useState('');
@@ -18,7 +16,7 @@ export default function Stock() {
   const toggleDropDown = () => setDropdownOpen((prevState) => !prevState);
 
   const getProducts = async () => {
-    const response = await GetService.getProducts(user.idCompany);
+    const response = await GetService.getProducts();
     setProducts(response);
   };
 
@@ -27,6 +25,7 @@ export default function Stock() {
   }, []);
 
   useEffect(() => {
+    console.log(products)
     const productsFilteredBySearch = products.filter((product) => product.name.includes(search));
     setProductsFiltered(productsFilteredBySearch);
   }, [search]);

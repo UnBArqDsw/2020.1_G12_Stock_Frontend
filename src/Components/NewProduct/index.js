@@ -1,13 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import CategoryService from '../../Services/CategoryService';
 import RegisterService from '../../Services/RegisterService';
-import { AuthContext } from '../../Contexts/AuthContext';
 import NewCategoria from '../NewCategory';
 import ResultModal from '../Modals/ResultModal';
 
 export default function NewProduct() {
-  const { user } = useContext(AuthContext);
   const [productName, setProductName] = useState('');
   const [productUnitQtd, setProductUnitQtd] = useState('');
   const [productUnitMeasure, setProductUnitMeasure] = useState('');
@@ -21,7 +19,7 @@ export default function NewProduct() {
   const toggleNewProductModal = () => setNewProductModalOpen(!newProductModalOpen);
 
   const getCategories = async () => {
-    const response = await CategoryService.getCategories(user.idCompany);
+    const response = await CategoryService.getCategories();
     setCategories(response);
   };
 

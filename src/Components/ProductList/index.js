@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Card, CardBody } from 'reactstrap';
 import './styles.css';
 import { useContext } from 'react';
