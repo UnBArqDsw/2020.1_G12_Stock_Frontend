@@ -58,7 +58,27 @@
   width: 100%;
 }
 
-.lot-info{
+.div-input{
+  display: flex;
+  align-items: center;
+}
+
+.lot-info div{
+  flex-direction: row;
+  display: flex;
+  padding-left: 5%;
+}
+
+.lot-info span{
+  display: flex;
+  flex-direction: column;
+  padding-left: 1%;
+}
+
+.lot-info label{
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
 }
 
 @media only screen and (max-width: 413px) {

@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { useEffect, useContext, useState  } from 'react';
 import { Modal, Collapse, CardBody, Card, CardText, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import './styles.css';
-import { useContext, useState } from 'react';
 import { DeviceContext } from '../../Contexts/DeviceContext';
 import DecreaseService from '../../Services/DecreaseService';
+import CollaboratorService from '../../Services/CollaboratorService';
 
 const ProductCard = ({ products }) => {
   const { isMobile } = useContext(DeviceContext);
@@ -14,14 +14,23 @@ const ProductCard = ({ products }) => {
   const [quantity, setQuantity] = useState('');
   const [product, setProduct] = useState({});
   const [lot, setLot] = useState({});
+  const [collaborator, setCollaborator] = useState({});
+  const [collaborators, setCollaborators] = useState({});
   const [showLotInfo, setShowLotInfo] = useState(false);
   const toggleDecreaseProductModal = () => {
     setDecreaseProductModalOpen(!decreaseProductModalOpen)
   };
   const toggleDecreaseLotModal = () => {
-    console.log(product.lots);
     setDecreaseLotModalOpen(!decreaseLotModalOpen)
+    if(!decreaseLotModalOpen){
+      setShowLotInfo(false);
+    }
   };
+  const loadCollaborators = async () => {
+    const response = await CollaboratorService.getCollaborators();
+    setCollaborators(response);
+  }
+  useEffect(() => {loadCollaborators()}, []);
   const toggle = (idCard) => {
     setCardSelected('');
     setProductId('');
@@ -36,13 +45,13 @@ const ProductCard = ({ products }) => {
     setQuantity('');
   }
   const setLotSelected = (l) => {
-    if (product) {
-      setLot(product.lots.filter((lot) => lot.idLot == l)[0]);
-    }
-    if(l!==''){
-      setShowLotInfo(true);
-    }else{
+    if(!l.target.value){
       setShowLotInfo(false);
+    }else{
+      let find_lot = product.lots.filter((lot) => lot.idLot == l.target.value)[0];
+      setLot(find_lot);
+      setCollaborator(collaborators.filter((c) => c.idCollaborator == find_lot.idCollaborator)[0]);
+      setShowLotInfo(true);
     }
   }
   const decreaseProduct = async () => {
@@ -90,9 +99,11 @@ const ProductCard = ({ products }) => {
   const lotInfo = () => (
     <div className="lot-info">
       <h5>Informações sobre esse lote:</h5>
-      <p>Data de adição {lot?.entryDate}</p>
-      <p>Quantidade disponível: {lot?.productQty}</p>
-      <p>Preço de compra: R${lot?.purchasePrice}</p>
+      <div><label>Data de adição:</label><span> {new Date(lot?.entryDate).toLocaleDateString()}</span></div>
+      <div><label>Quantidade disponível:</label><span> {lot?.productQty}</span></div>
+      <div><label>Preço de compra:</label><span> R${lot?.purchasePrice}</span></div>
+      <div><label>Responsável:</label><span>{collaborator?.name}</span></div>
+      <div class="div-input"><label>Quantidade a ser removida:</label><span><input className="input-quantity" type="number" defaultValue='' onChange={(e) => setQuantity(e.target.value)}></input></span></div>
     </div>
   );
   const renderDecreaseLotModal = () => (
@@ -100,7 +111,7 @@ const ProductCard = ({ products }) => {
       <ModalHeader toggle={toggleDecreaseLotModal}> Remover produto com defeito</ModalHeader>
       <ModalBody>
         <p>De qual lote deseja remover?</p>
-        <select className="select-alone" type="select" onChange={(e) => setLotSelected(e.target.value)}>
+        <select className="select-alone" type="select" onChange={setLotSelected}>
           <option value="" />
           {product?.lots?.filter((lot) => lot.productQty > 0).map((lot) => {
             return (
@@ -110,7 +121,7 @@ const ProductCard = ({ products }) => {
             );
           })}
         </select>
-        {showLotInfo? lotInfo():null}
+        {showLotInfo?lotInfo():null}
       </ModalBody>
       <ModalFooter>
         <p>
@@ -119,6 +130,7 @@ const ProductCard = ({ products }) => {
       </ModalFooter>
     </Modal>
   );
+  
   return (
     <div>
       <div className="list-container">
@@ -131,7 +143,7 @@ const ProductCard = ({ products }) => {
               <span>{isMobile ? 'Qtd' : 'Quantidade'}</span>
             </div>
             <div>
-              <span>Unidade</span>
+              <span>Tamanho</span>
             </div>
             <div>
               <span>Lotes</span>
@@ -139,7 +151,7 @@ const ProductCard = ({ products }) => {
           </CardBody>
         </Card>
         <div className="cards">
-          {products.map((product) => {
+          {products?.map((product) => {
             return (
               <div>
                 <Card>
@@ -152,7 +164,7 @@ const ProductCard = ({ products }) => {
                     </div>
                     <div id={product.idProduct} onClick={(e) => toggle(e.target.id)}>
                       <p id={product.idProduct} onClick={(e) => toggle(e.target.id)}>
-                        {product.uniQtd} {product.unitMeasure}(s)
+                        {product.unitQtd + " " + product.unitMeasure}(s)
                       </p>
                     </div>
                     <div id={product.idProduct} onClick={(e) => toggle(e.target.id)}>

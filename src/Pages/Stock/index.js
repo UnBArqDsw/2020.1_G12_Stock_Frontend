@@ -175,7 +175,7 @@ export default function Stock() {
           <div className="product-category">
             <span>Categorias</span>
             <div className="product-checks">
-              {categories.map((category, i) => (
+              {categories?.map((category, i) => (
                 <label for="category" key={i}>
                   <input
                     checked={selectedCategories.includes(category.idCategory)}
@@ -234,7 +234,7 @@ export default function Stock() {
               <div className="new-product-input-container">
               <select class="select-alone" type="select" onChange={(e) => setLotProduct(e.target.value)}>
                 <option value="" />
-                {products.map((product, i) => {
+                {products?.map((product, i) => {
                   return (
                     <option key={i} value={product.idProduct}>
                       {product.name + " - " + product.unitQtd +" "+ product.unitMeasure+"(s)"}
