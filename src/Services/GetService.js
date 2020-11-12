@@ -1,9 +1,9 @@
 import api from './Api';
 
 class GetService {
-  async getProducts() {
+  async getProducts(idCompany) {
     try {
-      const response = await api.get('/products');
+      const response = await api.get(`/products/${idCompany}`);
       return response.data;
     } catch (error) {
       return { error: true, errorData: error };

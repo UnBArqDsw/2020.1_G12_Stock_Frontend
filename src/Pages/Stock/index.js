@@ -1,19 +1,24 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useState, useEffect } from 'react';
-import './styles.css';
+import React, { useState, useEffect, useContext } from 'react';
 import { FaFilter, FaSortAmountUp } from 'react-icons/all';
 import ProductList from '../../Components/ProductList';
 import GetService from '../../Services/GetService';
+import { AuthContext } from '../../Contexts/AuthContext';
 import NewLot from '../../Components/NewLot';
 import NewProduct from '../../Components/NewProduct';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import './styles.css';
 
 export default function Stock() {
+  const { user } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
   const [productsFiltered, setProductsFiltered] = useState([]);
   const [search, setSearch] = useState('');
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const toggleDropDown = () => setDropdownOpen((prevState) => !prevState);
 
   const getProducts = async () => {
-    const response = await GetService.getProducts();
+    const response = await GetService.getProducts(user.idCompany);
     setProducts(response);
   };
 
@@ -37,7 +42,17 @@ export default function Stock() {
               placeholder="Procurar produtos"
               onChange={(e) => setSearch(e.target.value)}
             />
-            <FaFilter />
+            <div className="nav-item">
+              <Dropdown isOpen={dropdownOpen} toggle={toggleDropDown}>
+                <DropdownToggle color="transparent" caret>
+                  <FaFilter size={25} />
+                </DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem>Categoria</DropdownItem>
+                  <DropdownItem>Preço</DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </div>
             <FaSortAmountUp />
           </div>
           <div className="create-import">

@@ -1,28 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import CategoryService from '../../Services/CategoryService';
 import RegisterService from '../../Services/RegisterService';
+import { AuthContext } from '../../Contexts/AuthContext';
 import NewCategoria from '../NewCategory';
 import ResultModal from '../Modals/ResultModal';
 
 export default function NewProduct() {
+  const { user } = useContext(AuthContext);
   const [productName, setProductName] = useState('');
   const [productUnitQtd, setProductUnitQtd] = useState('');
   const [productUnitMeasure, setProductUnitMeasure] = useState('');
   const [productSalePrice, setProductSalePrice] = useState('');
-
   const [categories, setCategories] = useState([]);
-
   const [selectedCategories, setSelectedCategories] = useState([]);
-
   const [newProductModalOpen, setNewProductModalOpen] = useState(false);
-  const toggleNewProductModal = () => setNewProductModalOpen(!newProductModalOpen);
-
   const [resultModalTitle, setResultModalTitle] = useState('');
   const [resultModalVisible, setResultModalVisible] = useState(false);
 
+  const toggleNewProductModal = () => setNewProductModalOpen(!newProductModalOpen);
+
   const getCategories = async () => {
-    const response = await CategoryService.getCategories();
+    const response = await CategoryService.getCategories(user.idCompany);
     setCategories(response);
   };
 
