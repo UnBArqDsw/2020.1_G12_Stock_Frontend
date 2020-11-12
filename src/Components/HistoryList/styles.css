@@ -1,0 +1,46 @@
+.list-container {
+    margin-top: 26px;
+}
+
+.list-container .card {
+    margin-bottom: 16px;
+    margin-top: 50px;
+}
+
+.history-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px !important;
+}
+
+.history-header div {
+    padding: 10px;
+    display: flex;
+    width: 25%;
+    height: 100%;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.history-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.history-card div {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    width: 25%;
+    flex-direction: column;
+    text-align: center;
+}
+
+@media only screen and (max-width: 767px) {
+    .list-container {
+        margin-top: 90px;
+    }
+}

@@ -1,6 +1,7 @@
- import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaFilter } from 'react-icons/all';
 import HistoryService from '../../Services/HistoryService'
+import HistoryList from '../../Components/HistoryList'
 import './styles.css'
 
 export default function History() {
@@ -24,14 +25,17 @@ export default function History() {
     <div className="container">
       <div className="history-content">
         <h1>Histórico</h1>
-      </div>
-      <div className="history-input-container">
-        <span>Filtrar por:</span>
-        <div className="history-icon-container">
-          <FaFilter />
+        <div className="toolbar">
+          <div className="history-input-container">
+            <span>Filtrar por:</span>
+            <div className="history-icon-container">
+              <FaFilter />
+            </div>
+            <input id="history" />
+          </div>
         </div>
-        <input id="history" />
       </div>
+      {historyData.length ? <HistoryList historyData={historyData} /> : <p>Você não possui dados</p>}
     </div>
   );
 }

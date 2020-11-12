@@ -5,9 +5,19 @@
     flex-direction: column;
 }
 
+.toolbar {
+    width: 100%;
+    height: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 16px;
+}
+
 .history-input-container {
     position: relative;
     top: 30px;
+    width: 100%;
 }
 
 .history-input-container input {
