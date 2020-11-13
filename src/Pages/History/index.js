@@ -8,6 +8,7 @@ import './styles.css'
 
 export default function History() {
   const [historyData, setHistoryData] = useState([]);
+  var countHistoryData = (0);
 
   useEffect(() => {
     loadHistoryData();
@@ -23,10 +24,24 @@ export default function History() {
     }
   }
 
+  const compareHistoryDate = (countHistoryData) => {
+    if (countHistoryData < historyData.length) {
+      if (countHistoryData != 0) {
+        if (historyData[countHistoryData].date != historyData[countHistoryData - 1].date) {
+          return moment(historyData[countHistoryData].date).add(1, 'day').format('DD/MM/YYYY');
+        };
+      }
+      else {
+        return moment(historyData[countHistoryData].date).add(1, 'day').format('DD/MM/YYYY');
+      }
+    }
+  }
+
+
   return (
     <div className="container">
       <div className="history-content">
-        <h1>Histórico</h1>
+        <h1>Histórico de Vendas</h1>
         <div className="toolbar">
           <div className="history-input-container">
             <span>Filtrar por:</span>
@@ -60,7 +75,8 @@ export default function History() {
       </div>
       {historyData.length ? historyData.map((data) => (
         <>
-        <p className="history-date">{moment(data.date).add(1, 'day').format('DD/MM/YYYY')}</p>
+          <p className="history-date">{compareHistoryDate(countHistoryData)}</p>
+          <script>{countHistoryData++}</script>
           <HistoryList data={data} />
         </>
       )) : <p>Você não possui dados</p>}

@@ -6,4 +6,7 @@
     .list-container {
         margin-top: 90px;
     }
+    p {
+        font-size: 11px;
+    }
 }
