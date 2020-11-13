@@ -1,17 +1,17 @@
 import React, { useState, useContext, useEffect } from 'react';
 import './styles.css';
 import { Modal, ModalHeader, ModalFooter, ModalBody } from 'reactstrap';
+import InputMask from 'react-input-mask';
 import { AuthContext } from '../../../Contexts/AuthContext';
 import CollaboratorService from '../../../Services/CollaboratorService';
 import AccessLevelService from '../../../Services/AccessLevelService';
 import ResultModal from '../ResultModal';
-import InputMask from 'react-input-mask';
 
 export default function NewCollaboratorModal(props) {
   const { user } = useContext(AuthContext);
-  const { modalVisible, setModalVisible } = props;
+  const { modalVisible, setModalVisible, loadCollaborators } = props;
 
-  const [resultModal, setResultModal] = useState(false)
+  const [resultModal, setResultModal] = useState(false);
   const [name, setName] = useState('');
   const [cpf, setCpf] = useState('');
   const [email, setEmail] = useState('');
@@ -38,19 +38,22 @@ export default function NewCollaboratorModal(props) {
 
   const createCollaborator = async () => {
     if (password && passwordConfirm && password === passwordConfirm) {
-      try {
-        const response = await CollaboratorService.createCollaborator(user.idCompany, name, cpf, email, idAccessLevel, password);
-        setResponseCreate(response);
-        setResultModal(true);
-        setModalVisible(false);
-        return response;
-      } catch (error) {
-      }
+      const response = await CollaboratorService.createCollaborator(
+        user.idCompany,
+        name,
+        cpf,
+        email,
+        idAccessLevel,
+        password
+      );
+      loadCollaborators();
+      setResponseCreate(response);
+      setResultModal(true);
+      setModalVisible(false);
+      return response;
     }
-    else {
-      setResponseCreate({})
-    }
-  }
+    setResponseCreate({});
+  };
 
   const checkPassword = (pass_confirm) => {
     if (
@@ -67,22 +70,42 @@ export default function NewCollaboratorModal(props) {
 
   return (
     <>
-      <ResultModal title={responseCreate.error || !responseCreate ? ("Falha ao adicionar colaborador(a).") : ("Colaborador(a) adicionado com sucesso!")}
+      <ResultModal
+        title={
+          responseCreate.error || !responseCreate
+            ? 'Falha ao adicionar colaborador(a).'
+            : 'Colaborador(a) adicionado com sucesso!'
+        }
         modalVisible={resultModal}
-        setModalVisible={setResultModal} />
-      <Modal isOpen={modalVisible} toggle={() => {
-        setModalVisible(!modalVisible);
-      }}>
-        <ModalHeader isOpen={modalVisible} toggle={() => {
-          setModalVisible(false)
-        }}>Cadastrar novo(a) Colaborador(a)</ModalHeader>
+        setModalVisible={setResultModal}
+        refresh={false}
+      />
+      <Modal
+        isOpen={modalVisible}
+        toggle={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <ModalHeader
+          isOpen={modalVisible}
+          toggle={() => {
+            setModalVisible(false);
+          }}
+        >
+          Cadastrar novo(a) Colaborador(a)
+        </ModalHeader>
         <div className="new-collaborator-container">
           <form onSubmit={onSubmit}>
             <ModalBody>
               <div className="row new-collaborator-input-container">
                 <div className="col-md-6">
                   <label htmlFor="name">Nome</label>
-                  <input type="text" className="new-collaborator-input" onChange={(e) => setName(e.target.value)} required />
+                  <input
+                    type="text"
+                    className="new-collaborator-input"
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                  />
                 </div>
                 <div className="col-md-6">
                   <label htmlFor="document">CPF</label>
@@ -92,18 +115,24 @@ export default function NewCollaboratorModal(props) {
                     id="document"
                     mask="999.999.999-99"
                     maskChar=""
-                    required />
+                    required
+                  />
                 </div>
               </div>
               <div className="row new-collaborator-input-container">
                 <div className="col-md-6">
                   <label htmlFor="email">Email</label>
-                  <input type="text" className="new-collaborator-input" onChange={(e) => setEmail(e.target.value)} required />
+                  <input
+                    type="text"
+                    className="new-collaborator-input"
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
                 </div>
                 <div className="col-md-6">
                   <label htmlFor="idAccessLevel">Nível de Acesso</label>
                   <select type="select" onChange={(e) => setIdAccessLevel(e.target.value)}>
-                    <option value=""></option>
+                    <option value="" />
                     {roles?.map((role, i) => (
                       <option key={i} value={role.idAccessLevel}>
                         {role.name}
@@ -115,25 +144,38 @@ export default function NewCollaboratorModal(props) {
               <div className="row new-collaborator-input-container">
                 <div className="col-md-6">
                   <label htmlFor="password">Senha</label>
-                  <input type="password" className="new-collaborator-input" onChange={(e) => setPassword(e.target.value)} />
+                  <input
+                    type="password"
+                    className="new-collaborator-input"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
                 </div>
                 <div className="col-md-6">
                   <label htmlFor="passwordConfirm">Confirmar Senha</label>
-                  <input type="password" className="new-collaborator-input" onChange={function (e) {
-                    setPasswordConfirm(e.target.value);
-                    checkPassword(e.target.value);
-                  }}
-                    required />
+                  <input
+                    type="password"
+                    className="new-collaborator-input"
+                    onChange={function (e) {
+                      setPasswordConfirm(e.target.value);
+                      checkPassword(e.target.value);
+                    }}
+                    required
+                  />
                   <p className="password-text">{checkPasswordsText}</p>
                 </div>
               </div>
-
             </ModalBody>
             <ModalFooter>
               <div className="add-product-modal-footer">
-                <button type="submit" className="secondary" disabled={!password || !passwordConfirm || !idAccessLevel || !email || !cpf || !name}>
+                <button
+                  type="submit"
+                  className="secondary"
+                  disabled={
+                    !password || !passwordConfirm || !idAccessLevel || !email || !cpf || !name
+                  }
+                >
                   Adicionar
-          </button>
+                </button>
               </div>
             </ModalFooter>
           </form>
