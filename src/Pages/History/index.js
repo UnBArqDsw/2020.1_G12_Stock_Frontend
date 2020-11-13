@@ -8,7 +8,7 @@ import './styles.css'
 
 export default function History() {
   const [historyData, setHistoryData] = useState([]);
-  var countHistoryData = (0);
+  var countHistoryData = 0;
 
   useEffect(() => {
     loadHistoryData();
@@ -25,15 +25,13 @@ export default function History() {
   }
 
   const compareHistoryDate = (countHistoryData) => {
-    if (countHistoryData < historyData.length) {
-      if (countHistoryData != 0) {
-        if (historyData[countHistoryData].date != historyData[countHistoryData - 1].date) {
-          return moment(historyData[countHistoryData].date).add(1, 'day').format('DD/MM/YYYY');
-        };
-      }
-      else {
+    if (countHistoryData != 0) {
+      if (historyData[countHistoryData].date != historyData[countHistoryData - 1].date) {
         return moment(historyData[countHistoryData].date).add(1, 'day').format('DD/MM/YYYY');
-      }
+      };
+    }
+    else {
+      return moment(historyData[countHistoryData].date).add(1, 'day').format('DD/MM/YYYY');
     }
   }
 
