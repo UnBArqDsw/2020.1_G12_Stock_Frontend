@@ -5,7 +5,7 @@ import './styles.css';
 
 const HistoryCard = ({ historyData }) => {
     return (
-        <div className="list-container">
+        <div className="history-list-container">
             <Card>
                 <CardBody className="history-header">
                     <div>

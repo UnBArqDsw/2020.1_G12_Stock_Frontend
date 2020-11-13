@@ -1,10 +1,9 @@
-.list-container {
+.history-list-container {
     margin-top: 26px;
 }
 
-.list-container .card {
-    margin-bottom: 16px;
-    margin-top: 50px;
+.history-list-container .card {
+    margin-top: 70px;
 }
 
 .history-header {
