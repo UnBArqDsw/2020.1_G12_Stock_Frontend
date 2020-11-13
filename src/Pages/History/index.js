@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Card, CardBody } from 'reactstrap';
 import { FaFilter } from 'react-icons/all';
 import HistoryService from '../../Services/HistoryService'
 import HistoryList from '../../Components/HistoryList'
+import moment from 'moment';
 import './styles.css'
 
 export default function History() {
@@ -35,9 +37,31 @@ export default function History() {
           </div>
         </div>
       </div>
+      <div className="history-list-container">
+        <Card>
+          <CardBody className="history-header">
+            <div>
+              <span>Produto</span>
+            </div>
+            <div>
+              <span>Preço</span>
+            </div>
+            <div>
+              <span>Quantidade</span>
+            </div>
+            <div>
+              <span>Colaborador(a)</span>
+            </div>
+            <div>
+              <span>Valor total</span>
+            </div>
+          </CardBody>
+        </Card>
+      </div>
       {historyData.length ? historyData.map((data) => (
         <>
-        <HistoryList data={data} />
+        <p className="history-date">{moment(data.date).add(1, 'day').format('DD/MM/YYYY')}</p>
+          <HistoryList data={data} />
         </>
       )) : <p>Você não possui dados</p>}
     </div>

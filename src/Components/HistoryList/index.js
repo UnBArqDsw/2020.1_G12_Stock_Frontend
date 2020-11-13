@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, CardBody } from 'reactstrap';
-import moment from 'moment';
 import './styles.css';
 
 
@@ -11,50 +10,28 @@ const HistoryCard = ({ data }) => {
     }
 
     return (
-        <div className="history-list-container">
+        <div className="cards">
             <Card>
-                <CardBody className="history-header">
+                <CardBody className="history-card">
                     <div>
-                        <span>Produto</span>
+                        <p>{data.lot.product.name}</p>
                     </div>
                     <div>
-                        <span>Preço</span>
+                        <p>R$ {data.lot.product.salePrice}</p>
                     </div>
                     <div>
-                        <span>Quantidade</span>
+                        <p>
+                            {data.quantity}
+                        </p>
                     </div>
                     <div>
-                        <span>Colaborador(a)</span>
+                        <p>{data.collaborator.name}</p>
                     </div>
                     <div>
-                        <span>Valor total</span>
+                        <p>R$ {calcTotalValue(data.quantity, data.lot.product.salePrice)}</p>
                     </div>
                 </CardBody>
             </Card>
-            <div className="cards">
-                <p className="history-date">{moment(data.date).format('DD/MM/YYYY')}</p>
-                <Card>
-                    <CardBody className="history-card">
-                        <div>
-                            <p>{data.lot.product.name}</p>
-                        </div>
-                        <div>
-                            <p>R$ {data.lot.product.salePrice}</p>
-                        </div>
-                        <div>
-                            <p>
-                                {data.quantity}
-                            </p>
-                        </div>
-                        <div>
-                            <p>{data.collaborator.name}</p>
-                        </div>
-                        <div>
-                            <p>R$ {calcTotalValue(data.quantity, data.lot.product.salePrice)}</p>
-                        </div>
-                    </CardBody>
-                </Card>
-            </div>
         </div>
     );
 };
