@@ -4,6 +4,11 @@ import './styles.css';
 
 
 const HistoryCard = ({ historyData }) => {
+
+    const calcTotalValue = (quantity, value) => {
+        return quantity * value;
+    }
+
     return (
         <div className="history-list-container">
             <Card>
@@ -31,10 +36,10 @@ const HistoryCard = ({ historyData }) => {
                         <Card>
                             <CardBody className="history-card">
                                 <div>
-                                    <p>{data.idCollaborator}</p>
+                                    <p>{data.lot.product.name}</p>
                                 </div>
                                 <div>
-                                    <p>{data.idLot}</p>
+                                    <p>R$ {data.lot.product.salePrice}</p>
                                 </div>
                                 <div>
                                     <p>
@@ -42,10 +47,10 @@ const HistoryCard = ({ historyData }) => {
                                     </p>
                                 </div>
                                 <div>
-                                    <p>{data.quantity}</p>
+                                    <p>{data.collaborator.name}</p>
                                 </div>
                                 <div>
-                                    <p>{data.quantity}</p>
+                                    <p>R$ {calcTotalValue(data.quantity, data.lot.product.salePrice)}</p>
                                 </div>
                             </CardBody>
                         </Card>
