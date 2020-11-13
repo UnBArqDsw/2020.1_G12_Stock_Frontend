@@ -64,7 +64,7 @@
 .product-checks {
   display: flex;
   flex-direction: column;
-  height: 200px;
+  height: 100px;
   overflow-y: scroll;
 }
 

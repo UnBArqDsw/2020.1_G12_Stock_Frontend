@@ -156,19 +156,19 @@ export default function Stock() {
           </div>
           <div className="new-product-input-container">
             <div>
-              <span>Unidade de medida</span>
-              <input
-                type="text"
-                onChange={(e) => setProductUnitMeasure(e.target.value)}
-                placeholder="Litro, Kilograma, etc.."
-              />
-            </div>
-            <div>
               <span>Quantidade</span>
               <input
                 type="number"
                 onChange={(e) => setProductUnitQtd(e.target.value)}
                 placeholder="2 Litros, 5 Kilogramas, etc.."
+              />
+            </div>
+            <div>
+              <span>Unidade de medida</span>
+              <input
+                type="text"
+                onChange={(e) => setProductUnitMeasure(e.target.value)}
+                placeholder="Litro, Kilograma, etc.."
               />
             </div>
           </div>
@@ -231,13 +231,13 @@ export default function Stock() {
           </div>
           <div>
             <span>Produto</span>
-              <div className="new-product-input-container">
+            <div className="new-product-input-container">
               <select class="select-alone" type="select" onChange={(e) => setLotProduct(e.target.value)}>
                 <option value="" />
                 {products?.map((product, i) => {
                   return (
                     <option key={i} value={product.idProduct}>
-                      {product.name + " - " + product.unitQtd +" "+ product.unitMeasure+"(s)"}
+                      {product.name + " - " + product.unitQtd + " " + product.unitMeasure + "(s)"}
                     </option>
                   );
                 })}
@@ -300,7 +300,7 @@ export default function Stock() {
         </div>
       </div>
       <ProductCard products={products} />
-      
+
       {renderNewProductModal()}
       {renderNewLotModal()}
       {renderNewCategoryModal()}

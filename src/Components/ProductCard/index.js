@@ -123,10 +123,10 @@ const ProductCard = ({ products }) => {
   const renderConfirmDecreaseLotModal = () => (
     <Modal toggle={toggleConfirmDecreaseLotModal} isOpen={confirmDecreaseLotModalOpen}>
       <ModalHeader toggle={toggleConfirmDecreaseLotModal}>
-        Dar baixa em produto
+        Remover produto com defeito
       </ModalHeader>
       <ModalBody>
-  Tem certeza que deseja remover {quantity} unidade(s) do produto {product.name + ' ' + product.unitQtd + ' ' + product.unitMeasure}(s) do lote {lot.description} inserido pelo colaborador {collaborator.name}?
+  Tem certeza que deseja remover {quantity} unidade(s) do produto "{product.name + ' ' + product.unitQtd + ' ' + product.unitMeasure}(s)" do lote "{lot.description}" inserido pelo colaborador {collaborator.name}?
       </ModalBody>
       <ModalFooter>
         <button type="button" onClick={decreaseLot}>
@@ -143,6 +143,7 @@ const ProductCard = ({ products }) => {
     <div className="lot-info">
       <h5>Informações sobre esse lote:</h5>
       <div><label>Data de adição:</label><span> {new Date(lot?.entryDate).toLocaleDateString()}</span></div>
+      <div><label>Data de vencimento:</label><span>{new Date(lot?.dueDate).toLocaleDateString()} </span></div>
       <div><label>Quantidade disponível:</label><span> {lot?.productQty}</span></div>
       <div><label>Preço de compra:</label><span> R${lot?.purchasePrice}</span></div>
       <div><label>Responsável:</label><span>{collaborator?.name}</span></div>
@@ -156,7 +157,7 @@ const ProductCard = ({ products }) => {
     <Modal toggle={toggleDecreaseLotModal} isOpen={decreaseLotModalOpen}>
       <ModalHeader toggle={toggleDecreaseLotModal}> Remover produto com defeito</ModalHeader>
       <ModalBody>
-        <p>De qual lote deseja remover?</p>
+        <h4>De qual lote deseja remover?</h4>
         <select className="select-alone" type="select" onChange={setLotSelected}>
           <option value="" />
           {product?.lots?.filter((lot) => lot.productQty > 0).map((lot) => {
@@ -222,12 +223,14 @@ const ProductCard = ({ products }) => {
                     <CardText>
                       <div className="product-options-container">
                         <div className="product-options">
+                          <div className="product-quantity">
+                            <label>Quantidade</label>
+                            <input className="input-quantity" type="number" defaultValue='0' onChange={(e) => setQuantity(e.target.value)}></input>
+                          </div>
                           <button onClick={toggleDecreaseProductModal} className="decrease-button" type="button">Dar baixa</button>
-                          <label>Quantidade</label>
-                          <input className="input-quantity" type="number" defaultValue='' onChange={(e) => setQuantity(e.target.value)}></input>
                         </div>
                         <div className="decrease-link">
-                          <a onClick={toggleDecreaseLotModal}>Remover produto com defeito</a>
+                          <a className="decrease-link" onClick={toggleDecreaseLotModal}>Remover produto com defeito</a>
                         </div>
                       </div>
                     </CardText>
