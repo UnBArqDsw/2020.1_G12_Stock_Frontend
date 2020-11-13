@@ -18,7 +18,7 @@ export default function Collaborators() {
   }, []);
 
   useEffect(() => {
-    const collaboratorsFilteredBySearch = collaborators.filter((product) => product.name.includes(search));
+    const collaboratorsFilteredBySearch = collaborators.filter((collaborator) => collaborator.name.includes(search));
     setCollaboratorsFiltered(collaboratorsFilteredBySearch);
   }, [search]);
 

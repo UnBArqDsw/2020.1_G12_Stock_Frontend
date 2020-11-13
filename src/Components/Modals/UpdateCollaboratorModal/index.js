@@ -23,7 +23,6 @@ export default function UpdateCollaboratorModal(props) {
   useEffect(() => {
     getCollaborator();
     getRoles();
-    if (idAccessLevel) nameAccessLevel();
   }, []);
 
   const onSubmit = (e) => {
