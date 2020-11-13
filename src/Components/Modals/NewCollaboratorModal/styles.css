@@ -1,10 +1,14 @@
+.new-collaborator-container {
+  padding: 10px;
+}
+
 .add-product-modal-footer {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.new-product-input-container {
+.new-collaborator-input-container {
   display: flex;
   flex-direction: row;
   margin-bottom: 16px;
@@ -12,13 +16,17 @@
   flex-wrap: wrap;
 }
 
-.new-product-input-container div {
+.new-collaborator-input-container div {
   padding: 5px;
   display: flex;
   flex-direction: column;
 }
 
-.new-product-input-container.textarea div {
+.new-collaborator-input {
+  width: 220px !important;
+}
+
+.new-collaborator-input-container.textarea div {
   width: 100%;
 }
 

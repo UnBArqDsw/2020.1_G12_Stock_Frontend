@@ -9,14 +9,13 @@
   align-items: center;
   flex-direction: column;
   z-index: 200;
-  overflow-x: scroll;
 }
 
 .sidebar.mobile {
   transform: translate(-100%);
   transition: 0.2s;
   box-shadow: none;
-  overflow-x: scroll;
+  overflow-y: scroll;
 }
 
 .sidebar.mobile.open {
