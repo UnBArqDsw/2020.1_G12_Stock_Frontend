@@ -35,7 +35,11 @@ export default function History() {
           </div>
         </div>
       </div>
-      {historyData.length ? <HistoryList historyData={historyData} /> : <p>Você não possui dados</p>}
+      {historyData.length ? historyData.map((data) => (
+        <>
+        <HistoryList data={data} />
+        </>
+      )) : <p>Você não possui dados</p>}
     </div>
   );
 }
