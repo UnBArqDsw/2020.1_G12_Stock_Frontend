@@ -18,15 +18,15 @@ button:focus {
   outline: none !important;
 }
 
-button.secondary {
+button.secondary{
   border-style: none;
   background-color: var(--dark);
-  color: #fff;
+  color: #fff; 
   padding: 0.5rem 2rem;
   border-radius: 5px !important;
   transition: 0.5s;
 }
-button.secondary:hover {
+button.secondary:hover{
   background-color: var(--font-dark);
 }
 
@@ -39,6 +39,10 @@ textarea {
   border-radius: 5px;
 }
 
+option {
+  background-color: #fff;
+}
+
 select {
   background-color: #fff;
   border-style: none;
@@ -47,6 +51,7 @@ select {
   border-radius: 5px;
   width: 220px;
 }
+
 input:focus {
   border-style: solid;
   border-color: rgba(77, 188, 196, 0.6);
@@ -61,9 +66,6 @@ input:focus {
   padding-top: 3.5rem;
 }
 
-.close span {
-  font-size: 25px;
-}
 :root {
   --primary: #ab2918 !important;
   --primary-light: #e62c38;
@@ -89,9 +91,12 @@ input:focus {
   --yellow-smooth: #b8a52c;
   --yellow-strong: #e0ca36;
 
-  --gray: #f5f5f5 !important;
-  --gray-secondary: #e0e0e0;
-  --gray-dark: #757575 !important;
+  --gray: #F5F5F5 !important;
+  --gray-secondary: #E0E0E0;
+  --gray-third: #8A8A8A;
+  
+  --dark: #313C4E !important;
+  --font-dark: #1C1C1C;
 
   --dark: #313c4e !important;
   --font-dark: #1c1c1c;

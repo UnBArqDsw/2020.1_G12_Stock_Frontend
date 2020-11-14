@@ -5,15 +5,17 @@ const api = axios.create({
 });
 
 api.interceptors.request.use(
-    async (config) => {
-        let token = localStorage.getItem('@auth:token');
-        token = token?JSON.parse(token):"";
-        config.headers['x-auth-token'] = token;
-        return config;
-    },
-    (error) => {
-        console.log(error);
+  async (config) => {
+    if(localStorage.getItem('@auth:token')){
+      const token = JSON.parse(localStorage.getItem('@auth:token'));
+      config.headers['x-auth-token'] = token;
     }
-  )
+    return config;
+  },
+  (error) => {
+    console.log(error);
+    return error;
+  }
+);
 
 export default api;
