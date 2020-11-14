@@ -8,6 +8,14 @@ class CategoryService {
       console.log(error);
     }
   }
+  async getCategoriesByProduct(idProduct) {
+    try {
+      const response = await api.get(`/belongs/${idProduct}`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
   async createCategory(data) {
     try {
       const response = await api.post('/category', data);

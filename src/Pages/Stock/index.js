@@ -6,23 +6,32 @@ import GetService from '../../Services/GetService';
 import NewLot from '../../Components/NewLot';
 import NewProduct from '../../Components/NewProduct';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import CategoryFilterModal from '../../Components/Modals/CategoryFilterModal';
 import './styles.css';
 
 export default function Stock() {
   const [products, setProducts] = useState([]);
+  const [categoryModalOpen, setCategoryModalOpen] = useState(false)
   const [productsFiltered, setProductsFiltered] = useState([]);
   const [search, setSearch] = useState('');
+  const [filters, setFilters] = useState({})
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
   const toggleDropDown = () => setDropdownOpen((prevState) => !prevState);
 
   const getProducts = async () => {
-    const response = await GetService.getProducts();
+    const response = await GetService.getProducts(filters);
+    console.log(response)
     setProducts(response);
   };
 
+  const applyFilter = async (filter) => {
+    setFilters({ ...filters, ...filter });
+  }
+
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [filters]);
 
   useEffect(() => {
     console.log(products)
@@ -47,8 +56,7 @@ export default function Stock() {
                   <FaFilter size={25} />
                 </DropdownToggle>
                 <DropdownMenu>
-                  <DropdownItem>Categoria</DropdownItem>
-                  <DropdownItem>Preço</DropdownItem>
+                  <DropdownItem onClick={() => setCategoryModalOpen(true)}>Categoria</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
             </div>
@@ -60,7 +68,8 @@ export default function Stock() {
           </div>
         </div>
       </div>
+      <CategoryFilterModal applyFilter={applyFilter} setCategoryModalOpen={setCategoryModalOpen} categoryModalOpen={categoryModalOpen} />
       <ProductList products={search.length ? productsFiltered : products} />
-    </div>
+    </div >
   );
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import CategoryService from '../../Services/CategoryService';
 import RegisterService from '../../Services/RegisterService';
-import NewCategoria from '../NewCategory';
+import NewCategory from '../NewCategory';
 import ResultModal from '../Modals/ResultModal';
 
 export default function NewProduct() {
@@ -126,7 +126,7 @@ export default function NewProduct() {
         </form>
       </ModalBody>
       <ModalFooter>
-        <NewCategoria getCategories={getCategories} />
+        <NewCategory getCategories={getCategories} />
         <button className="secondary" type="button" onClick={registerProduct}>
           Adicionar
         </button>
