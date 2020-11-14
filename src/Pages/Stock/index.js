@@ -7,7 +7,6 @@ import NewLot from '../../Components/NewLot';
 import NewProduct from '../../Components/NewProduct';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import CategoryFilterModal from '../../Components/Modals/CategoryFilterModal';
-import PriceSortModal from '../../Components/Modals/PriceSortModal';
 import './styles.css';
 
 export default function Stock() {

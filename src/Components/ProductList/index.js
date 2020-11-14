@@ -1,4 +1,4 @@
-import React,  { useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Card, CardBody } from 'reactstrap';
 import './styles.css';
 import { DeviceContext } from '../../Contexts/DeviceContext';
@@ -20,6 +20,9 @@ const ProductCard = ({ products }) => {
             <span>Unidade</span>
           </div>
           <div>
+            <span>Preço</span>
+          </div>
+          <div>
             <span>Lotes</span>
           </div>
         </CardBody>
@@ -39,6 +42,9 @@ const ProductCard = ({ products }) => {
                   <p>
                     {product.uniQtd} {product.unitMeasure}(s)
                   </p>
+                </div>
+                <div>
+                  <p>R$ {product.salePrice}</p>
                 </div>
                 <div>
                   <p>{product.lots.length}</p>
