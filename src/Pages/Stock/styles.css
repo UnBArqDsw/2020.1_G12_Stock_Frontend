@@ -18,6 +18,7 @@
   height: inherit;
   display: flex;
   align-items: center;
+  margin: 0;
 }
 .search-filter input {
   height: inherit;
@@ -27,8 +28,7 @@
   color: var(--gray-dark);
   height: inherit;
   width: 30px;
-  padding: 5px;
-  margin-left: 5px;
+  margin: 0;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -86,6 +86,10 @@
   margin-top: 12px;
 }
 
+.dropdown-menu.show {
+  transform: translate3d(-88px, 39px, 0px) !important;
+}
+
 @media only screen and (max-width: 767px) {
   .new-product-input-container {
     flex-wrap: wrap;
@@ -96,9 +100,14 @@
   }
   .create-import {
     flex-direction: column;
-    margin-top: 10px;
+    margin: 40px 50px 0px -300px;
+    display: flex;
   }
   .create-import button {
     margin-bottom: 10px;
+  }
+  .dropdown-toggle {
+     white-space: normal;
+     padding: 0px !important;
   }
 }
