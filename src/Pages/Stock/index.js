@@ -13,7 +13,6 @@ import './styles.css';
 export default function Stock() {
   const [products, setProducts] = useState([]);
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
-  const [priceModalOpen, setPriceModalOpen] = useState(false);
   const [productsFiltered, setProductsFiltered] = useState([]);
   const [search, setSearch] = useState('');
   const [filters, setFilters] = useState({})
@@ -69,7 +68,8 @@ export default function Stock() {
                 <FaSortAmountUp size={25}/>
                 </DropdownToggle>
                 <DropdownMenu>
-                  <DropdownItem onClick={() => setPriceModalOpen(true)}>Preço</DropdownItem>
+                  <DropdownItem onClick={() => applyFilter({ orderPrice: 'ASC' })}>Preço Crescente</DropdownItem>
+                  <DropdownItem onClick={() => applyFilter({ orderPrice: 'DESC' })}>Preço Decrescente</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
             </div>
@@ -80,7 +80,6 @@ export default function Stock() {
           </div>
         </div>
       </div>
-      <PriceSortModal applyFilter={applyFilter}  setPriceModalOpen={setPriceModalOpen} priceModalOpen={priceModalOpen} />
       <CategoryFilterModal applyFilter={applyFilter} setCategoryModalOpen={setCategoryModalOpen} categoryModalOpen={categoryModalOpen} />
       <ProductList products={search.length ? productsFiltered : products} />
     </div >
