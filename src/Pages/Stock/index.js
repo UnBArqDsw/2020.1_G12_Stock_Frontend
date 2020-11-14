@@ -7,21 +7,25 @@ import NewLot from '../../Components/NewLot';
 import NewProduct from '../../Components/NewProduct';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import CategoryFilterModal from '../../Components/Modals/CategoryFilterModal';
+import PriceSortModal from '../../Components/Modals/PriceSortModal';
 import './styles.css';
 
 export default function Stock() {
   const [products, setProducts] = useState([]);
-  const [categoryModalOpen, setCategoryModalOpen] = useState(false)
+  const [categoryModalOpen, setCategoryModalOpen] = useState(false);
+  const [priceModalOpen, setPriceModalOpen] = useState(false);
   const [productsFiltered, setProductsFiltered] = useState([]);
   const [search, setSearch] = useState('');
   const [filters, setFilters] = useState({})
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
+  const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
 
-  const toggleDropDown = () => setDropdownOpen((prevState) => !prevState);
+  const filterToggleDropDown = () => setFilterDropdownOpen((prevState) => !prevState);
+
+  const sortToggleDropDown = () => setSortDropdownOpen((prevState) => !prevState);
 
   const getProducts = async () => {
     const response = await GetService.getProducts(filters);
-    console.log(response)
     setProducts(response);
   };
 
@@ -34,7 +38,6 @@ export default function Stock() {
   }, [filters]);
 
   useEffect(() => {
-    console.log(products)
     const productsFilteredBySearch = products.filter((product) => product.name.includes(search));
     setProductsFiltered(productsFilteredBySearch);
   }, [search]);
@@ -51,7 +54,7 @@ export default function Stock() {
               onChange={(e) => setSearch(e.target.value)}
             />
             <div className="nav-item">
-              <Dropdown isOpen={dropdownOpen} toggle={toggleDropDown}>
+              <Dropdown isOpen={filterDropdownOpen} toggle={filterToggleDropDown}>
                 <DropdownToggle color="transparent" caret>
                   <FaFilter size={25} />
                 </DropdownToggle>
@@ -60,7 +63,16 @@ export default function Stock() {
                 </DropdownMenu>
               </Dropdown>
             </div>
-            <FaSortAmountUp />
+            <div className="nav-item">
+              <Dropdown isOpen={sortDropdownOpen} toggle={sortToggleDropDown}>
+                <DropdownToggle color="transparent" caret>
+                <FaSortAmountUp size={25}/>
+                </DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem onClick={() => setPriceModalOpen(true)}>Preço</DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </div>
           </div>
           <div className="create-import">
             <NewLot products={products} />
@@ -68,6 +80,7 @@ export default function Stock() {
           </div>
         </div>
       </div>
+      <PriceSortModal applyFilter={applyFilter}  setPriceModalOpen={setPriceModalOpen} priceModalOpen={priceModalOpen} />
       <CategoryFilterModal applyFilter={applyFilter} setCategoryModalOpen={setCategoryModalOpen} categoryModalOpen={categoryModalOpen} />
       <ProductList products={search.length ? productsFiltered : products} />
     </div >
