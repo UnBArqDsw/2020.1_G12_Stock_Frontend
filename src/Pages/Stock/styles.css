@@ -19,9 +19,11 @@
   display: flex;
   align-items: center;
 }
+
 .search-filter input {
   height: inherit;
 }
+
 .search-filter svg {
   background: var(--gray-secondary);
   color: var(--gray-dark);
@@ -32,6 +34,7 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
 .search-filter svg:hover {
   opacity: 0.5;
 }
@@ -60,11 +63,13 @@
 .new-product-input-container div {
   width: 100%;
 }
+
 .product-category {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
 }
+
 .product-checks {
   display: flex;
   flex-direction: column;
@@ -90,14 +95,18 @@
   .new-product-input-container {
     flex-wrap: wrap;
   }
+
   .toolbar {
     display: flex;
     flex-direction: column;
   }
+  
   .create-import {
     flex-direction: column;
-    margin-top: 10px;
+    margin: 40px 0px 0px -300px;
+    display: flex;
   }
+  
   .create-import button {
     margin-bottom: 10px;
   }
