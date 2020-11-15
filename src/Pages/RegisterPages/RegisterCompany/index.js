@@ -1,9 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import InputMask from 'react-input-mask';
 import logo from '../../../assets/images/logo-horizontal.png';
 import RegisterService from '../../../Services/RegisterService';
 import './styles.css';
-import { useHistory } from 'react-router-dom';
-import InputMask from 'react-input-mask';
+import GetService from '../../../Services/GetService';
 
 const MASK_CPF = '999.999.999-999';
 const CPF_CHAR_LENGTH = 14;
@@ -13,7 +14,7 @@ export default function RegisterCompanyPage() {
   const [document, setDocument] = useState('');
   const [email, setEmail] = useState('');
   const [branch, setBranch] = useState('');
-  const [conpanyName, setCompanyName] = useState('');
+  const [companyName, setCompanyName] = useState('');
   const [telephone, setTelephone] = useState('');
   const [collaboratorQuantity, setCollaboratorQuantity] = useState('');
   const [branches, setBranches] = useState([]);
@@ -34,7 +35,7 @@ export default function RegisterCompanyPage() {
         email,
         document,
         branch,
-        conpanyName,
+        companyName,
         telephone,
         collaboratorQuantity
       );
@@ -52,14 +53,14 @@ export default function RegisterCompanyPage() {
     registerCompany();
   };
 
+  const getBranches = async () => {
+    const response = await GetService.getCompanyBranches();
+    setBranches(response);
+  };
+
   useEffect(() => {
     getBranches();
   }, []);
-
-  const getBranches = async () => {
-    const response = await RegisterService.getCompanyBranches();
-    setBranches(response);
-  };
 
   return (
     <div className="container">
@@ -95,7 +96,7 @@ export default function RegisterCompanyPage() {
               <label htmlFor="document">Ramo do Negócio:</label>
               <br />
               <select type="select" onChange={(e) => setBranch(e.target.value)}>
-                <option value=""></option>
+                <option value="" />
                 {branches?.map((branch, i) => (
                   <option key={i} value={branch.idBranch}>
                     {branch.name}
