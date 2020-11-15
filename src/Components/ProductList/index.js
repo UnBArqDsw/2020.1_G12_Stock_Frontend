@@ -1,3 +1,9 @@
+/* eslint-disable camelcase */
+/* eslint-disable no-use-before-define */
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect, useContext, useState } from 'react';
 import {
   Modal,
@@ -57,7 +63,7 @@ const ProductCard = ({ products }) => {
     if (cardSelected !== idCard) {
       setProductId(idCard);
       setCardSelected(idCard);
-      setProductSelected(products.filter((element) => element.idProduct == idCard));
+      setProductSelected(products.filter((element) => element.idProduct === idCard));
     }
     setQuantity('');
   };
@@ -66,10 +72,10 @@ const ProductCard = ({ products }) => {
     if (!l.target.value) {
       setShowLotInfo(false);
     } else {
-      const find_lot = product.lots.filter((lot) => lot.idLot == l.target.value)[0];
+      const find_lot = product.lots.filter((productLot) => productLot.idLot === l.target.value)[0];
       setLot(find_lot);
       setLotId(find_lot.idLot);
-      setCollaborator(collaborators.filter((c) => c.idCollaborator == find_lot.idCollaborator)[0]);
+      setCollaborator(collaborators.filter((c) => c.idCollaborator === find_lot.idCollaborator)[0]);
       setShowLotInfo(true);
     }
   };
@@ -132,9 +138,9 @@ const ProductCard = ({ products }) => {
     <Modal toggle={toggleConfirmDecreaseLotModal} isOpen={confirmDecreaseLotModalOpen}>
       <ModalHeader toggle={toggleConfirmDecreaseLotModal}>Remover produto com defeito</ModalHeader>
       <ModalBody>
-        Tem certeza que deseja remover {quantity} unidade(s) do produto "
-        {`${product.name} ${product.unitQtd} ${product.unitMeasure}`}(s)" do lote "{lot.description}
-        " inserido pelo colaborador {collaborator.name}?
+        Tem certeza que deseja remover {quantity} unidade(s) do produto
+        {`${product.name} ${product.unitQtd} ${product.unitMeasure}`}(s) do lote {lot.description}
+        inserido pelo colaborador {collaborator.name}?
       </ModalBody>
       <ModalFooter>
         <button type="button" onClick={decreaseLot}>
@@ -194,13 +200,13 @@ const ProductCard = ({ products }) => {
       <ModalBody>
         <h4>De qual lote deseja remover?</h4>
         <select className="select-alone" type="select" onChange={setLotSelected}>
-          <option value="" />
+          <option value=""> </option>
           {product?.lots
-            ?.filter((lot) => lot.productQty > 0)
-            .map((lot) => {
+            ?.filter((productLot) => productLot.productQty > 0)
+            .map((productLot) => {
               return (
-                <option key={lot.idLot} value={lot.idLot}>
-                  {lot.description}
+                <option key={productLot.idLot} value={productLot.idLot}>
+                  {productLot.description}
                 </option>
               );
             })}
@@ -237,37 +243,40 @@ const ProductCard = ({ products }) => {
           </CardBody>
         </Card>
         <div className="cards">
-          {products?.map((product) => {
+          {products?.map((productFromList) => {
             return (
               <div>
                 <Card>
                   <CardBody
-                    id={product.idProduct}
+                    id={productFromList.idProduct}
                     onClick={(e) => toggle(e.target.id)}
                     className="product-card"
                   >
-                    <div id={product.idProduct} onClick={(e) => toggle(e.target.id)}>
-                      <p id={product.idProduct} onClick={(e) => toggle(e.target.id)}>
-                        {product.name}
+                    <div id={productFromList.idProduct} onClick={(e) => toggle(e.target.id)}>
+                      <p id={productFromList.idProduct} onClick={(e) => toggle(e.target.id)}>
+                        {productFromList.name}
                       </p>
                     </div>
-                    <div id={product.idProduct} onClick={(e) => toggle(e.target.id)}>
-                      <p id={product.idProduct} onClick={(e) => toggle(e.target.id)}>
-                        {product.quantity}
+                    <div id={productFromList.idProduct} onClick={(e) => toggle(e.target.id)}>
+                      <p id={productFromList.idProduct} onClick={(e) => toggle(e.target.id)}>
+                        {productFromList.quantity}
                       </p>
                     </div>
-                    <div id={product.idProduct} onClick={(e) => toggle(e.target.id)}>
-                      <p id={product.idProduct} onClick={(e) => toggle(e.target.id)}>
-                        {`${product.unitQtd} ${product.unitMeasure}`}(s)
+                    <div id={productFromList.idProduct} onClick={(e) => toggle(e.target.id)}>
+                      <p id={productFromList.idProduct} onClick={(e) => toggle(e.target.id)}>
+                        {`${productFromList.unitQtd} ${productFromList.unitMeasure}`}(s)
                       </p>
                     </div>
-                    <div id={product.idProduct} onClick={(e) => toggle(e.target.id)}>
-                      <p id={product.idProduct} onClick={(e) => toggle(e.target.id)}>
-                        {product.lots.filter((l) => l.productQty > 0).length}
+                    <div id={productFromList.idProduct} onClick={(e) => toggle(e.target.id)}>
+                      <p id={productFromList.idProduct} onClick={(e) => toggle(e.target.id)}>
+                        {productFromList.lots.filter((l) => l.productQty > 0).length}
                       </p>
                     </div>
                   </CardBody>
-                  <Collapse value={product.idProduct} isOpen={product.idProduct == cardSelected}>
+                  <Collapse
+                    value={productFromList.idProduct}
+                    isOpen={productFromList.idProduct === cardSelected}
+                  >
                     <CardText>
                       <div className="product-options-container">
                         <div className="product-options">
@@ -288,10 +297,8 @@ const ProductCard = ({ products }) => {
                             Dar baixa
                           </button>
                         </div>
-                        <div className="decrease-link">
-                          <div className="decrease-link" onClick={toggleDecreaseLotModal}>
-                            Remover produto com defeito
-                          </div>
+                        <div className="decrease-link" onClick={toggleDecreaseLotModal}>
+                          Remover produto com defeito
                         </div>
                       </div>
                     </CardText>
