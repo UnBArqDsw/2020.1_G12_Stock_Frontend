@@ -7,7 +7,10 @@ class WebSocket {
       transports: ['websocket', 'polling', 'flashsocket'],
     });
   }
-  connect() {
+  connect(idCompany) {
+    this.socket.io.opts.query = {
+      idCompany,
+    };
     this.socket.connect();
   }
   subscribeToNewProducts(subscribeFunction) {
