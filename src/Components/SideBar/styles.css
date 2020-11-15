@@ -15,6 +15,7 @@
   transform: translate(-100%);
   transition: 0.2s;
   box-shadow: none;
+  overflow-y: scroll;
 }
 
 .sidebar.mobile.open {
