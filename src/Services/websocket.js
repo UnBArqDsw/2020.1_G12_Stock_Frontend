@@ -13,6 +13,12 @@ class WebSocket {
     };
     this.socket.connect();
   }
+
+  disconnect() {
+    if (this.socket.connected) {
+      this.socket.disconnect();
+    }
+  }
   subscribeToNewProducts(subscribeFunction) {
     this.socket.on('new-product', subscribeFunction);
   }

@@ -35,11 +35,15 @@ export default function AuthContextProvider({ children }) {
     removeToken();
     removeUser();
     setUser(null);
+    tearDownSocket();
     history.push('/home');
   };
 
   const setUpSocket = (idCompany) => {
     webSocketService.connect(idCompany);
+  };
+  const tearDownSocket = () => {
+    webSocketService.disconnect();
   };
 
   return (
