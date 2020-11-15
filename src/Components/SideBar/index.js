@@ -33,10 +33,11 @@ export default function SideBar() {
   };
 
   const renderSandwichButton = () => {
+    console.log('aaaaaaaaaaaaa', isMobile);
     if (isMobile) {
       return (
         <div className="side-button">
-          <GrMenu onClick={toggleSidebar} size={30} />
+          <GrMenu onClick={toggleSidebar} size={30} color="#000" />
         </div>
       );
     }
