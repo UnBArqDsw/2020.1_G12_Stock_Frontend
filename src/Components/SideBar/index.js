@@ -35,7 +35,6 @@ export default function SideBar() {
   };
 
   const renderSandwichButton = () => {
-    console.log('aaaaaaaaaaaaa', isMobile);
     if (isMobile) {
       return (
         <div className="side-button">

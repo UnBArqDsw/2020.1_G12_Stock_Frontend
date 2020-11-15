@@ -8,7 +8,6 @@ export const ProductsContext = createContext();
 export default function ProductContextProvider({ children }) {
   const { isUserSigned } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
-  console.log(products);
 
   useEffect(() => {
     if (isUserSigned) {
@@ -17,12 +16,28 @@ export default function ProductContextProvider({ children }) {
   }, [isUserSigned]);
 
   useEffect(() => {
-    listenForNewProducts();
-  }, [products]);
+    if (isUserSigned) {
+      listenForNewProducts();
+      listenForProductUpdate();
+    }
+  }, [products, isUserSigned]);
 
   const listenForNewProducts = () => {
     WebSocketService.subscribeToNewProducts((product) => {
       setProducts([...products, product]);
+    });
+  };
+
+  const listenForProductUpdate = () => {
+    WebSocketService.subscribeToUpdateProduct((product) => {
+      const newProductList = products.map((productFromState) => {
+        if (productFromState.idProduct === product.idProduct) {
+          productFromState = product;
+        }
+
+        return productFromState;
+      });
+      setProducts(newProductList);
     });
   };
 

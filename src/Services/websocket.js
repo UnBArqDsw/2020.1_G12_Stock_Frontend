@@ -22,6 +22,10 @@ class WebSocket {
   subscribeToNewProducts(subscribeFunction) {
     this.socket.on('new-product', subscribeFunction);
   }
+
+  subscribeToUpdateProduct(subscribeFunction) {
+    this.socket.on('update-product', subscribeFunction);
+  }
 }
 
 export default new WebSocket();
