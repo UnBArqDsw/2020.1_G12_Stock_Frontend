@@ -1,309 +1,94 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useState, useEffect } from 'react';
-import './styles.css';
 import { FaFilter, FaSortAmountUp } from 'react-icons/all';
-import { Modal, ModalHeader, ModalFooter, ModalBody } from 'reactstrap';
-import ProductCard from '../../Components/ProductCard';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import ProductList from '../../Components/ProductList';
 import ProductService from '../../Services/ProductService';
-import RegisterService from '../../Services/RegisterService';
-import CategoryService from '../../Services/CategoryService';
+import NewLot from '../../Components/NewLot';
+import NewProduct from '../../Components/NewProduct';
+import CategoryFilterModal from '../../Components/Modals/CategoryFilterModal';
+import './styles.css';
 
 export default function Stock() {
   const [products, setProducts] = useState([]);
-  const [productName, setProductName] = useState('');
-  const [productUnitQtd, setProductUnitQtd] = useState('');
-  const [productUnitMeasure, setProductUnitMeasure] = useState('');
-  const [productSalePrice, setProductSalePrice] = useState('');
-  const [lotProduct, setLotProduct] = useState('');
-  const [lotEntryDate, setLotEntryDate] = useState('');
-  const [lotDueDate, setLotDueDate] = useState('');
-  const [lotProductQty, setLotProductQty] = useState('');
-  const [lotDescription, setLotDescription] = useState('');
-  const [lotPurchasePrice, setLotPurchasePrice] = useState('');
-  const [categories, setCategories] = useState([]);
-  const [categoryName, setCategoryName] = useState('');
-  const [categoryDescription, setCategoryDescription] = useState('');
-  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [categoryModalOpen, setCategoryModalOpen] = useState(false);
+  const [productsFiltered, setProductsFiltered] = useState([]);
+  const [search, setSearch] = useState('');
+  const [filters, setFilters] = useState({});
+  const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
+  const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
 
-  const [newProductModalOpen, setNewProductModalOpen] = useState(false);
-  const toggleNewProductModal = () => setNewProductModalOpen(!newProductModalOpen);
+  const filterToggleDropDown = () => setFilterDropdownOpen((prevState) => !prevState);
 
-  const [newLotModalOpen, setNewLotModalOpen] = useState(false);
-  const toggleNewLotModal = () => setNewLotModalOpen(!newLotModalOpen);
-
-  const [newCategoryModalOpen, setNewCategoryModalOpen] = useState(false);
-  const toggleNewCategoryModal = () => setNewCategoryModalOpen(!newCategoryModalOpen);
+  const sortToggleDropDown = () => setSortDropdownOpen((prevState) => !prevState);
 
   const getProducts = async () => {
-    const response = await ProductService.getProducts();
+    const response = await ProductService.getProducts(filters);
     setProducts(response);
+  };
+
+  const applyFilter = async (filter) => {
+    setFilters({ ...filters, ...filter });
   };
 
   useEffect(() => {
     getProducts();
-    getCategories();
-  }, []);
+  }, [filters]);
 
   useEffect(() => {
-    if (!newCategoryModalOpen) {
-      setProductName('');
-      setSelectedCategories([]);
-      setProductUnitMeasure('');
-      setProductUnitQtd('');
-      setProductSalePrice('');
-    }
-  }, [newProductModalOpen]);
+    const productsFilteredBySearch = products.filter((product) => product.name.includes(search));
+    setProductsFiltered(productsFilteredBySearch);
+  }, [search]);
 
-  useEffect(() => {
-    if (!newLotModalOpen) {
-      setLotProduct('');
-      setLotEntryDate('');
-      setLotDueDate('');
-      setLotProductQty('');
-      setLotDescription('');
-      setLotPurchasePrice('');
-    }
-  }, [newLotModalOpen]);
-
-  useEffect(() => {
-    if (!newCategoryModalOpen) {
-      setCategoryName('');
-      setCategoryDescription('');
-    }
-  }, [newCategoryModalOpen]);
-
-  async function registerProduct() {
-    try {
-      const { status } = await RegisterService.registerProduct(
-        productName,
-        productSalePrice,
-        productUnitMeasure,
-        productUnitQtd,
-        selectedCategories
-      );
-      if (status === 200) {
-        toggleNewProductModal();
-        alert('Produto Cadastrado com sucesso!');
-      }
-    } catch (error) {
-      console.log(error.response);
-      alert(`Falha ao cadastrar produto: ${error.response}`);
-    }
-  }
-
-  async function registerLot() {
-    try {
-      const { status } = await RegisterService.registerLot(
-        lotProduct,
-        lotEntryDate,
-        lotDueDate,
-        lotProductQty,
-        lotDescription,
-        lotPurchasePrice
-      );
-      if (status === 200) {
-        toggleNewLotModal();
-        alert('Lote Cadastrado com sucesso!');
-      }
-    } catch (error) {
-      console.log(error.response);
-      alert(`Falha ao cadastrar lote: ${error.response}`);
-    }
-  }
-
-  const getCategories = async () => {
-    const response = await CategoryService.getCategories();
-    setCategories(response);
-  };
-
-  const createCategory = async () => {
-    const response = await CategoryService.createCategory({
-      name: categoryName,
-      description: categoryDescription,
-    });
-    if (!response.error) {
-      getCategories();
-      toggleNewCategoryModal();
-    } else {
-      alert('Erro ao salvar a categoria!');
-    }
-  };
-
-  const selectCategory = (e) => {
-    const categoryId = Number(e.target.value);
-    if (selectedCategories.includes(categoryId)) {
-      const newSelectedCategories = selectedCategories.filter(
-        (selectedCategoryId) => categoryId !== selectedCategoryId
-      );
-      setSelectedCategories(newSelectedCategories);
-    } else {
-      setSelectedCategories([...selectedCategories, categoryId]);
-    }
-  };
-  const renderNewProductModal = () => (
-    <Modal toggle={toggleNewProductModal} isOpen={newProductModalOpen}>
-      <ModalHeader toggle={toggleNewProductModal}>Cadastrar novo produto</ModalHeader>
-      <ModalBody>
-        <form>
-          <div className="new-product-input-container">
-            <div>
-              <span>Nome</span>
-              <input type="text" onChange={(e) => setProductName(e.target.value)} />
-            </div>
-            <div>
-              <span>Preço</span>
-              <input type="number" onChange={(e) => setProductSalePrice(e.target.value)} />
-            </div>
-          </div>
-          <div className="new-product-input-container">
-            <div>
-              <span>Quantidade</span>
-              <input
-                type="number"
-                onChange={(e) => setProductUnitQtd(e.target.value)}
-                placeholder="2 Litros, 5 Kilogramas, etc.."
-              />
-            </div>
-            <div>
-              <span>Unidade de medida</span>
-              <input
-                type="text"
-                onChange={(e) => setProductUnitMeasure(e.target.value)}
-                placeholder="Litro, Kilograma, etc.."
-              />
-            </div>
-          </div>
-          <div className="product-category">
-            <span>Categorias</span>
-            <div className="product-checks">
-              {categories?.map((category, i) => (
-                <label for="category" key={i}>
-                  <input
-                    checked={selectedCategories.includes(category.idCategory)}
-                    type="checkbox"
-                    name="category"
-                    value={category.idCategory}
-                    onChange={selectCategory}
-                  />{' '}
-                  {category.name}
-                </label>
-              ))}
-            </div>
-          </div>
-        </form>
-      </ModalBody>
-      <ModalFooter>
-        <button type="button" onClick={toggleNewCategoryModal}>
-          Criar Categoria
-        </button>
-
-        <button className="secondary" type="button" onClick={registerProduct}>
-          Adicionar
-        </button>
-      </ModalFooter>
-    </Modal>
-  );
-
-  const renderNewLotModal = () => (
-    <Modal toggle={toggleNewLotModal} isOpen={newLotModalOpen}>
-      <ModalHeader toggle={toggleNewLotModal}>Cadastro de Lote</ModalHeader>
-      <ModalBody>
-        <form>
-          <div className="new-product-input-container">
-            <div>
-              <span>Data de entrada</span>
-              <input type="date" onChange={(e) => setLotEntryDate(e.target.value)} />
-            </div>
-            <div>
-              <span>Data de Vencimento</span>
-              <input type="date" onChange={(e) => setLotDueDate(e.target.value)} />
-            </div>
-          </div>
-
-          <div className="new-product-input-container">
-            <div>
-              <span>Preço de compra</span>
-              <input type="number" onChange={(e) => setLotPurchasePrice(e.target.value)} />
-            </div>
-            <div>
-              <span>Quantidade</span>
-              <input type="number" onChange={(e) => setLotProductQty(e.target.value)} />
-            </div>
-          </div>
-          <div>
-            <span>Produto</span>
-            <div className="new-product-input-container">
-              <select class="select-alone" type="select" onChange={(e) => setLotProduct(e.target.value)}>
-                <option value="" />
-                {products?.map((product, i) => {
-                  return (
-                    <option key={i} value={product.idProduct}>
-                      {product.name + " - " + product.unitQtd + " " + product.unitMeasure + "(s)"}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-          </div>
-          <span>Descrição</span>
-          <div className="new-product-input-container">
-            <textarea class="textarea-alone" maxLength="255" onChange={(e) => setLotDescription(e.target.value)} />
-          </div>
-        </form>
-      </ModalBody>
-      <ModalFooter>
-        <div className="add-product-modal-footer">
-          <button type="button" className="secondary" onClick={registerLot}>
-            Cadastrar Lote
-          </button>
-        </div>
-      </ModalFooter>
-    </Modal>
-  );
-
-  const renderNewCategoryModal = () => (
-    <Modal isOpen={newCategoryModalOpen} toggle={toggleNewCategoryModal} size="sm">
-      <ModalHeader toggle={toggleNewCategoryModal}>Criar Categoria</ModalHeader>
-      <ModalBody>
-        <div className="new-category-form">
-          <label>Nome</label>
-          <input onChange={(e) => setCategoryName(e.target.value)} value={categoryName} />
-          <label>Descrição</label>
-          <textarea
-            onChange={(e) => setCategoryDescription(e.target.value)}
-            value={categoryDescription}
-          />
-        </div>
-      </ModalBody>
-      <ModalFooter>
-        <button onClick={createCategory}>Criar</button>
-      </ModalFooter>
-    </Modal>
-  );
   return (
     <div className="container">
       <div className="stock-content">
         <h1>Estoque</h1>
         <div className="toolbar">
           <div className="search-filter">
-            <input type="text" placeholder="Procurar produtos" />
-            <FaFilter />
-            <FaSortAmountUp />
+            <input
+              type="text"
+              placeholder="Procurar produtos"
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <div className="nav-item">
+              <Dropdown isOpen={filterDropdownOpen} toggle={filterToggleDropDown}>
+                <DropdownToggle color="transparent" caret>
+                  <FaFilter size={25} />
+                </DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem onClick={() => setCategoryModalOpen(true)}>Categoria</DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </div>
+            <div className="nav-item">
+              <Dropdown isOpen={sortDropdownOpen} toggle={sortToggleDropDown}>
+                <DropdownToggle color="transparent" caret>
+                  <FaSortAmountUp size={25} />
+                </DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem onClick={() => applyFilter({ orderPrice: 'ASC' })}>
+                    Preço Crescente
+                  </DropdownItem>
+                  <DropdownItem onClick={() => applyFilter({ orderPrice: 'DESC' })}>
+                    Preço Decrescente
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </div>
           </div>
           <div className="create-import">
-            <button type="button" className="secondary" onClick={toggleNewLotModal}>
-              Novo lote de produto
-            </button>
-            <button type="button" className="secondary" onClick={toggleNewProductModal}>
-              Novo Produto
-            </button>
+            <NewLot products={products} />
+            <NewProduct getProducts={getProducts} />
           </div>
         </div>
       </div>
-      <ProductCard products={products} />
-
-      {renderNewProductModal()}
-      {renderNewLotModal()}
-      {renderNewCategoryModal()}
+      <CategoryFilterModal
+        applyFilter={applyFilter}
+        setCategoryModalOpen={setCategoryModalOpen}
+        categoryModalOpen={categoryModalOpen}
+      />
+      <ProductList products={search.length ? productsFiltered : products} />
     </div>
   );
 }

@@ -14,7 +14,6 @@ export default function LoginPage() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(document, password);
     signIn(document, password);
   };
   return (
@@ -44,7 +43,12 @@ export default function LoginPage() {
               type={passwordVisible ? 'text' : 'password'}
             />
           </div>
-          <p>Não é cadastrado ainda? <Link to="register/company" className="register-click">Clique aqui</Link></p>
+          <p>
+            Não é cadastrado ainda?{' '}
+            <Link to="register/company" className="register-click">
+              Clique aqui
+            </Link>
+          </p>
           <div className="login-submit">
             <span>esqueci minha senha</span>
             <button type="submit">Entrar</button>

@@ -20,6 +20,7 @@ export default function AuthContextProvider({ children }) {
   }, []);
 
   const signIn = async (document, password) => {
+    console.log('aaaaa');
     const response = await AuthService.signIn(document, password);
     if (!response.error) {
       setStorageToken(response.headers['x-auth-token']);

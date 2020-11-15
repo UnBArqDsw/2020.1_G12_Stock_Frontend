@@ -1,5 +1,14 @@
-import React, { useEffect, useContext, useState  } from 'react';
-import { Modal, Collapse, CardBody, Card, CardText, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import React, { useEffect, useContext, useState } from 'react';
+import {
+  Modal,
+  Collapse,
+  CardBody,
+  Card,
+  CardText,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from 'reactstrap';
 import './styles.css';
 import { DeviceContext } from '../../Contexts/DeviceContext';
 import DecreaseService from '../../Services/DecreaseService';
@@ -20,23 +29,25 @@ const ProductCard = ({ products }) => {
   const [showLotInfo, setShowLotInfo] = useState(false);
   const [confirmDecreaseLotModalOpen, setConfirmDecreaseLotModalOpen] = useState(false);
   const toggleDecreaseProductModal = () => {
-    setDecreaseProductModalOpen(!decreaseProductModalOpen)
+    setDecreaseProductModalOpen(!decreaseProductModalOpen);
   };
   const toggleDecreaseLotModal = () => {
-    setDecreaseLotModalOpen(!decreaseLotModalOpen)
-    if(!decreaseLotModalOpen){
+    setDecreaseLotModalOpen(!decreaseLotModalOpen);
+    if (!decreaseLotModalOpen) {
       setShowLotInfo(false);
       setQuantity('');
     }
   };
-  const toggleConfirmDecreaseLotModal = () =>{
+  const toggleConfirmDecreaseLotModal = () => {
     setConfirmDecreaseLotModalOpen(!confirmDecreaseLotModalOpen);
-  }
+  };
   const loadCollaborators = async () => {
     const response = await CollaboratorService.getCollaborators();
     setCollaborators(response);
-  }
-  useEffect(() => {loadCollaborators()}, []);
+  };
+  useEffect(() => {
+    loadCollaborators();
+  }, []);
   const toggle = (idCard) => {
     setCardSelected('');
     setProductId('');
@@ -49,19 +60,19 @@ const ProductCard = ({ products }) => {
       setProductSelected(products.filter((element) => element.idProduct == idCard));
     }
     setQuantity('');
-  }
+  };
   const setLotSelected = (l) => {
     setQuantity('');
-    if(!l.target.value){
+    if (!l.target.value) {
       setShowLotInfo(false);
-    }else{
-      let find_lot = product.lots.filter((lot) => lot.idLot == l.target.value)[0];
+    } else {
+      const find_lot = product.lots.filter((lot) => lot.idLot == l.target.value)[0];
       setLot(find_lot);
       setLotId(find_lot.idLot);
       setCollaborator(collaborators.filter((c) => c.idCollaborator == find_lot.idCollaborator)[0]);
       setShowLotInfo(true);
     }
-  }
+  };
   const decreaseProduct = async () => {
     try {
       const { errorData, status } = await DecreaseService.decreaseProduct(productId, quantity);
@@ -75,7 +86,7 @@ const ProductCard = ({ products }) => {
     } catch (error) {
       alert(`Falha ao dar baixa em produto: ${error.data}`);
     }
-  }
+  };
   const decreaseLot = async () => {
     try {
       const { errorData, status } = await DecreaseService.decreaseLot(lotId, quantity);
@@ -90,24 +101,21 @@ const ProductCard = ({ products }) => {
     } catch (error) {
       alert(`Falha ao remover produto: ${error.data}`);
     }
-  }
+  };
   const setProductSelected = (p) => {
-    if (p) {
-      if (p.length > 0) {
-        if (p[0] != product) {
-          setProduct(p[0]);
-        }
+    if (p?.length > 0) {
+      if (p[0] != product) {
+        setProduct(p[0]);
       }
     }
-  }
+  };
 
   const renderDecreseProductModal = () => (
     <Modal toggle={toggleDecreaseProductModal} isOpen={decreaseProductModalOpen}>
-      <ModalHeader toggle={toggleDecreaseProductModal}>
-        Dar baixa em produto
-      </ModalHeader>
+      <ModalHeader toggle={toggleDecreaseProductModal}>Dar baixa em produto</ModalHeader>
       <ModalBody>
-        Tem certeza que deseja dar baixa de {quantity} unidade(s) do produto {product.name + ' ' + product.unitQtd + ' ' + product.unitMeasure}(s)?
+        Tem certeza que deseja dar baixa de {quantity} unidade(s) do produto{' '}
+        {`${product.name} ${product.unitQtd} ${product.unitMeasure}`}(s)?
       </ModalBody>
       <ModalFooter>
         <button type="button" onClick={decreaseProduct}>
@@ -122,11 +130,11 @@ const ProductCard = ({ products }) => {
 
   const renderConfirmDecreaseLotModal = () => (
     <Modal toggle={toggleConfirmDecreaseLotModal} isOpen={confirmDecreaseLotModalOpen}>
-      <ModalHeader toggle={toggleConfirmDecreaseLotModal}>
-        Remover produto com defeito
-      </ModalHeader>
+      <ModalHeader toggle={toggleConfirmDecreaseLotModal}>Remover produto com defeito</ModalHeader>
       <ModalBody>
-  Tem certeza que deseja remover {quantity} unidade(s) do produto "{product.name + ' ' + product.unitQtd + ' ' + product.unitMeasure}(s)" do lote "{lot.description}" inserido pelo colaborador {collaborator.name}?
+        Tem certeza que deseja remover {quantity} unidade(s) do produto "
+        {`${product.name} ${product.unitQtd} ${product.unitMeasure}`}(s)" do lote "{lot.description}
+        " inserido pelo colaborador {collaborator.name}?
       </ModalBody>
       <ModalFooter>
         <button type="button" onClick={decreaseLot}>
@@ -142,16 +150,43 @@ const ProductCard = ({ products }) => {
   const lotInfo = () => (
     <div className="lot-info">
       <h5>Informações sobre esse lote:</h5>
-      <div><label>Data de adição:</label><span> {new Date(lot?.entryDate).toLocaleDateString()}</span></div>
-      <div><label>Data de vencimento:</label><span>{new Date(lot?.dueDate).toLocaleDateString()} </span></div>
-      <div><label>Quantidade disponível:</label><span> {lot?.productQty}</span></div>
-      <div><label>Preço de compra:</label><span> R${lot?.purchasePrice}</span></div>
-      <div><label>Responsável:</label><span>{collaborator?.name}</span></div>
-      <div class="div-input"><label>Quantidade a ser removida:</label><span><input className="input-quantity" type="number" defaultValue='' onChange={(e) => setQuantity(e.target.value)}></input></span></div>
+      <div>
+        <label>Data de adição:</label>
+        <span> {new Date(lot?.entryDate).toLocaleDateString()}</span>
+      </div>
+      <div>
+        <label>Data de vencimento:</label>
+        <span>{new Date(lot?.dueDate).toLocaleDateString()} </span>
+      </div>
+      <div>
+        <label>Quantidade disponível:</label>
+        <span> {lot?.productQty}</span>
+      </div>
+      <div>
+        <label>Preço de compra:</label>
+        <span> R${lot?.purchasePrice}</span>
+      </div>
+      <div>
+        <label>Responsável:</label>
+        <span>{collaborator?.name}</span>
+      </div>
+      <div className="div-input">
+        <label>Quantidade a ser removida:</label>
+        <span>
+          <input
+            className="input-quantity"
+            type="number"
+            defaultValue=""
+            onChange={(e) => setQuantity(e.target.value)}
+          />
+        </span>
+      </div>
     </div>
   );
   const decreaseLotButton = () => (
-    <button onClick={toggleConfirmDecreaseLotModal} type="button">Remover</button>
+    <button onClick={toggleConfirmDecreaseLotModal} type="button">
+      Remover
+    </button>
   );
   const renderDecreaseLotModal = () => (
     <Modal toggle={toggleDecreaseLotModal} isOpen={decreaseLotModalOpen}>
@@ -160,25 +195,28 @@ const ProductCard = ({ products }) => {
         <h4>De qual lote deseja remover?</h4>
         <select className="select-alone" type="select" onChange={setLotSelected}>
           <option value="" />
-          {product?.lots?.filter((lot) => lot.productQty > 0).map((lot) => {
-            return (
-              <option key={lot.idLot} value={lot.idLot}>
-                {lot.description}
-              </option>
-            );
-          })}
+          {product?.lots
+            ?.filter((lot) => lot.productQty > 0)
+            .map((lot) => {
+              return (
+                <option key={lot.idLot} value={lot.idLot}>
+                  {lot.description}
+                </option>
+              );
+            })}
         </select>
-        {showLotInfo?lotInfo():null}
+        {showLotInfo ? lotInfo() : null}
       </ModalBody>
       <ModalFooter>
-        {showLotInfo?decreaseLotButton():null}
+        {showLotInfo ? decreaseLotButton() : null}
         <p>
-          A remoção do produto não será contabilizada como venda, apenas remoção por motivo específico de indisponibilidade do produto.
+          A remoção do produto não será contabilizada como venda, apenas remoção por motivo
+          específico de indisponibilidade do produto.
         </p>
       </ModalFooter>
     </Modal>
   );
-  
+
   return (
     <div>
       <div className="list-container">
@@ -203,20 +241,30 @@ const ProductCard = ({ products }) => {
             return (
               <div>
                 <Card>
-                  <CardBody id={product.idProduct} onClick={(e) => toggle(e.target.id)} className="product-card">
-                    <div id={product.idProduct} onClick={(e) => toggle(e.target.id)}>
-                      <p id={product.idProduct} onClick={(e) => toggle(e.target.id)}>{product.name}</p>
-                    </div>
-                    <div id={product.idProduct} onClick={(e) => toggle(e.target.id)}>
-                      <p id={product.idProduct} onClick={(e) => toggle(e.target.id)}>{product.quantity}</p>
-                    </div>
+                  <CardBody
+                    id={product.idProduct}
+                    onClick={(e) => toggle(e.target.id)}
+                    className="product-card"
+                  >
                     <div id={product.idProduct} onClick={(e) => toggle(e.target.id)}>
                       <p id={product.idProduct} onClick={(e) => toggle(e.target.id)}>
-                        {product.unitQtd + " " + product.unitMeasure}(s)
+                        {product.name}
                       </p>
                     </div>
                     <div id={product.idProduct} onClick={(e) => toggle(e.target.id)}>
-                      <p id={product.idProduct} onClick={(e) => toggle(e.target.id)}>{product.lots.filter((l) => l.productQty > 0).length}</p>
+                      <p id={product.idProduct} onClick={(e) => toggle(e.target.id)}>
+                        {product.quantity}
+                      </p>
+                    </div>
+                    <div id={product.idProduct} onClick={(e) => toggle(e.target.id)}>
+                      <p id={product.idProduct} onClick={(e) => toggle(e.target.id)}>
+                        {`${product.unitQtd} ${product.unitMeasure}`}(s)
+                      </p>
+                    </div>
+                    <div id={product.idProduct} onClick={(e) => toggle(e.target.id)}>
+                      <p id={product.idProduct} onClick={(e) => toggle(e.target.id)}>
+                        {product.lots.filter((l) => l.productQty > 0).length}
+                      </p>
                     </div>
                   </CardBody>
                   <Collapse value={product.idProduct} isOpen={product.idProduct == cardSelected}>
@@ -225,18 +273,30 @@ const ProductCard = ({ products }) => {
                         <div className="product-options">
                           <div className="product-quantity">
                             <label>Quantidade</label>
-                            <input className="input-quantity" type="number" defaultValue='0' onChange={(e) => setQuantity(e.target.value)}></input>
+                            <input
+                              className="input-quantity"
+                              type="number"
+                              defaultValue="0"
+                              onChange={(e) => setQuantity(e.target.value)}
+                            />
                           </div>
-                          <button onClick={toggleDecreaseProductModal} className="decrease-button" type="button">Dar baixa</button>
+                          <button
+                            onClick={toggleDecreaseProductModal}
+                            className="decrease-button"
+                            type="button"
+                          >
+                            Dar baixa
+                          </button>
                         </div>
                         <div className="decrease-link">
-                          <a className="decrease-link" onClick={toggleDecreaseLotModal}>Remover produto com defeito</a>
+                          <div className="decrease-link" onClick={toggleDecreaseLotModal}>
+                            Remover produto com defeito
+                          </div>
                         </div>
                       </div>
                     </CardText>
                   </Collapse>
                 </Card>
-
               </div>
             );
           })}
@@ -248,4 +308,5 @@ const ProductCard = ({ products }) => {
     </div>
   );
 };
+
 export default ProductCard;

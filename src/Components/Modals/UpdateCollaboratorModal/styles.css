@@ -1,0 +1,26 @@
+.edit-collaborator-container {
+    padding: 10px;
+}
+
+.edit-collaborator-input-container {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 16px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.edit-collaborator-input-container div {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-collaborator-input {
+    width: 220px !important;
+}
+
+
+.edit-collaborator-input-container.textarea div {
+    width: 100%;
+}

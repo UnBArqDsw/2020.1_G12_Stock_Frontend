@@ -21,9 +21,19 @@ class CollaboratorService {
     }
   }
 
-  async loadCollaborator(idCompany) {
+  async loadCollaborators() {
     try {
-      const response = await api.get(`/collaborators/${idCompany}`);
+      const response = await api.get(`/collaborators`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return { error: true, errorData: error };
+    }
+  }
+
+  async loadCollaborator(idCollaborator) {
+    try {
+      const response = await api.get(`/collaborator/${idCollaborator}`);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -36,6 +46,16 @@ class CollaboratorService {
       const response = await api.put(`collaborator/update/collaborator/${idCollaborator}`, {
         activate: status,
       });
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return { error: true, errorData: error };
+    }
+  }
+
+  async editCollaborator(idCollaborator, params) {
+    try {
+      const response = await api.put(`collaborator/update/collaborator/${idCollaborator}`, params);
       return response.data;
     } catch (error) {
       console.log(error);
