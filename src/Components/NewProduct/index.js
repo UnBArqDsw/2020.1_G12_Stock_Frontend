@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import CategoryService from '../../Services/CategoryService';
 import RegisterService from '../../Services/RegisterService';
-import NewCategoria from '../NewCategory';
+import NewCategory from '../NewCategory';
 import ResultModal from '../Modals/ResultModal';
 
 export default function NewProduct() {
@@ -10,16 +10,13 @@ export default function NewProduct() {
   const [productUnitQtd, setProductUnitQtd] = useState('');
   const [productUnitMeasure, setProductUnitMeasure] = useState('');
   const [productSalePrice, setProductSalePrice] = useState('');
-
   const [categories, setCategories] = useState([]);
-
   const [selectedCategories, setSelectedCategories] = useState([]);
-
   const [newProductModalOpen, setNewProductModalOpen] = useState(false);
-  const toggleNewProductModal = () => setNewProductModalOpen(!newProductModalOpen);
-
   const [resultModalTitle, setResultModalTitle] = useState('');
   const [resultModalVisible, setResultModalVisible] = useState(false);
+
+  const toggleNewProductModal = () => setNewProductModalOpen(!newProductModalOpen);
 
   const getCategories = async () => {
     const response = await CategoryService.getCategories();
@@ -129,7 +126,7 @@ export default function NewProduct() {
         </form>
       </ModalBody>
       <ModalFooter>
-        <NewCategoria getCategories={getCategories} />
+        <NewCategory getCategories={getCategories} />
         <button className="secondary" type="button" onClick={registerProduct}>
           Adicionar
         </button>

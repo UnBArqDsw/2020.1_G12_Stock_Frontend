@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Card, CardBody } from 'reactstrap';
 import './styles.css';
-import { useContext } from 'react';
 import { DeviceContext } from '../../Contexts/DeviceContext';
 
 const ProductCard = ({ products }) => {
   const { isMobile } = useContext(DeviceContext);
+
   return (
     <div className="list-container">
       <Card>
@@ -18,6 +18,9 @@ const ProductCard = ({ products }) => {
           </div>
           <div>
             <span>Unidade</span>
+          </div>
+          <div>
+            <span>Preço</span>
           </div>
           <div>
             <span>Lotes</span>
@@ -41,6 +44,9 @@ const ProductCard = ({ products }) => {
                   </p>
                 </div>
                 <div>
+                  <p>R$ {product.salePrice}</p>
+                </div>
+                <div>
                   <p>{product.lots.length}</p>
                 </div>
               </CardBody>
@@ -51,4 +57,5 @@ const ProductCard = ({ products }) => {
     </div>
   );
 };
+
 export default ProductCard;
