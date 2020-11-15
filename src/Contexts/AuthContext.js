@@ -14,12 +14,9 @@ export default function AuthContextProvider({ children }) {
   const [storageUser, setStorageUser, removeUser] = useLocalStorage('@auth:user');
 
   useEffect(() => {
-    webSocketService.subscribeToNewProducts((product) => {
-      console.log(product);
-    });
     if (storageUser) {
       setUser(storageUser);
-      setUpSocket();
+      setUpSocket(storageUser.idCompany);
     }
     setLoading(false);
   }, []);
@@ -30,7 +27,7 @@ export default function AuthContextProvider({ children }) {
       setStorageToken(response.headers['x-auth-token']);
       setStorageUser(response.data);
       setUser(response.data);
-      setUpSocket();
+      setUpSocket(response.data.idCompany);
       history.push('/');
     }
   };
@@ -41,8 +38,8 @@ export default function AuthContextProvider({ children }) {
     history.push('/home');
   };
 
-  const setUpSocket = () => {
-    webSocketService.connect();
+  const setUpSocket = (idCompany) => {
+    webSocketService.connect(idCompany);
   };
 
   return (
