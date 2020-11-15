@@ -1,0 +1,12 @@
+.card {
+    margin-top: 20px;
+}
+
+@media only screen and (max-width: 767px) {
+    .list-container {
+        margin-top: 90px;
+    }
+    p {
+        font-size: 11px;
+    }
+}
