@@ -24,7 +24,7 @@ export default function ProductContextProvider({ children }) {
 
   const listenForNewProducts = () => {
     WebSocketService.subscribeToNewProducts((product) => {
-      setProducts([...products, product]);
+      setProducts([product, ...products]);
     });
   };
 
