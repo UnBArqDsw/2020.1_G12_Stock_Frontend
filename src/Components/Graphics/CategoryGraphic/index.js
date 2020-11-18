@@ -3,7 +3,7 @@ import { PieChart, Pie, Sector, Cell } from 'recharts';
 import CategoryService from '../../../Services/CategoryService';
 
 
-const COLORS = ['#58c791', '#4dbcc4', '#c21123', '#b8a52c'];
+const COLORS = ['#d92109', '#4dbcc4', '#f7de3b', '#1d7817', '#e62c38'];
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
@@ -37,13 +37,11 @@ export default function CategoryGraphic() {
 
   const getData = () => {
     let data = [];
-    for (let i = 0; i < (productList.length > 4 ? 4 : productList.length); i++) {
+    for (let i = 0; i < (productList.length > 5 ? 5 : productList.length); i++) {
       data.push(productList[i]);
     }
     setData(data);
   }
-
-  console.log(productList[0])
 
   return (
     <PieChart width={800} height={400}>
