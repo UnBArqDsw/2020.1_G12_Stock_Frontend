@@ -11,29 +11,9 @@ class CollaboratorService {
     }
   }
 
-  async getCollaborators() {
-    try {
-      const response = await api.get('/min/collaborators');
-      return response.data;
-    } catch (error) {
-      console.log(error);
-      return { error: true, errorData: error };
-    }
-  }
-
   async loadCollaborators() {
     try {
       const response = await api.get(`/collaborators`);
-      return response.data;
-    } catch (error) {
-      console.log(error);
-      return { error: true, errorData: error };
-    }
-  }
-
-  async loadCollaborator(idCollaborator) {
-    try {
-      const response = await api.get(`/collaborator/${idCollaborator}`);
       return response.data;
     } catch (error) {
       console.log(error);

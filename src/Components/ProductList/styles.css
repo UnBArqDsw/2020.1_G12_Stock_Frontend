@@ -35,27 +35,37 @@
 }
 
 .product-options {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
   padding: 5px;
   height: 80%;
 }
-.product-options-container{
+.product-options button {
+  height: 80%;
+}
+.product-options-container {
   background-color: var(--gray-secondary);
   flex-direction: row;
   flex-wrap: wrap;
   display: flex;
   justify-content: space-between;
+  padding: 15px;
+  align-items: center;
 }
 
-.product-quantity input, label{
+.product-quantity {
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.decrease-link{
+.decrease-link {
   color: var(--dark);
   cursor: pointer;
 }
 
-.input-quantity{
+.input-quantity {
   width: 60px;
 }
 
@@ -63,24 +73,24 @@
   width: 100%;
 }
 
-.div-input{
+.div-input {
   display: flex;
   align-items: center;
 }
 
-.lot-info div{
+.lot-info div {
   flex-direction: row;
   display: flex;
   padding-left: 5%;
 }
 
-.lot-info span{
+.lot-info span {
   display: flex;
   flex-direction: column;
   padding-left: 1%;
 }
 
-.lot-info label{
+.lot-info label {
   display: flex;
   flex-direction: column;
   font-weight: bold;

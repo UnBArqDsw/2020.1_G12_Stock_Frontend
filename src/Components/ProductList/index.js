@@ -48,7 +48,7 @@ const ProductCard = ({ products }) => {
     setConfirmDecreaseLotModalOpen(!confirmDecreaseLotModalOpen);
   };
   const loadCollaborators = async () => {
-    const response = await CollaboratorService.getCollaborators();
+    const response = await CollaboratorService.loadCollaborators();
     setCollaborators(response);
   };
   useEffect(() => {
@@ -57,13 +57,13 @@ const ProductCard = ({ products }) => {
   const toggle = (idCard) => {
     setCardSelected('');
     setProductId('');
-    setProductSelected({});
+    setProduct({});
     setLot({});
     setProduct({});
     if (cardSelected !== idCard) {
       setProductId(idCard);
       setCardSelected(idCard);
-      setProductSelected(products.filter((element) => element.idProduct === idCard));
+      setProduct(products.find((element) => element.idProduct === idCard));
     }
     setQuantity('');
   };
@@ -82,13 +82,14 @@ const ProductCard = ({ products }) => {
   const decreaseProduct = async () => {
     try {
       const { errorData, status } = await DecreaseService.decreaseProduct(productId, quantity);
+
       if (status === 200) {
-        toggleDecreaseProductModal();
         alert('Baixa do produto concluída com sucesso!');
       } else {
-        toggleDecreaseProductModal();
         alert(`Falha ao dar baixa em produto: ${errorData.data.details}`);
       }
+      toggleDecreaseProductModal();
+      setCardSelected('');
     } catch (error) {
       alert(`Falha ao dar baixa em produto: ${error.data}`);
     }
@@ -106,13 +107,6 @@ const ProductCard = ({ products }) => {
       }
     } catch (error) {
       alert(`Falha ao remover produto: ${error.data}`);
-    }
-  };
-  const setProductSelected = (p) => {
-    if (p?.length > 0) {
-      if (p[0] != product) {
-        setProduct(p[0]);
-      }
     }
   };
 
@@ -201,15 +195,13 @@ const ProductCard = ({ products }) => {
         <h4>De qual lote deseja remover?</h4>
         <select className="select-alone" type="select" onChange={setLotSelected}>
           <option value=""> </option>
-          {product?.lots
-            ?.filter((productLot) => productLot.productQty > 0)
-            .map((productLot) => {
-              return (
-                <option key={productLot.idLot} value={productLot.idLot}>
-                  {productLot.description}
-                </option>
-              );
-            })}
+          {product?.lots?.map((productLot) => {
+            return (
+              <option key={productLot.idLot} value={productLot.idLot}>
+                {productLot.description}
+              </option>
+            );
+          })}
         </select>
         {showLotInfo ? lotInfo() : null}
       </ModalBody>
@@ -248,29 +240,20 @@ const ProductCard = ({ products }) => {
               <div>
                 <Card>
                   <CardBody
-                    id={productFromList.idProduct}
-                    onClick={(e) => toggle(e.target.id)}
                     className="product-card"
+                    onClick={() => toggle(productFromList.idProduct)}
                   >
-                    <div id={productFromList.idProduct} onClick={(e) => toggle(e.target.id)}>
-                      <p id={productFromList.idProduct} onClick={(e) => toggle(e.target.id)}>
-                        {productFromList.name}
-                      </p>
+                    <div>
+                      <p>{productFromList.name}</p>
                     </div>
-                    <div id={productFromList.idProduct} onClick={(e) => toggle(e.target.id)}>
-                      <p id={productFromList.idProduct} onClick={(e) => toggle(e.target.id)}>
-                        {productFromList.quantity}
-                      </p>
+                    <div>
+                      <p>{productFromList.quantity}</p>
                     </div>
-                    <div id={productFromList.idProduct} onClick={(e) => toggle(e.target.id)}>
-                      <p id={productFromList.idProduct} onClick={(e) => toggle(e.target.id)}>
-                        {`${productFromList.unitQtd} ${productFromList.unitMeasure}`}(s)
-                      </p>
+                    <div>
+                      <p>{`${productFromList.unitQtd} ${productFromList.unitMeasure}`}(s)</p>
                     </div>
-                    <div id={productFromList.idProduct} onClick={(e) => toggle(e.target.id)}>
-                      <p id={productFromList.idProduct} onClick={(e) => toggle(e.target.id)}>
-                        {productFromList.lots.filter((l) => l.productQty > 0).length}
-                      </p>
+                    <div>
+                      <p>{productFromList.lots.filter((l) => l.productQty > 0).length}</p>
                     </div>
                   </CardBody>
                   <Collapse
@@ -286,6 +269,7 @@ const ProductCard = ({ products }) => {
                               className="input-quantity"
                               type="number"
                               defaultValue="0"
+                              min="0"
                               onChange={(e) => setQuantity(e.target.value)}
                             />
                           </div>
@@ -297,9 +281,9 @@ const ProductCard = ({ products }) => {
                             Dar baixa
                           </button>
                         </div>
-                        <div className="decrease-link" onClick={toggleDecreaseLotModal}>
+                        <button className="secondary" onClick={toggleDecreaseLotModal}>
                           Remover produto com defeito
-                        </div>
+                        </button>
                       </div>
                     </CardText>
                   </Collapse>

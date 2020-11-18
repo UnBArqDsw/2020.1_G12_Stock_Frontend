@@ -46,30 +46,34 @@ export default function Stock() {
               placeholder="Procurar produtos"
               onChange={(e) => setSearch(e.target.value)}
             />
-            <div className="nav-item">
-              <Dropdown isOpen={filterDropdownOpen} toggle={filterToggleDropDown}>
-                <DropdownToggle color="transparent" caret>
-                  <FaFilter size={25} />
-                </DropdownToggle>
-                <DropdownMenu>
-                  <DropdownItem onClick={() => setCategoryModalOpen(true)}>Categoria</DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-            </div>
-            <div className="nav-item">
-              <Dropdown isOpen={sortDropdownOpen} toggle={sortToggleDropDown}>
-                <DropdownToggle color="transparent" caret>
-                  <FaSortAmountUp size={25} />
-                </DropdownToggle>
-                <DropdownMenu>
-                  <DropdownItem onClick={() => applyFilter({ orderPrice: 'ASC' })}>
-                    Preço Crescente
-                  </DropdownItem>
-                  <DropdownItem onClick={() => applyFilter({ orderPrice: 'DESC' })}>
-                    Preço Decrescente
-                  </DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
+            <div className="product-filters">
+              <div className="nav-item">
+                <Dropdown isOpen={filterDropdownOpen} toggle={filterToggleDropDown}>
+                  <DropdownToggle color="transparent" caret>
+                    <FaFilter size={25} />
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem onClick={() => setCategoryModalOpen(true)}>
+                      Categoria
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </div>
+              <div className="nav-item">
+                <Dropdown isOpen={sortDropdownOpen} toggle={sortToggleDropDown}>
+                  <DropdownToggle color="transparent" caret>
+                    <FaSortAmountUp size={25} />
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem onClick={() => applyFilter({ orderPrice: 'ASC' })}>
+                      Preço Crescente
+                    </DropdownItem>
+                    <DropdownItem onClick={() => applyFilter({ orderPrice: 'DESC' })}>
+                      Preço Decrescente
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </div>
             </div>
           </div>
           <div className="create-import">
