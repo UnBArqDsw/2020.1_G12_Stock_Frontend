@@ -24,6 +24,15 @@ class CategoryService {
       return { error: true, errorData: error };
     }
   }
+
+  async getCategoriesListByProduct() {
+    try {
+      const response = await api.get('belongs/productsByCategory');
+      return response.data;
+    } catch (error) {
+      return { error: true, errorData: error };
+    }
+  }
 }
 
 export default new CategoryService();
