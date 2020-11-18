@@ -34,6 +34,7 @@ const ProductCard = ({ products }) => {
   const [collaborators, setCollaborators] = useState({});
   const [showLotInfo, setShowLotInfo] = useState(false);
   const [confirmDecreaseLotModalOpen, setConfirmDecreaseLotModalOpen] = useState(false);
+
   const toggleDecreaseProductModal = () => {
     setDecreaseProductModalOpen(!decreaseProductModalOpen);
   };
@@ -67,15 +68,15 @@ const ProductCard = ({ products }) => {
     }
     setQuantity('');
   };
-  const setLotSelected = (l) => {
+  const setLotSelected = (selectedLot) => {
     setQuantity('');
-    if (!l.target.value) {
+
+    if (!selectedLot) {
       setShowLotInfo(false);
     } else {
-      const find_lot = product.lots.filter((productLot) => productLot.idLot === l.target.value)[0];
-      setLot(find_lot);
-      setLotId(find_lot.idLot);
-      setCollaborator(collaborators.filter((c) => c.idCollaborator === find_lot.idCollaborator)[0]);
+      setLot(selectedLot);
+      setLotId(selectedLot.idLot);
+      setCollaborator(collaborators.find((c) => c.idCollaborator === selectedLot.idCollaborator));
       setShowLotInfo(true);
     }
   };
@@ -101,9 +102,11 @@ const ProductCard = ({ products }) => {
         toggleConfirmDecreaseLotModal();
         toggleDecreaseLotModal();
         alert('Produto removido com sucesso!');
+        setCardSelected('');
       } else {
         toggleConfirmDecreaseLotModal();
         alert(`Falha ao remover produto: ${errorData.data.details}`);
+        setCardSelected('');
       }
     } catch (error) {
       alert(`Falha ao remover produto: ${error.data}`);
@@ -128,24 +131,28 @@ const ProductCard = ({ products }) => {
     </Modal>
   );
 
-  const renderConfirmDecreaseLotModal = () => (
-    <Modal toggle={toggleConfirmDecreaseLotModal} isOpen={confirmDecreaseLotModalOpen}>
-      <ModalHeader toggle={toggleConfirmDecreaseLotModal}>Remover produto com defeito</ModalHeader>
-      <ModalBody>
-        Tem certeza que deseja remover {quantity} unidade(s) do produto
-        {`${product.name} ${product.unitQtd} ${product.unitMeasure}`}(s) do lote {lot.description}
-        inserido pelo colaborador {collaborator.name}?
-      </ModalBody>
-      <ModalFooter>
-        <button type="button" onClick={decreaseLot}>
-          Sim
-        </button>
-        <button type="button" onClick={toggleConfirmDecreaseLotModal}>
-          Não
-        </button>
-      </ModalFooter>
-    </Modal>
-  );
+  const renderConfirmDecreaseLotModal = () => {
+    return (
+      <Modal toggle={toggleConfirmDecreaseLotModal} isOpen={confirmDecreaseLotModalOpen}>
+        <ModalHeader toggle={toggleConfirmDecreaseLotModal}>
+          Remover produto com defeito
+        </ModalHeader>
+        <ModalBody>
+          Tem certeza que deseja remover {quantity} unidade(s) do produto
+          {`${product.name} ${product.unitQtd} ${product.unitMeasure}`}(s) do lote {lot.description}
+          inserido pelo colaborador {collaborator.name}?
+        </ModalBody>
+        <ModalFooter>
+          <button type="button" onClick={decreaseLot}>
+            Sim
+          </button>
+          <button type="button" onClick={toggleConfirmDecreaseLotModal}>
+            Não
+          </button>
+        </ModalFooter>
+      </Modal>
+    );
+  };
 
   const lotInfo = () => (
     <div className="lot-info">
@@ -193,11 +200,15 @@ const ProductCard = ({ products }) => {
       <ModalHeader toggle={toggleDecreaseLotModal}> Remover produto com defeito</ModalHeader>
       <ModalBody>
         <h4>De qual lote deseja remover?</h4>
-        <select className="select-alone" type="select" onChange={setLotSelected}>
+        <select
+          className="select-alone"
+          type="select"
+          onChange={(e) => setLotSelected((e.target.value && JSON.parse(e.target.value)) || '')}
+        >
           <option value=""> </option>
           {product?.lots?.map((productLot) => {
             return (
-              <option key={productLot.idLot} value={productLot.idLot}>
+              <option key={productLot.idLot} value={JSON.stringify(productLot)}>
                 {productLot.description}
               </option>
             );
