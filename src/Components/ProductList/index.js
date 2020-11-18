@@ -72,10 +72,12 @@ const ProductCard = ({ products }) => {
     if (!l.target.value) {
       setShowLotInfo(false);
     } else {
-      const find_lot = product.lots.filter((productLot) => productLot.idLot === l.target.value)[0];
+      const find_lot = product.lots.find((productLot) => productLot.idLot.toString() === l.target.value);
       setLot(find_lot);
       setLotId(find_lot.idLot);
-      setCollaborator(collaborators.filter((c) => c.idCollaborator === find_lot.idCollaborator)[0]);
+      console.log(find_lot.idCollaborator);
+      const find_collaborator = collaborators.find((c) => c.idCollaborator === find_lot.idCollaborator);
+      setCollaborator(find_collaborator);
       setShowLotInfo(true);
     }
   };
