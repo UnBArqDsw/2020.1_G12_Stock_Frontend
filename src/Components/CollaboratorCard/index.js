@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FiEdit } from 'react-icons/all';
+import { Link } from 'react-router-dom';
 import CollaboratorService from '../../Services/CollaboratorService';
 import AccessLevelService from '../../Services/AccessLevelService';
 import ConfirmationModal from '../Modals/ConfirmationModal';
@@ -112,7 +113,9 @@ export default function CollaboratorCard(props) {
           <a onClick={() => setConfirmationModal(true)} className="deactivate">
             {activate ? 'Desativar Colaborador' : 'Ativar Colaborador'}
           </a>
-          <a className="show-sells">Visualizar Vendas</a>
+          <Link className="show-sells" to={{ pathname: '/history', state: { idCollaborator } }}>
+            Visualizar Vendas
+          </Link>
         </div>
       </div>
     </div>
