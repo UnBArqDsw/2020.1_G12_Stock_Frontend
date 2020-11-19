@@ -11,9 +11,9 @@ class HistoryService {
     }
   }
 
-  async loadDaySales(data) {
+  async loadDaySales() {
     try {
-      const response = await api.get(`/decreases/daySales/${data}`);
+      const response = await api.get(`/decreases/daySales`);
       return response.data;
     } catch (error) {
       console.log(error);
