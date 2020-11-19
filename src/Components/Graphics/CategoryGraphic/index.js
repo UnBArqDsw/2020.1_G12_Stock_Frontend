@@ -1,22 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { PieChart, Pie, Sector, Cell } from 'recharts';
+import { PieChart, Pie, Sector, Cell, Tooltip } from 'recharts';
 import CategoryService from '../../../Services/CategoryService';
 
-
-const COLORS = ['#d92109', '#4dbcc4', '#f7de3b', '#1d7817', '#e62c38'];
-
-const RADIAN = Math.PI / 180;
-const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-  return (
-    <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-      {`${(percent * 100).toFixed(0)}%`}
-    </text>
-  );
-};
+const COLORS = ['#8FB1E3', '#95D0ED', '#8FE3B9', '#95EDDA', '#92D2D6'];
 
 export default function CategoryGraphic() {
   const [productList, setProductList] = useState([]);
@@ -44,20 +30,19 @@ export default function CategoryGraphic() {
   }
 
   return (
-    <PieChart width={800} height={400}>
+    <PieChart width={400} height={400} margin={0}>
       <Pie
         data={data}
         cx={300}
         cy={200}
         labelLine={false}
-        label={renderCustomizedLabel}
         outerRadius={80}
-        fill="#8884d8"
       >
         {
           data.map((entry, index) => <Cell fill={COLORS[index % COLORS.length]} />)
         }
       </Pie>
+      <Tooltip />
     </PieChart>
   );
 
