@@ -9,6 +9,7 @@ export default function Dashboard() {
         <h1>Painel de Controle</h1>
         <div className="row">
             <CategoryGraphic />  
+            <CategoryGraphic />  
         </div>
         <div className="row">
         </div>

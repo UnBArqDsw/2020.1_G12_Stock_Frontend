@@ -1,13 +1,10 @@
-.card-header {
+.card-graphic-header {
     background-color: #fff !important;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     border: none !important;
-}
-
-.col-md-6 {
-    width: 100%;
+    padding: 20px;
 }
 
 .card-content {

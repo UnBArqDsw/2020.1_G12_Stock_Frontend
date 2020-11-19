@@ -32,14 +32,14 @@ export default function CategoryGraphic() {
 
   return (
     <div className="col-md-6">
-      <div className="card-header">
+      <div className="card-graphic-header">
         <div className="card-content">
           <h3>Relação de Produtos por Categoria</h3>
-          <PieChart width={600} height={600}>
+          <PieChart width={300} height={300}>
             <Pie
               data={data}
-              cx={300}
-              cy={300}
+              cx={150}
+              cy={150}
               labelLine={false}
               outerRadius={80}
             >
