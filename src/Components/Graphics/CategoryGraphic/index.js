@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { PieChart, Pie, Sector, Cell, Tooltip } from 'recharts';
 import CategoryService from '../../../Services/CategoryService';
+import './styles.css';
 
 const COLORS = ['#8FB1E3', '#95D0ED', '#8FE3B9', '#95EDDA', '#92D2D6'];
 
@@ -30,20 +31,27 @@ export default function CategoryGraphic() {
   }
 
   return (
-    <PieChart width={400} height={400} margin={0}>
-      <Pie
-        data={data}
-        cx={300}
-        cy={200}
-        labelLine={false}
-        outerRadius={80}
-      >
-        {
-          data.map((entry, index) => <Cell fill={COLORS[index % COLORS.length]} />)
-        }
-      </Pie>
-      <Tooltip />
-    </PieChart>
+    <div className="col-md-6">
+      <div className="card-header">
+        <div className="card-content">
+          <h3>Relação de Produtos por Categoria</h3>
+          <PieChart width={600} height={600}>
+            <Pie
+              data={data}
+              cx={300}
+              cy={300}
+              labelLine={false}
+              outerRadius={80}
+            >
+              {
+                data.map((entry, index) => <Cell fill={COLORS[index % COLORS.length]} />)
+              }
+            </Pie>
+            <Tooltip />
+          </PieChart>
+        </div>
+      </div>
+    </div>
   );
 
 }

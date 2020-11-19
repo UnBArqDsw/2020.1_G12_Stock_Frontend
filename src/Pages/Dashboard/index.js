@@ -5,12 +5,14 @@ import "./styles.css";
 export default function Dashboard() {
   return (
     <div className="container">
-      <h1>Dashboard</h1>
-      <div className="category-graphic">
-        <p>Relação de Produtos em estoque por Categoria</p>
-        <CategoryGraphic />
+      <div className="dashboard-content">
+        <h1>Painel de Controle</h1>
+        <div className="row">
+            <CategoryGraphic />  
+        </div>
+        <div className="row">
+        </div>
       </div>
-      
     </div>
   );
 }

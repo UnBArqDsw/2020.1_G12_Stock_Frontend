@@ -1,9 +1,6 @@
-.category-graphic {
-    background-color: white;
+.dashboard-content {
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
-    width: 23rem;
-    height: 20rem;
 }
