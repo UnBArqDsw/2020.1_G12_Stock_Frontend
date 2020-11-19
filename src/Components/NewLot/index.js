@@ -20,7 +20,7 @@ export default function NewLot({ products }) {
   useEffect(() => {
     if (!newLotModalOpen) {
       setLotProduct('');
-      setLotEntryDate('');
+      setLotEntryDate(moment().format('YYYY-MM-DD'));
       setLotDueDate('');
       setLotProductQty('');
       setLotDescription('');

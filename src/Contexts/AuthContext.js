@@ -2,6 +2,7 @@ import React, { useState, createContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import useLocalStorage from '../Hooks/useLocalStorage';
 import AuthService from '../Services/AuthService';
+import webSocketService from '../Services/websocket';
 
 export const AuthContext = createContext();
 
@@ -15,17 +16,18 @@ export default function AuthContextProvider({ children }) {
   useEffect(() => {
     if (storageUser) {
       setUser(storageUser);
+      setUpSocket(storageUser.idCompany);
     }
     setLoading(false);
   }, []);
 
   const signIn = async (document, password) => {
-    console.log('aaaaa');
     const response = await AuthService.signIn(document, password);
     if (!response.error) {
       setStorageToken(response.headers['x-auth-token']);
       setStorageUser(response.data);
       setUser(response.data);
+      setUpSocket(response.data.idCompany);
       history.push('/');
     }
   };
@@ -33,7 +35,15 @@ export default function AuthContextProvider({ children }) {
     removeToken();
     removeUser();
     setUser(null);
+    tearDownSocket();
     history.push('/home');
+  };
+
+  const setUpSocket = (idCompany) => {
+    webSocketService.connect(idCompany);
+  };
+  const tearDownSocket = () => {
+    webSocketService.disconnect();
   };
 
   return (
