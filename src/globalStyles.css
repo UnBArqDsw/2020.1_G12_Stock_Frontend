@@ -53,6 +53,10 @@ textarea {
   border-radius: 5px;
 }
 
+option {
+  background-color: #fff;
+}
+
 select {
   background-color: #fff;
   border-style: none;
@@ -60,10 +64,6 @@ select {
   padding: 8px;
   border-radius: 5px;
   width: 220px;
-}
-
-option {
-  background-color: #fff;
 }
 
 input:focus {

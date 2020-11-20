@@ -1,0 +1,15 @@
+.card-graphic-header {
+    background-color: #fff !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: none !important;
+    padding: 20px;
+}
+
+.card-content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

@@ -6,7 +6,7 @@ import ResultModal from '../Modals/ResultModal';
 
 export default function NewLot({ products }) {
   const [lotProduct, setLotProduct] = useState('');
-  const [lotEntryDate, setLotEntryDate] = useState('');
+  const [lotEntryDate, setLotEntryDate] = useState(moment().format('YYYY-MM-DD'));
   const [lotDueDate, setLotDueDate] = useState('');
   const [lotProductQty, setLotProductQty] = useState('');
   const [lotDescription, setLotDescription] = useState('');

@@ -1,13 +1,12 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { FaFilter, FaSortAmountUp } from 'react-icons/all';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import ProductList from '../../Components/ProductList';
 import NewLot from '../../Components/NewLot';
 import NewProduct from '../../Components/NewProduct';
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import CategoryFilterModal from '../../Components/Modals/CategoryFilterModal';
 import './styles.css';
-import { useContext } from 'react';
 import { ProductsContext } from '../../Contexts/ProductsContext';
 
 export default function Stock() {
@@ -47,30 +46,34 @@ export default function Stock() {
               placeholder="Procurar produtos"
               onChange={(e) => setSearch(e.target.value)}
             />
-            <div className="nav-item">
-              <Dropdown isOpen={filterDropdownOpen} toggle={filterToggleDropDown}>
-                <DropdownToggle color="transparent" caret>
-                  <FaFilter size={25} />
-                </DropdownToggle>
-                <DropdownMenu>
-                  <DropdownItem onClick={() => setCategoryModalOpen(true)}>Categoria</DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-            </div>
-            <div className="nav-item">
-              <Dropdown isOpen={sortDropdownOpen} toggle={sortToggleDropDown}>
-                <DropdownToggle color="transparent" caret>
-                  <FaSortAmountUp size={25} />
-                </DropdownToggle>
-                <DropdownMenu>
-                  <DropdownItem onClick={() => applyFilter({ orderPrice: 'ASC' })}>
-                    Preço Crescente
-                  </DropdownItem>
-                  <DropdownItem onClick={() => applyFilter({ orderPrice: 'DESC' })}>
-                    Preço Decrescente
-                  </DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
+            <div className="product-filters">
+              <div className="nav-item">
+                <Dropdown isOpen={filterDropdownOpen} toggle={filterToggleDropDown}>
+                  <DropdownToggle color="transparent" caret>
+                    <FaFilter size={25} />
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem onClick={() => setCategoryModalOpen(true)}>
+                      Categoria
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </div>
+              <div className="nav-item">
+                <Dropdown isOpen={sortDropdownOpen} toggle={sortToggleDropDown}>
+                  <DropdownToggle color="transparent" caret>
+                    <FaSortAmountUp size={25} />
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem onClick={() => applyFilter({ orderPrice: 'ASC' })}>
+                      Preço Crescente
+                    </DropdownItem>
+                    <DropdownItem onClick={() => applyFilter({ orderPrice: 'DESC' })}>
+                      Preço Decrescente
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </div>
             </div>
           </div>
           <div className="create-import">
