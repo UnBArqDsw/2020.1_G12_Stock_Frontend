@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import useLocalStorage from '../Hooks/useLocalStorage';
 import AuthService from '../Services/AuthService';
 import webSocketService from '../Services/websocket';
-
+import AccessLevelService from '../Services/AccessLevelService';
 export const AuthContext = createContext();
 
 export default function AuthContextProvider({ children }) {
@@ -12,13 +12,21 @@ export default function AuthContextProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [, setStorageToken, removeToken] = useLocalStorage('@auth:token');
   const [storageUser, setStorageUser, removeUser] = useLocalStorage('@auth:user');
+  const [accessLevels, setAccessLevels] = useState([]);
+
+   async function loadAccessLevels(){
+    const response = await AccessLevelService.loadAccessLevel();
+    setAccessLevels(response);
+  }
 
   useEffect(() => {
     if (storageUser) {
       setUser(storageUser);
       setUpSocket(storageUser.idCompany);
+      
     }
     setLoading(false);
+    loadAccessLevels();
   }, []);
 
   const signIn = async (document, password) => {
@@ -38,7 +46,10 @@ export default function AuthContextProvider({ children }) {
     tearDownSocket();
     history.push('/home');
   };
-
+  const checkAccessLevel = (roles) => {
+    const role = accessLevels.find((access_level)=>access_level.idAccessLevel == user.idAccessLevel);
+    return roles.find((r)=>r == role?.name)!=undefined;
+  };
   const setUpSocket = (idCompany) => {
     webSocketService.connect(idCompany);
   };
@@ -47,7 +58,7 @@ export default function AuthContextProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, signIn, signOut, isUserSigned: !!user }}>
+    <AuthContext.Provider value={{ user, loading, signIn, signOut, isUserSigned: !!user, checkAccessLevel }}>
       {children}
     </AuthContext.Provider>
   );

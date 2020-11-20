@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import moment from 'moment';
 import RegisterService from '../../Services/RegisterService';
 import ResultModal from '../Modals/ResultModal';
+import {AuthContext} from '../../Contexts/AuthContext';
 
 export default function NewLot({ products }) {
   const [lotProduct, setLotProduct] = useState('');
@@ -13,9 +14,9 @@ export default function NewLot({ products }) {
   const [lotPurchasePrice, setLotPurchasePrice] = useState('');
   const [newLotModalOpen, setNewLotModalOpen] = useState(false);
   const toggleNewLotModal = () => setNewLotModalOpen(!newLotModalOpen);
-
   const [resultModalTitle, setResultModalTitle] = useState('');
   const [resultModalVisible, setResultModalVisible] = useState(false);
+  const { checkAccessLevel } = useContext(AuthContext);
 
   useEffect(() => {
     if (!newLotModalOpen) {
@@ -127,9 +128,9 @@ export default function NewLot({ products }) {
         refresh={false}
       />
       {renderNewLotModal()}
-      <button type="button" className="secondary" onClick={toggleNewLotModal}>
+      {checkAccessLevel(['Gestor(a)', 'Administrador(a)'])&&<button type="button" className="secondary" onClick={toggleNewLotModal}>
         Novo lote de produto
-      </button>
+      </button>}
     </>
   );
 }

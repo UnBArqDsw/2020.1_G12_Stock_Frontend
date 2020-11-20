@@ -19,6 +19,7 @@ import './styles.css';
 import { DeviceContext } from '../../Contexts/DeviceContext';
 import DecreaseService from '../../Services/DecreaseService';
 import CollaboratorService from '../../Services/CollaboratorService';
+import { AuthContext } from '../../Contexts/AuthContext';
 
 const ProductCard = ({ products }) => {
   const { isMobile } = useContext(DeviceContext);
@@ -34,6 +35,7 @@ const ProductCard = ({ products }) => {
   const [collaborators, setCollaborators] = useState({});
   const [showLotInfo, setShowLotInfo] = useState(false);
   const [confirmDecreaseLotModalOpen, setConfirmDecreaseLotModalOpen] = useState(false);
+  const { checkAccessLevel } = useContext(AuthContext);
 
   const toggleDecreaseProductModal = () => {
     setDecreaseProductModalOpen(!decreaseProductModalOpen);
@@ -292,9 +294,9 @@ const ProductCard = ({ products }) => {
                             Dar baixa
                           </button>
                         </div>
-                        <button className="secondary" onClick={toggleDecreaseLotModal}>
+                        {checkAccessLevel(['Gestor(a)', 'Administrador(a)'])&&<button className="secondary" onClick={toggleDecreaseLotModal}>
                           Remover produto com defeito
-                        </button>
+                        </button>}
                       </div>
                     </CardText>
                   </Collapse>

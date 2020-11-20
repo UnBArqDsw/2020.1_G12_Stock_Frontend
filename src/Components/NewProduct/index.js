@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import CategoryService from '../../Services/CategoryService';
 import RegisterService from '../../Services/RegisterService';
 import NewCategory from '../NewCategory';
 import ResultModal from '../Modals/ResultModal';
+import { AuthContext } from '../../Contexts/AuthContext.js';
 
 export default function NewProduct() {
   const [productName, setProductName] = useState('');
@@ -15,6 +16,7 @@ export default function NewProduct() {
   const [newProductModalOpen, setNewProductModalOpen] = useState(false);
   const [resultModalTitle, setResultModalTitle] = useState('');
   const [resultModalVisible, setResultModalVisible] = useState(false);
+  const { checkAccessLevel } = useContext(AuthContext);
 
   const toggleNewProductModal = () => setNewProductModalOpen(!newProductModalOpen);
 
@@ -143,9 +145,9 @@ export default function NewProduct() {
         setModalVisible={setResultModalVisible}
         refresh={false}
       />
-      <button type="button" className="secondary" onClick={toggleNewProductModal}>
+      {checkAccessLevel(['Gestor(a)', 'Administrador(a)'])&&<button type="button" className="secondary" onClick={toggleNewProductModal}>
         Novo Produto
-      </button>
+      </button>}
     </>
   );
 }

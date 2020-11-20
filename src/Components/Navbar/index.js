@@ -7,20 +7,20 @@ import { AuthContext } from '../../Contexts/AuthContext';
 export default function NavBar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggleDropDown = () => setDropdownOpen((prevState) => !prevState);
-  const { signOut } = useContext(AuthContext);
+  const { signOut, checkAccessLevel } = useContext(AuthContext);
 
   return (
     <nav className="nav-container">
-      <div className="nav-item">
+      { checkAccessLevel([])&&<div className="nav-item">
         <BsFillBellFill size={25} />
-      </div>
+      </div>}
       <div className="nav-item">
         <Dropdown isOpen={dropdownOpen} toggle={toggleDropDown}>
           <DropdownToggle color="transparent" caret>
             <FaUserCircle size={25} />
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem>Perfil</DropdownItem>
+            { checkAccessLevel([])&&<DropdownItem>Perfil</DropdownItem>}
             <DropdownItem onClick={signOut}>Sair</DropdownItem>
           </DropdownMenu>
         </Dropdown>
