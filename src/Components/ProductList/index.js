@@ -244,6 +244,9 @@ const ProductCard = ({ products }) => {
               <span>Tamanho</span>
             </div>
             <div>
+              <span>Preço</span>
+            </div>
+            <div>
               <span>Lotes</span>
             </div>
           </CardBody>
@@ -265,6 +268,9 @@ const ProductCard = ({ products }) => {
                     </div>
                     <div>
                       <p>{`${productFromList.unitQtd} ${productFromList.unitMeasure}`}(s)</p>
+                    </div>
+                    <div>
+                      <p>R$ {productFromList.salePrice}</p>
                     </div>
                     <div>
                       <p>{productFromList.lots.filter((l) => l.productQty > 0).length}</p>
