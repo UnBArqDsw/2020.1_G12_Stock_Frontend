@@ -37,6 +37,8 @@ export default function AuthContextProvider({ children }) {
       setUser(response.data);
       setUpSocket(response.data.idCompany);
       history.push('/');
+    }else{
+      return response.errorData;
     }
   };
   const signOut = () => {

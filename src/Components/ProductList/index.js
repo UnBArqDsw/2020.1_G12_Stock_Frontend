@@ -21,6 +21,7 @@ import { DeviceContext } from '../../Contexts/DeviceContext';
 import DecreaseService from '../../Services/DecreaseService';
 import CollaboratorService from '../../Services/CollaboratorService';
 import { AuthContext } from '../../Contexts/AuthContext';
+import ResultModal from '../Modals/ResultModal';
 
 const ProductCard = ({ products }) => {
   const { isMobile } = useContext(DeviceContext);
@@ -37,6 +38,8 @@ const ProductCard = ({ products }) => {
   const [showLotInfo, setShowLotInfo] = useState(false);
   const [confirmDecreaseLotModalOpen, setConfirmDecreaseLotModalOpen] = useState(false);
   const { checkAccessLevel } = useContext(AuthContext);
+  const [resultModalVisible, setResultModalVisible] = useState(false);
+  const [resultModalTitle, setResultModalTitle] = useState('');
 
   const toggleDecreaseProductModal = () => {
     setDecreaseProductModalOpen(!decreaseProductModalOpen);
@@ -88,14 +91,17 @@ const ProductCard = ({ products }) => {
       const { errorData, status } = await DecreaseService.decreaseProduct(productId, quantity);
 
       if (status === 200) {
-        alert('Baixa do produto concluída com sucesso!');
+        setResultModalTitle('Baixa do produto concluída com sucesso!');
+        setResultModalVisible(true);
       } else {
-        alert(`Falha ao dar baixa em produto: ${errorData.data.details}`);
+        setResultModalTitle(`Falha ao dar baixa em produto: ${errorData.details||errorData.message}`);
+        setResultModalVisible(true);
       }
       toggleDecreaseProductModal();
       setCardSelected('');
     } catch (error) {
-      alert(`Falha ao dar baixa em produto: ${error.data}`);
+      setResultModalTitle(`Falha ao dar baixa em produto: ${error.data}`);
+      setResultModalVisible(true);
     }
   };
   const decreaseLot = async () => {
@@ -104,15 +110,19 @@ const ProductCard = ({ products }) => {
       if (status === 200) {
         toggleConfirmDecreaseLotModal();
         toggleDecreaseLotModal();
-        alert('Produto removido com sucesso!');
+        setResultModalTitle('Produto removido com sucesso!');
+        setResultModalVisible(true);
         setCardSelected('');
       } else {
         toggleConfirmDecreaseLotModal();
-        alert(`Falha ao remover produto: ${errorData.data.details}`);
+        console.log(errorData);
+        setResultModalTitle(`Falha ao remover produto: ${errorData.details||errorData.message}`);
+        setResultModalVisible(true);
         setCardSelected('');
       }
     } catch (error) {
-      alert(`Falha ao remover produto: ${error.data}`);
+      setResultModalTitle(`Falha ao remover produto: ${error.data}`);
+      setResultModalVisible(true);
     }
   };
 
@@ -314,6 +324,12 @@ const ProductCard = ({ products }) => {
       {renderDecreseProductModal()}
       {renderDecreaseLotModal()}
       {renderConfirmDecreaseLotModal()}
+      <ResultModal
+        title={resultModalTitle}
+        modalVisible={resultModalVisible}
+        setModalVisible={setResultModalVisible}
+        refresh={false}
+      />
     </div>
   );
 };

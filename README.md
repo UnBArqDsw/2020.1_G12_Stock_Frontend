@@ -12,7 +12,6 @@ Toda a documentação está exposta de forma organizada em nossa GH Pages: https
 
 | Matrícula  | Aluno    |GitHub                         |
 | ---------- | --------------------------------- | - |
-| 15/0009917 | Gabriel Alves Soares de Souza     | [@gitgabiru](https://github.com/gitgabiru)
 | 17/0010341 | Gabriel Davi Silva Pereira        | [@GabrielDVpereira](https://github.com/GabrielDVpereira)
 | 17/0111288 | Micaella Lorraine Gouveia de Lima | [@micaellagouveia](https://github.com/micaellagouveia)
 | 17/0062635 | Pedro Igor Oliveira Silva         | [@pedroeagle](https://github.com/pedroeagle)

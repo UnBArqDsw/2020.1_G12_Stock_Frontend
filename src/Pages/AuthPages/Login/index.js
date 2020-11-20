@@ -4,17 +4,22 @@ import { Link } from 'react-router-dom';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/all';
 import { AuthContext } from '../../../Contexts/AuthContext';
 import './styles.css';
+import ResultModal from '../../../Components/Modals/ResultModal';
 import InputMask from 'react-input-mask';
 
 export default function LoginPage() {
-  const { signIn } = useContext(AuthContext);
+  const { signIn, checkAccessLevel } = useContext(AuthContext);
   const [document, setDocument] = useState('');
   const [password, setPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [resultModalTitle, setResultModalTitle] = useState('');
+  const [resultModalVisible, setResultModalVisible] = useState(false);
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    signIn(document, password);
+    const response = await signIn(document, password);
+    setResultModalTitle(response?.message||response?.details);
+    setResultModalVisible(true);
   };
   return (
     <div className="container">
@@ -50,11 +55,17 @@ export default function LoginPage() {
             </Link>
           </p>
           <div className="login-submit">
-            <span>esqueci minha senha</span>
+            {!<><span>esqueci minha senha</span></>}
             <button type="submit">Entrar</button>
           </div>
         </form>
       </div>
+      <ResultModal
+        title={resultModalTitle}
+        modalVisible={resultModalVisible}
+        setModalVisible={setResultModalVisible}
+        refresh={false}
+      />
     </div>
   );
 }
