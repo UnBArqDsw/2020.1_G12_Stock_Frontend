@@ -4,3 +4,12 @@
     align-items: center;
     flex-direction: column;
 }
+
+.dashboard-card-header {
+    background-color: #fff !important;
+    border: none !important;
+    padding: 20px !important;
+    max-width: 1090px;
+    width: 100%;
+    border-radius: 10px;
+}

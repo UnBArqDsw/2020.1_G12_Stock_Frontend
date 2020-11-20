@@ -1,15 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
     LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 import 'moment/locale/pt-br';
 import HistoryService from '../../../Services/HistoryService'
 import './styles.css'
+import { DeviceContext } from '../../../Contexts/DeviceContext';
 
+const chartDimensionsDesktop = { width: 1020, height: 250 };
+const chartDimensionsMobile = { width: 300, height: 250 };
 
 export default function OutflowGraphic() {
-
+    const { isMobile } = useContext(DeviceContext);
     const [salesData, setSalesData] = useState([]);
+    const [chartDimension, setChartDimension] = useState(chartDimensionsDesktop);
+
+    useEffect(() => {
+        if (isMobile) setChartDimension(chartDimensionsMobile);
+        else setChartDimension(chartDimensionsDesktop);
+    }, [isMobile]);
 
     useEffect(() => {
         loadDaySales();
@@ -28,16 +37,13 @@ export default function OutflowGraphic() {
 
     return (
         <div className="container">
-            <div className="card-header">
+            <div className="outflow-card-header">
                 <div className="card-content">
                     <h3>Fluxo de Saída</h3>
                     <LineChart
-                        width={1000}
-                        height={250}
+                        width={chartDimension.width}
+                        height={chartDimension.height}
                         data={salesData}
-                        margin={{
-                            top: 5, right: 30, left: 20, bottom: 5,
-                        }}
                     >
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="name" />

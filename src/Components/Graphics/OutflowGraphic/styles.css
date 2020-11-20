@@ -1,10 +1,18 @@
-.card-header {
+.outflow-card-header {
     background-color: #fff !important;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     border: none !important;
-    padding: 30px 30px 30px 40px !important;
+    padding: 35px !important;
+    border-radius: 10px;
+    width: 100%;
+}
+
+@media screen and (max-width: 375px){
+    .outflow-card-header {
+        padding: 15px !important;
+    }
 }
 
 .card-content {
