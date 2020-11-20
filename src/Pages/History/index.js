@@ -9,9 +9,22 @@ import './styles.css';
 
 export default function History() {
   const [historyData, setHistoryData] = useState([]);
+
   const location = useLocation();
-  const idCollaborator = location.state?.idCollaborator;
-  console.log(idCollaborator);
+  const collaboratorName = location.state?.collaboratorName;
+
+  const [search, setSearch] = useState(collaboratorName);
+  const [historyFiltered, setHistoryFiltered] = useState([]);
+  console.log(historyData);
+
+  useEffect(() => {
+    if (historyData.length) {
+      const productsFilteredBySearch = historyData?.filter((history) =>
+        history.collaborator.name.includes(search)
+      );
+      setHistoryFiltered(productsFilteredBySearch);
+    }
+  }, [search, historyData]);
 
   let countHistoryData = 0;
 
@@ -22,27 +35,39 @@ export default function History() {
   const loadHistoryData = async () => {
     try {
       const response = await HistoryService.loadHistoryData(2);
-      if (idCollaborator) {
-        const responseByCollaborator = response.filter(
-          (history) => idCollaborator === history.idCollaborator
-        );
-        setHistoryData(responseByCollaborator);
-      } else {
-        setHistoryData(response);
-      }
+      setHistoryData(response);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const compareHistoryDate = (counter) => {
+  const compareHistoryDate = (counter, data) => {
     if (counter !== 0) {
-      if (historyData[counter].date !== historyData[counter - 1].date) {
-        return moment(historyData[counter].date).add(1, 'day').format('DD/MM/YYYY');
+      if (data[counter].date !== data[counter - 1].date) {
+        return moment(data[counter].date).add(1, 'day').format('DD/MM/YYYY');
       }
     } else {
-      return moment(historyData[counter].date).add(1, 'day').format('DD/MM/YYYY');
+      return moment(data[counter].date).add(1, 'day').format('DD/MM/YYYY');
     }
+  };
+
+  const renderHistory = () => {
+    if (search) {
+      return historyFiltered?.map((data) => (
+        <>
+          <p className="history-date">{compareHistoryDate(countHistoryData, historyFiltered)}</p>
+          <script>{countHistoryData++}</script>
+          <HistoryList data={data} />
+        </>
+      ));
+    }
+    return historyData?.map((data) => (
+      <>
+        <p className="history-date">{compareHistoryDate(countHistoryData, historyData)}</p>
+        <script>{countHistoryData++}</script>
+        <HistoryList data={data} />
+      </>
+    ));
   };
 
   return (
@@ -51,11 +76,11 @@ export default function History() {
         <h1>Histórico de Vendas</h1>
         <div className="toolbar">
           <div className="history-input-container">
-            <span>Filtrar por:</span>
+            <span>Nome do colaborador:</span>
             <div className="history-icon-container">
               <FaFilter />
             </div>
-            <input id="history" />
+            <input id="history" onChange={(e) => setSearch(e.target.value)} defaultValue={search} />
           </div>
         </div>
       </div>
@@ -80,19 +105,7 @@ export default function History() {
           </CardBody>
         </Card>
       </div>
-      {historyData.length ? (
-        historyData.map((data) => {
-          return (
-            <>
-              <p className="history-date">{compareHistoryDate(countHistoryData)}</p>
-              <script>{countHistoryData++}</script>
-              <HistoryList data={data} />
-            </>
-          );
-        })
-      ) : (
-        <p>Você não possui dados</p>
-      )}
+      {renderHistory()}
     </div>
   );
 }

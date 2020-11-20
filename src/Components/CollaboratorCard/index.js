@@ -113,7 +113,10 @@ export default function CollaboratorCard(props) {
           <a onClick={() => setConfirmationModal(true)} className="deactivate">
             {activate ? 'Desativar Colaborador' : 'Ativar Colaborador'}
           </a>
-          <Link className="show-sells" to={{ pathname: '/history', state: { idCollaborator } }}>
+          <Link
+            className="show-sells"
+            to={{ pathname: '/history', state: { collaboratorName: name } }}
+          >
             Visualizar Vendas
           </Link>
         </div>
