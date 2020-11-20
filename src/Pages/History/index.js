@@ -15,7 +15,6 @@ export default function History() {
 
   const [search, setSearch] = useState(collaboratorName);
   const [historyFiltered, setHistoryFiltered] = useState([]);
-  console.log(historyData);
 
   useEffect(() => {
     if (historyData.length) {
