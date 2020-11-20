@@ -2,7 +2,8 @@ import React, { useContext } from 'react';
 import OutflowGraphic from '../../Components/Graphics/OutflowGraphic';
 import { AuthContext } from '../../Contexts/AuthContext';
 import CategoryGraphic from '../../Components/Graphics/CategoryGraphic';
-import "./styles.css";
+import DecreasePerWeekGraphic from '../../Components/Graphics/DecreasePerWeekGraphic';
+import './styles.css';
 
 export default function Dashboard() {
   const { user } = useContext(AuthContext);
@@ -16,7 +17,7 @@ export default function Dashboard() {
       </div>
       <div className="row">
         <CategoryGraphic />
-        <CategoryGraphic />
+        <DecreasePerWeekGraphic />
       </div>
       <div className="row">
         <OutflowGraphic />
