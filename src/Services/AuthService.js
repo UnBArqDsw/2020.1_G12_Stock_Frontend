@@ -9,8 +9,7 @@ class AuthService {
       });
       return response;
     } catch (error) {
-      console.log(error);
-      return { error: true, errorData: error };
+      return { error: true, errorData: error?.response?.data || error };
     }
   }
 }

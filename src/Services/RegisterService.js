@@ -13,7 +13,7 @@ class RegisterService {
       });
       return response;
     } catch (error) {
-      return { error: true, errorData: error };
+      return { error: true, errorData: error.response.data };
     }
   }
 
@@ -28,7 +28,7 @@ class RegisterService {
       });
       return response;
     } catch (error) {
-      return { error: true, errorData: error };
+      return { error: true, errorData: error.response.data };
     }
   }
 
@@ -43,8 +43,7 @@ class RegisterService {
       });
       return response;
     } catch (error) {
-      console.log(error.response.data);
-      return { error: true, erroData: error };
+      return { error: true, errorData: error.response.data };
     }
   }
 
@@ -60,7 +59,7 @@ class RegisterService {
       });
       return response;
     } catch (error) {
-      return { error: true, erroData: error };
+      return { error: true, errorData: error.response.data };
     }
   }
 }

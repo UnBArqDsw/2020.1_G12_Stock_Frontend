@@ -5,7 +5,7 @@ class LotService{
       const response = await api.get(`/lots/${idProduct}`);
       return response.data;
     } catch (error) {
-      return { error: true, errorData: error };
+      return { error: true, errorData: error.response.data };
     }
   }
 }
