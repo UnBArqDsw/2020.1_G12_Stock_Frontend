@@ -4,6 +4,7 @@ import InputMask from 'react-input-mask';
 import logo from '../../../assets/images/logo-horizontal.png';
 import RegisterService from '../../../Services/RegisterService';
 import './styles.css';
+import ResultModal from '../../../Components/Modals/ResultModal';
 import CompanyService from '../../../Services/CompanyService';
 
 const MASK_CPF = '999.999.999-999';
@@ -20,6 +21,8 @@ export default function RegisterCompanyPage() {
   const [branches, setBranches] = useState([]);
   const history = useHistory();
   const [cpfCnpjMask, setCpfCnpjMask] = useState(MASK_CPF);
+  const [resultModalTitle, setResultModalTitle] = useState('');
+  const [resultModalVisible, setResultModalVisible] = useState(false);
 
   useEffect(() => {
     if (document.length > CPF_CHAR_LENGTH) {
@@ -31,7 +34,7 @@ export default function RegisterCompanyPage() {
 
   async function registerCompany() {
     try {
-      const { status } = await RegisterService.registerCompany(
+      const { status, errorData } = await RegisterService.registerCompany(
         email,
         document,
         branch,
@@ -40,8 +43,10 @@ export default function RegisterCompanyPage() {
         collaboratorQuantity
       );
       if (status === 200) {
-        alert('Empresa cadastrada com sucesso!');
         history.push('/register/owner');
+      }else{
+        setResultModalTitle(`Falha ao cadastrar empresa: ${errorData.message||errorData.details}`);
+        setResultModalVisible(true);
       }
     } catch (error) {
       console.log(error.response);
@@ -126,6 +131,12 @@ export default function RegisterCompanyPage() {
           </div>
         </form>
       </div>
+      <ResultModal
+        title={resultModalTitle}
+        modalVisible={resultModalVisible}
+        setModalVisible={setResultModalVisible}
+        refresh={false}
+      />
     </div>
   );
 }
