@@ -75,6 +75,7 @@ export default function NewLot({ products }) {
               <span>Preço da compra</span>
               <input
                 value={`R$ ${lotPurchasePrice}`}
+                min="0.01"
                 onChange={(e) => {
                   const price = e.target.value.split(' ')[1];
                   setLotPurchasePrice(price || '');
@@ -83,7 +84,7 @@ export default function NewLot({ products }) {
             </div>
             <div>
               <span>Quantidade</span>
-              <input type="number" onChange={(e) => setLotProductQty(e.target.value)} />
+              <input min="1" type="number" onChange={(e) => setLotProductQty(e.target.value)} />
             </div>
           </div>
           <div className="new-product-input-container">

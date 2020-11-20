@@ -83,6 +83,7 @@ export default function NewProduct() {
               <span>Preço</span>
               <input
                 value={`R$ ${productSalePrice}`}
+                min="0.01"
                 onChange={(e) => {
                   const price = e.target.value.split(' ')[1];
                   setProductSalePrice(price || '');
@@ -95,6 +96,7 @@ export default function NewProduct() {
               <span>Quantidade</span>
               <input
                 type="number"
+                min="0.01"
                 onChange={(e) => setProductUnitQtd(e.target.value)}
                 placeholder="2 Litros, 5 Kilogramas, etc.."
               />

@@ -5,6 +5,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect, useContext, useState } from 'react';
+import InputMask from 'react-input-mask';
 import {
   Modal,
   Collapse,
@@ -123,7 +124,7 @@ const ProductCard = ({ products }) => {
         {`${product.name} ${product.unitQtd} ${product.unitMeasure}`}(s)?
       </ModalBody>
       <ModalFooter>
-        <button type="button" onClick={decreaseProduct}>
+        <button type="button" className="secondary" onClick={decreaseProduct}>
           Sim
         </button>
         <button type="button" onClick={toggleDecreaseProductModal}>
@@ -145,7 +146,7 @@ const ProductCard = ({ products }) => {
           inserido pelo colaborador {collaborator.name}?
         </ModalBody>
         <ModalFooter>
-          <button type="button" onClick={decreaseLot}>
+          <button type="button" className="secondary" onClick={decreaseLot}>
             Sim
           </button>
           <button type="button" onClick={toggleConfirmDecreaseLotModal}>
@@ -278,23 +279,21 @@ const ProductCard = ({ products }) => {
                         <div className="product-options">
                           <div className="product-quantity">
                             <label>Quantidade</label>
-                            <input
+                            <InputMask mask="9999999"
                               className="input-quantity"
-                              type="number"
-                              defaultValue="0"
-                              min="0"
+                              maskChar=""
                               onChange={(e) => setQuantity(e.target.value)}
                             />
                           </div>
                           <button
                             onClick={toggleDecreaseProductModal}
-                            className="decrease-button"
+                            className="decrease-button secondary"
                             type="button"
                           >
                             Dar baixa
                           </button>
                         </div>
-                        {checkAccessLevel(['Gestor(a)', 'Administrador(a)'])&&<button className="secondary" onClick={toggleDecreaseLotModal}>
+                        {checkAccessLevel(['Gestor(a)', 'Administrador(a)'])&&<button onClick={toggleDecreaseLotModal}>
                           Remover produto com defeito
                         </button>}
                       </div>
