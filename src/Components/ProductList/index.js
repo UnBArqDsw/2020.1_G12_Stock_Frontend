@@ -5,6 +5,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect, useContext, useState } from 'react';
+import InputMask from 'react-input-mask';
 import {
   Modal,
   Collapse,
@@ -19,6 +20,7 @@ import './styles.css';
 import { DeviceContext } from '../../Contexts/DeviceContext';
 import DecreaseService from '../../Services/DecreaseService';
 import CollaboratorService from '../../Services/CollaboratorService';
+import { AuthContext } from '../../Contexts/AuthContext';
 
 const ProductCard = ({ products }) => {
   const { isMobile } = useContext(DeviceContext);
@@ -34,6 +36,7 @@ const ProductCard = ({ products }) => {
   const [collaborators, setCollaborators] = useState({});
   const [showLotInfo, setShowLotInfo] = useState(false);
   const [confirmDecreaseLotModalOpen, setConfirmDecreaseLotModalOpen] = useState(false);
+  const { checkAccessLevel } = useContext(AuthContext);
 
   const toggleDecreaseProductModal = () => {
     setDecreaseProductModalOpen(!decreaseProductModalOpen);
@@ -121,7 +124,7 @@ const ProductCard = ({ products }) => {
         {`${product.name} ${product.unitQtd} ${product.unitMeasure}`}(s)?
       </ModalBody>
       <ModalFooter>
-        <button type="button" onClick={decreaseProduct}>
+        <button type="button" className="secondary" onClick={decreaseProduct}>
           Sim
         </button>
         <button type="button" onClick={toggleDecreaseProductModal}>
@@ -143,7 +146,7 @@ const ProductCard = ({ products }) => {
           inserido pelo colaborador {collaborator.name}?
         </ModalBody>
         <ModalFooter>
-          <button type="button" onClick={decreaseLot}>
+          <button type="button" className="secondary" onClick={decreaseLot}>
             Sim
           </button>
           <button type="button" onClick={toggleConfirmDecreaseLotModal}>
@@ -241,6 +244,9 @@ const ProductCard = ({ products }) => {
               <span>Tamanho</span>
             </div>
             <div>
+              <span>Preço</span>
+            </div>
+            <div>
               <span>Lotes</span>
             </div>
           </CardBody>
@@ -264,6 +270,9 @@ const ProductCard = ({ products }) => {
                       <p>{`${productFromList.unitQtd} ${productFromList.unitMeasure}`}(s)</p>
                     </div>
                     <div>
+                      <p>R$ {productFromList.salePrice}</p>
+                    </div>
+                    <div>
                       <p>{productFromList.lots.filter((l) => l.productQty > 0).length}</p>
                     </div>
                   </CardBody>
@@ -276,25 +285,23 @@ const ProductCard = ({ products }) => {
                         <div className="product-options">
                           <div className="product-quantity">
                             <label>Quantidade</label>
-                            <input
+                            <InputMask mask="9999999"
                               className="input-quantity"
-                              type="number"
-                              defaultValue="0"
-                              min="0"
+                              maskChar=""
                               onChange={(e) => setQuantity(e.target.value)}
                             />
                           </div>
                           <button
                             onClick={toggleDecreaseProductModal}
-                            className="decrease-button"
+                            className="decrease-button secondary"
                             type="button"
                           >
                             Dar baixa
                           </button>
                         </div>
-                        <button className="secondary" onClick={toggleDecreaseLotModal}>
+                        {checkAccessLevel(['Gestor(a)', 'Administrador(a)'])&&<button onClick={toggleDecreaseLotModal}>
                           Remover produto com defeito
-                        </button>
+                        </button>}
                       </div>
                     </CardText>
                   </Collapse>
