@@ -1,14 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardBody } from 'reactstrap';
 import { FaFilter } from 'react-icons/all';
-import HistoryService from '../../Services/HistoryService'
-import HistoryList from '../../Components/HistoryList'
+import { useLocation } from 'react-router-dom';
 import moment from 'moment';
-import './styles.css'
+import HistoryService from '../../Services/HistoryService';
+import HistoryList from '../../Components/HistoryList';
+import './styles.css';
 
 export default function History() {
   const [historyData, setHistoryData] = useState([]);
-  var countHistoryData = 0;
+
+  const location = useLocation();
+  const collaboratorName = location.state?.collaboratorName;
+
+  const [search, setSearch] = useState(collaboratorName);
+  const [historyFiltered, setHistoryFiltered] = useState([]);
+
+  useEffect(() => {
+    if (historyData.length) {
+      const productsFilteredBySearch = historyData?.filter((history) =>
+        history.collaborator.name.includes(search)
+      );
+      setHistoryFiltered(productsFilteredBySearch);
+    }
+  }, [search, historyData]);
+
+  let countHistoryData = 0;
 
   useEffect(() => {
     loadHistoryData();
@@ -18,23 +35,39 @@ export default function History() {
     try {
       const response = await HistoryService.loadHistoryData(2);
       setHistoryData(response);
-
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
-  const compareHistoryDate = (countHistoryData) => {
-    if (countHistoryData != 0) {
-      if (historyData[countHistoryData].date != historyData[countHistoryData - 1].date) {
-        return moment(historyData[countHistoryData].date).add(1, 'day').format('DD/MM/YYYY');
-      };
+  const compareHistoryDate = (counter, data) => {
+    if (counter !== 0) {
+      if (data[counter].date !== data[counter - 1].date) {
+        return moment(data[counter].date).add(1, 'day').format('DD/MM/YYYY');
+      }
+    } else {
+      return moment(data[counter].date).add(1, 'day').format('DD/MM/YYYY');
     }
-    else {
-      return moment(historyData[countHistoryData].date).add(1, 'day').format('DD/MM/YYYY');
-    }
-  }
+  };
 
+  const renderHistory = () => {
+    if (search) {
+      return historyFiltered?.map((data) => (
+        <>
+          <p className="history-date">{compareHistoryDate(countHistoryData, historyFiltered)}</p>
+          <script>{countHistoryData++}</script>
+          <HistoryList data={data} />
+        </>
+      ));
+    }
+    return historyData?.map((data) => (
+      <>
+        <p className="history-date">{compareHistoryDate(countHistoryData, historyData)}</p>
+        <script>{countHistoryData++}</script>
+        <HistoryList data={data} />
+      </>
+    ));
+  };
 
   return (
     <div className="container">
@@ -42,11 +75,11 @@ export default function History() {
         <h1>Histórico de Vendas</h1>
         <div className="toolbar">
           <div className="history-input-container">
-            <span>Filtrar por:</span>
+            <span>Nome do colaborador:</span>
             <div className="history-icon-container">
               <FaFilter />
             </div>
-            <input id="history" />
+            <input id="history" onChange={(e) => setSearch(e.target.value)} defaultValue={search} />
           </div>
         </div>
       </div>
@@ -71,13 +104,7 @@ export default function History() {
           </CardBody>
         </Card>
       </div>
-      {historyData.length ? historyData.map((data) => (
-        <>
-          <p className="history-date">{compareHistoryDate(countHistoryData)}</p>
-          <script>{countHistoryData++}</script>
-          <HistoryList data={data} />
-        </>
-      )) : <p>Você não possui dados</p>}
+      {renderHistory()}
     </div>
   );
 }
