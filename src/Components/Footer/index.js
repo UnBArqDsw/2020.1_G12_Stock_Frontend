@@ -18,7 +18,7 @@ export default function Footer() {
             </Link>
           </div>
           <div className="signIn-page link">
-            <Link to="/login" className="signUp">Portal do Gestor
+            <Link to="/register/company" className="signUp">Portal do Gestor
             </Link>
           </div>
         </div>
