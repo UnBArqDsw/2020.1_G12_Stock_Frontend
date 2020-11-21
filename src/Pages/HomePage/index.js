@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './styles.css';
 import Step1 from '../../assets/icons/step1.svg';
 import Step2 from '../../assets/icons/step2.svg';
@@ -52,11 +53,11 @@ export default function HomePage() {
         <Requirements />
 
         <div className="signUp">
-          <a href="/">
+          <Link to="/register/company">
             <button className="signUp-button" type="button">
               Cadastre-se agora
             </button>
-          </a>
+          </Link>
         </div>
       </div>
       <Footer />
