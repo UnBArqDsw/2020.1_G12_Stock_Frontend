@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import logo from '../../../assets/images/logo-horizontal.png';
 import RegisterService from '../../../Services/RegisterService';
 import InputMask from 'react-input-mask';
-
+import ResultModal from '../../../Components/Modals/ResultModal';
 import { AuthContext } from '../../../Contexts/AuthContext';
 import './styles.css';
 
@@ -20,8 +20,12 @@ export default function RegisterOwnerPage() {
   const [password, setPassword] = useState('');
   const [password_confirm, setPasswordConfirm] = useState('');
   const [checkPassowordsText, setCheckPasswordsText] = useState('');
+  const [resultModalTitle, setResultModalTitle] = useState('');
+  const [resultModalVisible, setResultModalVisible] = useState(false);
 
   useEffect(() => {
+    setResultModalTitle('Empresa cadastrada com sucesso!');
+    setResultModalVisible(true);
     if (cpfCnpj.length > CPF_CHAR_LENGTH) {
       setCpfCnpjMask(MASK_CNPJ);
     } else {
@@ -130,6 +134,12 @@ export default function RegisterOwnerPage() {
           </div>
         </form>
       </div>
+      <ResultModal
+        title={resultModalTitle}
+        modalVisible={resultModalVisible}
+        setModalVisible={setResultModalVisible}
+        refresh={false}
+      />
     </div>
   );
 }

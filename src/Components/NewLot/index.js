@@ -31,7 +31,7 @@ export default function NewLot({ products }) {
 
   async function registerLot() {
     try {
-      const { status } = await RegisterService.registerLot(
+      const { errorData, status } = await RegisterService.registerLot(
         lotProduct,
         lotEntryDate,
         lotDueDate,
@@ -43,6 +43,10 @@ export default function NewLot({ products }) {
         toggleNewLotModal();
         setResultModalTitle('Lote Cadastrado com sucesso!');
         setResultModalVisible(true);
+      }else{
+        console.log(errorData);
+        setResultModalTitle(`Erro ao cadastrar lote: ${errorData?.message||errorData?.details}`);
+      setResultModalVisible(true);
       }
     } catch (error) {
       setResultModalTitle(`Falha ao cadastrar lote: ${error.response}`);

@@ -40,19 +40,19 @@ export default function NewProduct() {
   }, [newProductModalOpen]);
 
   async function registerProduct() {
-    const result = await RegisterService.registerProduct(
+    const {errorData, status} = await RegisterService.registerProduct(
       productName,
       productSalePrice,
       productUnitMeasure,
       productUnitQtd,
       selectedCategories
     );
-    if (result.status === 200) {
+    if (status === 200) {
       toggleNewProductModal();
       setResultModalTitle('Produto Cadastrado com sucesso!');
       setResultModalVisible(true);
-    } else if (result.error) {
-      setResultModalTitle(`Falha ao cadastrar produto: ${result.erroData.response?.data?.details}`);
+    } else{
+      setResultModalTitle(`Falha ao cadastrar produto: ${errorData?.message||errorData?.details}`);
       setResultModalVisible(true);
     }
   }
