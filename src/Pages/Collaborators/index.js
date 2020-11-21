@@ -51,8 +51,6 @@ export default function Collaborators() {
               placeholder="Procurar colaborador"
               onChange={(e) => setSearch(e.target.value)}
             />
-            <FaFilter />
-            <FaSortAmountUp />
           </div>
           <div className="create-collaborator">
             <button
@@ -69,7 +67,7 @@ export default function Collaborators() {
       </div>
       <div className="row">
         {search.length
-          ? collaboratorsFiltered.map((user) => (
+          ? collaboratorsFiltered?.map((user) => (
               <CollaboratorCard
                 name={user.name}
                 idAccessLevel={user.idAccessLevel}
@@ -81,7 +79,7 @@ export default function Collaborators() {
                 loadCollaborators={loadCollaborators}
               />
             ))
-          : collaborators.map((user) => (
+          : collaborators?.map((user) => (
               <CollaboratorCard
                 name={user.name}
                 idAccessLevel={user.idAccessLevel}

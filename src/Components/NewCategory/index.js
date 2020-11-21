@@ -48,7 +48,7 @@ function NewCategory({ getCategories }) {
         </div>
       </ModalBody>
       <ModalFooter>
-        <button type="button" onClick={createCategory}>
+        <button type="button" className="secondary" onClick={createCategory}>
           Criar
         </button>
       </ModalFooter>

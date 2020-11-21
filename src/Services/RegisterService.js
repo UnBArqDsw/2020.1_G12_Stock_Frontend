@@ -43,6 +43,7 @@ class RegisterService {
       });
       return response;
     } catch (error) {
+      console.log(error.response.data);
       return { error: true, erroData: error };
     }
   }

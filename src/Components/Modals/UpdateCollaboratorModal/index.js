@@ -43,7 +43,7 @@ export default function UpdateCollaboratorModal(props) {
   };
 
   const getCollaborator = async () => {
-    const response = await CollaboratorService.loadCollaborator(idCollaborator);
+    const response = await CollaboratorService.getCollaborator(idCollaborator);
     setName(response.name);
     setCpf(response.document);
     setEmail(response.email);

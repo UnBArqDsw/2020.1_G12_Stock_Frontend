@@ -14,10 +14,6 @@ export default function ConfirmationModal(props) {
     response
   } = props;
 
-  const [modal, setModal] = useState(false);
-
-  const toggle = () => setModal(!modal);
-
   return (
     <div>
       <Modal isOpen={modalVisible} toggle={() => {

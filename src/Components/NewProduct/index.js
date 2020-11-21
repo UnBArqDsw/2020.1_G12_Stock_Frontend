@@ -1,25 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import CategoryService from '../../Services/CategoryService';
 import RegisterService from '../../Services/RegisterService';
-import NewCategoria from '../NewCategory';
+import NewCategory from '../NewCategory';
 import ResultModal from '../Modals/ResultModal';
+import { AuthContext } from '../../Contexts/AuthContext.js';
 
 export default function NewProduct() {
   const [productName, setProductName] = useState('');
   const [productUnitQtd, setProductUnitQtd] = useState('');
   const [productUnitMeasure, setProductUnitMeasure] = useState('');
   const [productSalePrice, setProductSalePrice] = useState('');
-
   const [categories, setCategories] = useState([]);
-
   const [selectedCategories, setSelectedCategories] = useState([]);
-
   const [newProductModalOpen, setNewProductModalOpen] = useState(false);
-  const toggleNewProductModal = () => setNewProductModalOpen(!newProductModalOpen);
-
   const [resultModalTitle, setResultModalTitle] = useState('');
   const [resultModalVisible, setResultModalVisible] = useState(false);
+  const { checkAccessLevel } = useContext(AuthContext);
+
+  const toggleNewProductModal = () => setNewProductModalOpen(!newProductModalOpen);
 
   const getCategories = async () => {
     const response = await CategoryService.getCategories();
@@ -84,6 +83,7 @@ export default function NewProduct() {
               <span>Preço</span>
               <input
                 value={`R$ ${productSalePrice}`}
+                min="0.01"
                 onChange={(e) => {
                   const price = e.target.value.split(' ')[1];
                   setProductSalePrice(price || '');
@@ -96,6 +96,7 @@ export default function NewProduct() {
               <span>Quantidade</span>
               <input
                 type="number"
+                min="0.01"
                 onChange={(e) => setProductUnitQtd(e.target.value)}
                 placeholder="2 Litros, 5 Kilogramas, etc.."
               />
@@ -129,7 +130,7 @@ export default function NewProduct() {
         </form>
       </ModalBody>
       <ModalFooter>
-        <NewCategoria getCategories={getCategories} />
+        <NewCategory getCategories={getCategories} />
         <button className="secondary" type="button" onClick={registerProduct}>
           Adicionar
         </button>
@@ -146,9 +147,9 @@ export default function NewProduct() {
         setModalVisible={setResultModalVisible}
         refresh={false}
       />
-      <button type="button" className="secondary" onClick={toggleNewProductModal}>
+      {checkAccessLevel(['Gestor(a)', 'Administrador(a)'])&&<button type="button" className="secondary" onClick={toggleNewProductModal}>
         Novo Produto
-      </button>
+      </button>}
     </>
   );
 }

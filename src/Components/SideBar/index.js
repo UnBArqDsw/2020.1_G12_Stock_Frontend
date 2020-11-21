@@ -1,18 +1,19 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { GoGraph, FiBox, HiUserGroup, BiHistory, MdModeComment, GrMenu } from 'react-icons/all';
 import { useLocation, useHistory } from 'react-router-dom';
-
 import logo from '../../assets/images/logo-vertical.png';
 import './styles.css';
 import { DeviceContext } from '../../Contexts/DeviceContext';
+import { AuthContext } from '../../Contexts/AuthContext.js';
 
 export default function SideBar() {
   const location = useLocation();
   const history = useHistory();
 
   const { isMobile } = useContext(DeviceContext);
+  const { checkAccessLevel } = useContext(AuthContext);
   const [sideBarOpen, setSideBarOpen] = useState(false);
 
   const toggleSidebar = () => setSideBarOpen(!sideBarOpen);
@@ -38,7 +39,7 @@ export default function SideBar() {
     if (isMobile) {
       return (
         <div className="side-button">
-          <GrMenu onClick={toggleSidebar} size={30} />
+          <GrMenu onClick={toggleSidebar} size={30} color="#000" />
         </div>
       );
     }
@@ -79,18 +80,19 @@ export default function SideBar() {
           <span>Estoque</span>
         </div>
 
-        <div
+        {checkAccessLevel(['Gestor(a)', 'Administrador(a)'])&&<div
           className={getNavClassOnSelect('/collaborators')}
           onClick={() => {
             history.push('/collaborators');
             if (isMobile) toggleSidebar();
-          }}
+          }
+          }
         >
-          <HiUserGroup />
+          <HiUserGroup/>
           <span>Colaboradores</span>
-        </div>
+        </div>}
 
-        <div
+        {checkAccessLevel(['Gestor(a)', 'Administrador(a)'])&&<div
           className={getNavClassOnSelect('/history')}
           onClick={() => {
             history.push('/history');
@@ -99,9 +101,9 @@ export default function SideBar() {
         >
           <BiHistory />
           <span>Histórico</span>
-        </div>
+        </div>}
 
-        <div
+        {checkAccessLevel([])&&<div
           className={getNavClassOnSelect('/feedback')}
           onClick={() => {
             history.push('/feedback');
@@ -110,7 +112,7 @@ export default function SideBar() {
         >
           <MdModeComment />
           <span>Feedback</span>
-        </div>
+        </div>}
       </div>
     </>
   );
