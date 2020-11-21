@@ -12,6 +12,9 @@
 @media screen and (max-width: 375px){
     .outflow-card-header {
         padding: 15px !important;
+        width: 350px !important;
+        margin-left: -20px;
+        margin-top: -30px;
     }
 }
 

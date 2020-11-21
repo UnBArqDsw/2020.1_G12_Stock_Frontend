@@ -45,14 +45,12 @@ export default function Collaborators() {
       <div className="collaborator-content">
         <h1>Colaboradores</h1>
         <div className="toolbar">
-          <div className="search-filter">
+          <div className="search-collaborator-filter">
             <input
               type="text"
               placeholder="Procurar colaborador"
               onChange={(e) => setSearch(e.target.value)}
             />
-            <FaFilter />
-            <FaSortAmountUp />
           </div>
           <div className="create-collaborator">
             <button

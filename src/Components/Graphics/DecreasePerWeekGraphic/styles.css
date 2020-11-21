@@ -1,0 +1,16 @@
+.card-graphic-header {
+    background-color: #fff !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: none !important;
+    padding: 30px !important;
+    border-radius: 10px;
+}
+
+@media screen and (max-width:375px) {
+    .card-graphic-header {
+        width: 350px !important;
+        margin-bottom: 0px !important;
+    }
+}

@@ -5,6 +5,22 @@
     flex-direction: column;
 }
 
+@media screen and (max-width:375px) {
+    .dashboard-card-header {
+        width: 350px !important;
+        margin-bottom: -50px !important;
+        margin-left: -20px;
+    }
+
+    .dashboard-content {
+        width: 100% !important;
+    }
+
+    h1 {
+        font-size: 35px !important;
+    }
+}
+
 .dashboard-card-header {
     background-color: #fff !important;
     border: none !important;

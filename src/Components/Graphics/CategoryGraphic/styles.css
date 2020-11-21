@@ -5,8 +5,14 @@
     justify-content: space-between;
     border: none !important;
     padding: 20px;
+    border-radius: 10px;
 }
-
+@media screen and (max-width:375px) {
+    .card-graphic-header {
+        width: 350px !important;
+        margin-top: 40px !important;
+    }
+}
 .card-content {
     width: 100%;
     display: flex;

@@ -74,12 +74,8 @@ export default function History() {
       <div className="history-content">
         <h1>Histórico de Vendas</h1>
         <div className="toolbar">
-          <div className="history-input-container">
-            <span>Nome do colaborador:</span>
-            <div className="history-icon-container">
-              <FaFilter />
-            </div>
-            <input id="history" onChange={(e) => setSearch(e.target.value)} defaultValue={search} />
+          <div className="search-history-filter">
+            <input id="history" placeholder="Procurar colaborador" onChange={(e) => setSearch(e.target.value)} defaultValue={search} />
           </div>
         </div>
       </div>
