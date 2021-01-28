@@ -12,6 +12,7 @@ class DecreaseService {
       return { error: true, errorData: error.response.data };
     }
   }
+
   async decreaseLot(idLot, quantity) {
     try {
       const response = await api.post('/lot/decreases', {

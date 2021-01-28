@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
-import logo from '../../../assets/images/logo-horizontal.png';
-import RegisterService from '../../../Services/RegisterService';
 import InputMask from 'react-input-mask';
+import RegisterService from '../../../Services/RegisterService';
 import ResultModal from '../../../Components/Modals/ResultModal';
 import { AuthContext } from '../../../Contexts/AuthContext';
 import './styles.css';
@@ -24,14 +23,17 @@ export default function RegisterOwnerPage() {
   const [resultModalVisible, setResultModalVisible] = useState(false);
 
   useEffect(() => {
-    setResultModalTitle('Empresa cadastrada com sucesso!');
-    setResultModalVisible(true);
     if (cpfCnpj.length > CPF_CHAR_LENGTH) {
       setCpfCnpjMask(MASK_CNPJ);
     } else {
       setCpfCnpjMask(MASK_CPF);
     }
   }, [cpfCnpj]);
+
+  useEffect(() => {
+    setResultModalTitle('Empresa cadastrada com sucesso!');
+    setResultModalVisible(true);
+  }, []);
 
   async function registerOwner() {
     if (password && password_confirm && password_confirm === password) {
